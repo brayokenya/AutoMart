@@ -11,6 +11,7 @@ body{
     font-size: 0.9rem;
 }
 
+
 a{
     text-decoration: none;
     outline: none;
@@ -111,6 +112,10 @@ nav{
     height: 100vh;
     overflow-y: hidden;
     padding: 0;
+  }
+
+  #wrapper{
+      display: none;
   }
 }
 
@@ -292,7 +297,7 @@ input::placeholder{
     }
 }
 
-.scroll-btn {
+#scroll-btn {
     width: 30px;
     margin: auto;
     position: relative;
@@ -304,7 +309,7 @@ input::placeholder{
 }
 
 @media screen and (max-width: 420px){
-    .scroll-btn{
+    #scroll-btn{
         left: 35%;
     }
 }
