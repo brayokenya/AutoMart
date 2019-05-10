@@ -17,8 +17,11 @@
             <img src="../images/automart_white.png" alt="logo" id="logo">
         </div>
         <div>
-            <button class="sec-btn btn-white lg-screen">login</button>
-            <button class="sec-btn btn-white-reverse mg-r-80 lg-screen">signup</button>
+            <button class="sec-btn btn-white login-btn lg-screen"> <span><i class="fas fa-sign-in-alt"></i></span>
+                login</button>
+            <button class="sec-btn btn-white-reverse signup-btn mg-r-80 lg-screen"> <span><i
+                        class="fas fa-user-plus"></i></span>
+                signup</button>
             <img src="../images/hamburger.svg" alt="menu button" id="menu-btn">
         </div>
     </nav>
@@ -43,9 +46,10 @@
                 </a>
             </ul>
             <div class="mg-t-30">
-                <li> <button class="sec-btn btn-white"> <span><i class="fas fa-sign-in-alt"></i></span> login</button>
+                <li> <button class="sec-btn btn-white login-btn"> <span><i class="fas fa-sign-in-alt"></i></span>
+                        login</button>
                 </li>
-                <li><button class="sec-btn btn-white-reverse"> <span><i class="fas fa-user-plus"></i></span>
+                <li><button class="sec-btn btn-white-reverse signup-btn"> <span><i class="fas fa-user-plus"></i></span>
                         signup</button></li>
             </div>
 
@@ -66,23 +70,50 @@
                     <a href="#" class="main-btn btn-primary-reverse"> sell an automobile </a>
                 </div>
 
-                <div id="search-form-div">
-                    <h3 class="lt-grey sm"> Search for automobiles</h3>
-                    <form action="" id="search-form">
-                        <input type="text" name="make" placeholder="manufacturer eg (Ford)">
-                        <input type="text" name="bodyType" placeholder="body type (eg truck)">
-                        <select name="state" id="select-state" class="block" placeholder="select">
-                            <option value=""> select vehicle state </option>
-                            <option value=""> ---- </option>
-                            <option value="new"> new </option>
-                            <option value="used"> used </option>
-                            <option value="used"> new and used </option>
-                        </select>
-                        <input type="number" name="minPrice" placeholder="min-price">
-                        <input type="number" name="maxPrice" placeholder="max-price">
-                        <button class="main-btn btn-primary block" id="search-btn"> search </button>
-                    </form>
+                <div>
+                    <span id="close-form-btn"> <i class="far fa-times-circle"></i> </span>
+                    <div id="form-div">
+                        <div id="search-form-div">
+                            <h3 class="lt-grey sm"> Search for automobiles</h3>
+                            <form action="" id="search-form" class="primary-form">
+                                <input type="text" name="make" placeholder="manufacturer eg (Ford)">
+                                <input type="text" name="bodyType" placeholder="body type (eg truck)">
+                                <select name="state" id="select-state" class="block" placeholder="select">
+                                    <option value=""> select vehicle state </option>
+                                    <option value=""> ---- </option>
+                                    <option value="new"> new </option>
+                                    <option value="used"> used </option>
+                                    <option value="used"> new and used </option>
+                                </select>
+                                <input type="number" name="minPrice" placeholder="min-price">
+                                <input type="number" name="maxPrice" placeholder="max-price">
+                                <button class="main-btn btn-primary block primary-form-btn" id="search-btn"> search
+                                </button>
+                            </form>
+                        </div>
+                        <p class="lt-grey signup-note sm-txt"> already a user?
+                            <span class="">
+                                <a href="#" class="login-btn sec-color">
+                                    login </a>
+                            </span>
+                        </p>
+                        <p class="lt-grey login-note sm-txt"> not a user?
+                            <span class="">
+                                <a href="#" class="signup-btn sec-color">
+                                    signup </a>
+                            </span>
+
+                        </p>
+                        <p class="lt-grey login-note sm-txt"> forgot password?
+                            <span class="">
+                                <a href="#" class="sec-color" id="reset-pass-btn">
+                                    reset password </a>
+                            </span>
+                        </p>
+                    </div>
                 </div>
+
+
             </div>
             <div class="mg-auto">
                 <a href="#show-automobiles">

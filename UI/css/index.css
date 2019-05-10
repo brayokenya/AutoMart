@@ -18,6 +18,9 @@ a{
     color: black;
 }
 
+.sec-color{
+    color: #FF9A85;
+}
 .open-sans{
     font-family: 'Open Sans', sans-serif;
 }
@@ -316,19 +319,21 @@ nav{
     border: 2px solid #FF9A85;
 }
 
-#search-form-div{
+#form-div{
     text-align: center;
     padding: 50px;
     background:  #003542;
+    
 }
 
-#search-form{
+.primary-form{
     max-width: 200px;
     margin: auto;
+    padding: 0;
 }
 
 
-#search-form input, #search-form select {
+.primary-form input, .primary-form select {
     background: transparent;
     width: 90%;
     margin-top: 20px;
@@ -340,29 +345,29 @@ nav{
     color: lightgrey;
 }
 
-#search-form select{
+.primary-form select{
     color: grey;
     width: 100%;
     padding: 8px;
     display: block;
 }
 
-#search-form select:focus{
+.primary-form select:focus{
     background: black;
     border: 2px solid #57CEA0;
 }
 
-#search-form select option:first-child{
+.primary-form select option:first-child{
     display: none;
 }
 
-#search-form input:focus {
+.primary-form input:focus {
     background: black;
     color: white;
     padding: 10px;
     border: 2px solid #57CEA0;
 }
-#search-form option {
+.primary-form option {
     background: #003542;
     color: white;
     border: 1px solid #57CEA0;
@@ -378,7 +383,7 @@ input::placeholder{
     font-size: 0.9em;
 }
 
-#search-btn{
+.primary-form-btn{
     display: block;
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
@@ -391,11 +396,26 @@ input::placeholder{
     #info-jmb{
         display: none;
     }
-    #search-form-div{
+    #form-div{
         text-align: center;
         padding: 10px;
         background:  #003542e1;
     }
+}
+
+.login-note, .signup-note{
+    display: none;
+}
+
+#close-form-btn {
+    color: white;
+    font-size: 2em;
+    float: right;
+    clear: both;
+    margin-top: -10px;
+    margin-right: -10px;
+    cursor: pointer;
+    display: none;
 }
 
 #scroll-btn {
