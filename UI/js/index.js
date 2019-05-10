@@ -26,7 +26,7 @@ closeBtn.addEventListener('click', () => {
     if (blurLayer.style.display = 'block') {
         blurLayer.style.display = 'none';
         sideNav.style.width = '0';
-        menuBtn.style.display = 'block';
+        menuBtn.style.display = '';
         closeBtn.style.display = 'none';
     }
 });
@@ -35,7 +35,7 @@ blurLayer.addEventListener('click', () => {
     if (blurLayer.style.display = 'block') {
         blurLayer.style.display = 'none';
         sideNav.style.width = '0';
-        menuBtn.style.display = 'block';
+        menuBtn.style.display = '';
         closeBtn.style.display = 'none';
     }
 });
