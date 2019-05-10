@@ -18,6 +18,7 @@ a{
     color: black;
 }
 
+
 .open-sans{
     font-family: 'Open Sans', sans-serif;
 }
@@ -72,10 +73,62 @@ button{
 nav{
     position: fixed;
     top: 0;
+    background: transparent;
+    width: 100%;
+    max-width: 100%;
+    height: 50px;
+    max-height: 50px;
+    display: flex;
+    justify-content: space-between;
 }
 
 #logo{
     width: 150px;
+}
+
+#menu-btn {
+    width: 25px;
+    margin: 10px 20px 0px 0px;
+    cursor: pointer;
+    outline: none;
+}
+
+#blur-layer{
+    background: rgba(0, 0, 0, 0.575);
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    position: fixed;
+    top: 0px;
+    display: none;
+    transition: 0.2s ease-in;
+}
+
+#side-nav{
+    background: #003542;
+    width: 0px;
+    overflow-x: hidden;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    z-index: 3;
+    transition: 0.2s ease-in;
+}
+
+#close-btn {
+    width: 20px;
+    position: fixed;
+    top: 0;
+    right: 10px;
+    margin: 10px 20px 0px 0px;
+    cursor: pointer;
+    outline: none;
+    display: none;
+    z-index: 4;
+}
+
+#menu-items {
+    margin-top: 50px;
 }
 
 .white{
@@ -251,6 +304,11 @@ nav{
     display: block;
 }
 
+#search-form select:focus{
+    background: black;
+    border: 2px solid #57CEA0;
+}
+
 #search-form select option:first-child{
     display: none;
 }
@@ -304,7 +362,7 @@ input::placeholder{
     bottom: 120px;
     left: 45%;
     cursor: pointer;
-    animation: bounce 2s infinite;
+    animation: bounce 1s infinite;
     animation-fill-mode: both;
 }
 
@@ -316,6 +374,9 @@ input::placeholder{
 @media screen and (max-height: 500px){
     .scroll-btn{
         display: none;
+    }
+    nav{
+        background: #003542;
     }
 }
 
@@ -374,7 +435,7 @@ input::placeholder{
     margin-bottom: 50px;
     padding: 30px;
     padding-bottom: 0;
-    box-shadow: 5px 6px 8px 2px rgba(179, 178, 178, 0.137);
+    box-shadow: 8px 8px 7px 1px rgba(179, 178, 178, 0.253);
     border-radius: 6px;
     transition: 0.2s ease-out;
 }
