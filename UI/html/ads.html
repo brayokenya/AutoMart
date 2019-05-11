@@ -67,20 +67,6 @@
     <div id="blur-layer"></div>
     <div id="main">
 
-        <!-- Filters -->
-        <div id="filters-div">
-            <h3> filter by: </h3>
-            <button class="filter-btn"> make </button>
-            <button class="filter-btn"> body type </button>
-            <button class="filter-btn"> lowest price </button>
-            <button class="filter-btn"> highest price </button>
-            <input type="number" id="min-price-filter" placeholder="min-price">
-            <input type="number" id="max-price-filter" placeholder="max-price">
-
-        </div>
-        <hr>
-        <!-- Filters div ends here-->
-
         <div id="ads" class="flex-primary wrap">
             <!-- ad starts here-->
             <div class="ad" id="show-automobiles">
@@ -261,10 +247,56 @@
 
         <div class="center mg-auto">
             <button class="main-btn btn-primary block center mg-auto"> load more </button>
+
+            <!-- Filter button -->
+            <button id="filter-btn"><i class="fas fa-filter"></i></button>
+        </div>
+
+        <div id="filters-div">
+            <div class="flex">
+                <div id="filters">
+                    <p> Filter by:</p>
+                    <ul>
+                        <li id="make-filter"> make </li>
+                        <li id="body-type-filter"> body type </li>
+                        <li id="price-range-filter"> set price range </li>
+                    </ul>
+                </div>
+                <div id="filter-options">
+                    <ul id="make-options">
+                        <li> <input type="checkbox"> Mercedes Benz</li>
+                        <li> <input type="checkbox"> B.M.W.</li>
+                        <li> <input type="checkbox"> Toyota </li>
+                        <li> <input type="checkbox"> KIA </li>
+                        <li> <input type="checkbox"> Lexus </li>
+                        <li> <input type="checkbox"> Jeep </li>
+                        <li> <input type="checkbox"> Range Rover </li>
+                        <li> <input type="checkbox"> Land Rover </li>
+                        <li> <input type="checkbox"> Hummer </li>
+                        <li> <input type="checkbox"> Crysla </li>
+                        <li> <input type="checkbox"> Mustang </li>
+                        <li> <input type="checkbox"> Ferrari </li>
+                        <li> <input type="checkbox"> Nissan </li>
+                        <li> <input type="checkbox"> Volkswagen </li>
+                    </ul>
+                    <ul id="body-type-options">
+                        <li> <input type="checkbox"> Sedan</li>
+                        <li> <input type="checkbox"> S.U.V</li>
+                        <li> <input type="checkbox"> Truck </li>
+                        <li> <input type="checkbox"> Mini-van </li>
+                        <li> <input type="checkbox"> Van </li>
+                    </ul>
+                    <ul id="price-range">
+                        <li> <input type="number" placeholder="min-price"></li>
+                        <li> <input type="number" placeholder="max-price"></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 
     <script src="../js/index.js"></script>
+    <script src="../js/ad.js"></script>
 </body>
 
 </html>
