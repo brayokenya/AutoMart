@@ -1,0 +1,79 @@
+nav {
+    background: #003542;
+}
+
+#main {
+    width: 500px;
+    max-width: 70vw;
+    height: 70vh;
+    padding: 20px;
+    margin: auto;
+    margin-top: 80px;
+    text-align: center;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 5px 5px 20px 8px #0035422a;
+    overflow-y: hidden;
+}
+
+@media screen and (max-height: 400px){
+    #main{
+        height: auto;
+    }
+}
+
+#ad-image {
+    max-width: 100%;
+    max-height: 300px;
+    margin: auto;
+}
+
+.product-title {
+    font-size: 1.2em;
+    font-weight: 400;
+}
+#price{
+    font-size: 2em;
+    font-weight: 700;
+    color: #003542;
+    line-height: 0;
+}
+
+#edit-price-btn {
+    font-size: 0.7rem;
+    color: black;
+    cursor: pointer;
+    margin: 0;
+}
+
+#input-div {
+    width: 200px;
+    height: 150px;
+    position: fixed;
+    top: 45%;
+    left: 45%;
+    padding-top: 50px;
+    margin-top: 100px;
+    margin: auto;
+    z-index: 5;
+    display: none;
+    text-align: center;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 5px 5px 20px 8px #0035422a;
+}
+
+@media screen and (max-width: 500px){
+    #input-div{
+        top: 30%;
+        left: 25%;
+    }
+}
+
+#new-price {
+    border: 2px solid #003542;
+    border-radius: 4px;
+    padding: 8px;
+    width: 150px;
+    outline: none;
+}
