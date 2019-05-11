@@ -1,0 +1,54 @@
+body{
+    background: whitesmoke;
+}
+nav {
+    background: #003542;
+}
+
+#main{
+    margin: auto;
+    margin-top: 70px;
+    padding: 20px 0;
+    max-width: 90vw;
+}
+
+@media screen and (max-width: 500px){
+    #main {
+        max-width: 70vw;
+    }
+}
+
+#filters-div{
+    width: 500px;
+    margin: 10px 10px;
+    max-width: 80vw;
+}
+
+.filter-btn {
+    background: darkgrey;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    padding: 7px;
+    font-size: 0.8em;
+}
+
+.filter-btn:hover{
+    background: darkgrey;
+}
+
+#filters-div input {
+    background: darkgrey;
+    width: 100px;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 10px 0;
+    outline: none;
+}
+
+#filters-div input::placeholder{
+    color: black;
+}

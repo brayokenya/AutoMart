@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/defaults.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/ads.css">
+    <title>Automart Ads</title>
+</head>
+
+<body>
+    <nav>
+        <div id="logo-div">
+            <img src="../images/automart_white.png" alt="logo" id="logo">
+        </div>
+        <div>
+
+            <button class="sec-btn btn-white logout-btn mg-r-80 lg-screen">
+                <span>
+                    <i class="fas fa-sign-out-alt"></i>
+                </span>
+                logout
+            </button>
+            <img src="../images/hamburger.svg" alt="menu button" id="menu-btn">
+        </div>
+    </nav>
+    <aside id="side-nav">
+        <img src="../images/close_btn.svg" alt="close button" id="close-btn">
+        <ul id='menu-items'>
+            <li>
+                <span class="menu-icon"><i class="fas fa-filter"></i></span> Filter by:
+            </li>
+            <ul>
+                <a href="">
+                    <li> <span><i class="far fa-copyright"></i></span> make </li>
+                </a>
+                <a href="">
+                    <li> <span><i class="fas fa-car"></i></span> body type </li>
+                </a>
+                <a href="">
+                    <li> <span><i class="fas fa-tags"></i></span> lowest price </li>
+                </a>
+                <a href="">
+                    <li> <span><i class="fas fa-tags"></i></span> highest price </li>
+                </a>
+            </ul>
+            <div class="mg-t-30">
+                <a href="">
+                    <li> <span><i class="fas fa-bullhorn"></i></span> my ads </li>
+                </a>
+                <a href="">
+                    <li> <span><i class="fas fa-file-invoice"></i></span> purchase orders </li>
+                </a>
+                <a href="" class="logout-btn">
+                    <li> <span><i class="fas fa-sign-out-alt"></i></span> log out </li>
+                </a>
+            </div>
+
+        </ul>
+    </aside>
+
+    <div id="blur-layer"></div>
+    <div id="main">
+
+        <!-- Filters -->
+        <div id="filters-div">
+            <h3> filter by: </h3>
+            <button class="filter-btn"> make </button>
+            <button class="filter-btn"> body type </button>
+            <button class="filter-btn"> lowest price </button>
+            <button class="filter-btn"> highest price </button>
+            <input type="number" id="min-price-filter" placeholder="min-price">
+            <input type="number" id="max-price-filter" placeholder="max-price">
+
+        </div>
+        <hr>
+        <!-- Filters div ends here-->
+
+        <div id="ads" class="flex-primary wrap">
+            <!-- ad starts here-->
+            <div class="ad" id="show-automobiles">
+                <a href="">
+                    <div class="disp-box">
+                        <div class="disp-img-container">
+                            <img src="../images/toyota.jpg" alt="">
+                        </div>
+                        <div class="disp-content">
+                            <p class="title"><span class="state"> used </span> 2016 Toyota 4Runner</p>
+                            <p class="price"><span class="currenct">N</span>5,000,000</p>
+                        </div>
+                        <div class="disp-details flex-between">
+                            <div>
+                                <img src="../images/vehicle.svg" alt="body type" class="disp-img">
+                                <p class="disp-detail body-type"> s.u.v.</p>
+                            </div>
+                            <div>
+                                <img src="../images/images.svg" alt="images" class="disp-img">
+                                <p class="disp-detail images"> 6 </p>
+                            </div>
+                            <div>
+                                <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
+                                <p class="disp-detail owner"> John Doe </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of an ad-->
+            <!-- ad starts here-->
+            <div class="ad">
+                <a href="">
+                    <div class="disp-box">
+                        <div class="disp-img-container">
+                            <img src="../images/thundra.jpg" alt="">
+                        </div>
+                        <div class="disp-content">
+                            <p class="title"><span class="state"> used </span> 2013 Toyota Thundra</p>
+                            <p class="price"><span class="currenct">N</span>3,500,000</p>
+                        </div>
+                        <div class="disp-details flex-between">
+                            <div>
+                                <img src="../images/vehicle.svg" alt="body type" class="disp-img">
+                                <p class="disp-detail body-type"> truck</p>
+                            </div>
+                            <div>
+                                <img src="../images/images.svg" alt="images" class="disp-img">
+                                <p class="disp-detail images"> 4 </p>
+                            </div>
+                            <div>
+                                <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
+                                <p class="disp-detail owner"> John Doe </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of an ad-->
+            <!-- ad starts here-->
+            <div class="ad">
+                <a href="">
+                    <div class="disp-box">
+                        <div class="disp-img-container">
+                            <img src="../images/lexus.jpg" alt="">
+                        </div>
+                        <div class="disp-content">
+                            <p class="title"><span class="state"> new </span> 2017 Lexus</p>
+                            <p class="price"><span class="currenct">N</span>15,000,000</p>
+                        </div>
+                        <div class="disp-details flex-between">
+                            <div>
+                                <img src="../images/vehicle.svg" alt="body type" class="disp-img">
+                                <p class="disp-detail body-type"> sedan </p>
+                            </div>
+                            <div>
+                                <img src="../images/images.svg" alt="images" class="disp-img">
+                                <p class="disp-detail images"> 5 </p>
+                            </div>
+                            <div>
+                                <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
+                                <p class="disp-detail owner"> John Doe </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of an ad-->
+            <!-- ad starts here-->
+            <div class="ad">
+                <a href="">
+                    <div class="disp-box">
+                        <div class="disp-img-container">
+                            <img src="../images/corolla.jpg" alt="">
+                        </div>
+                        <div class="disp-content">
+                            <p class="title"><span class="state"> used </span> 2011 Toyota Corolla</p>
+                            <p class="price"><span class="currenct">N</span>1,300,000</p>
+                        </div>
+                        <div class="disp-details flex-between">
+                            <div>
+                                <img src="../images/vehicle.svg" alt="body type" class="disp-img">
+                                <p class="disp-detail body-type"> s.u.v.</p>
+                            </div>
+                            <div>
+                                <img src="../images/images.svg" alt="images" class="disp-img">
+                                <p class="disp-detail images"> 6 </p>
+                            </div>
+                            <div>
+                                <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
+                                <p class="disp-detail owner"> John Doe </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of an ad-->
+            <!-- ad starts here-->
+            <div class="ad">
+                <a href="">
+                    <div class="disp-box">
+                        <div class="disp-img-container">
+                            <img src="../images/honda.jpg" alt="">
+                        </div>
+                        <div class="disp-content">
+                            <p class="title"><span class="state"> new </span> 2018 Honda Accord</p>
+                            <p class="price"><span class="currenct">N</span>17,000,000</p>
+                        </div>
+                        <div class="disp-details flex-between">
+                            <div>
+                                <img src="../images/vehicle.svg" alt="body type" class="disp-img">
+                                <p class="disp-detail body-type"> s.u.v.</p>
+                            </div>
+                            <div>
+                                <img src="../images/images.svg" alt="images" class="disp-img">
+                                <p class="disp-detail images"> 8 </p>
+                            </div>
+                            <div>
+                                <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
+                                <p class="disp-detail owner"> Jane Doe </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of an ad-->
+            <!-- ad starts here-->
+            <div class="ad">
+                <a href="">
+                    <div class="disp-box">
+                        <div class="disp-img-container">
+                            <img src="../images/mercedes_benz.jpg" alt="">
+                        </div>
+                        <div class="disp-content">
+                            <p class="title"><span class="state"> used </span> 2014 Mercedes Benz</p>
+                            <p class="price"><span class="currenct">N</span>5,000,000</p>
+                        </div>
+                        <div class="disp-details flex-between">
+                            <div>
+                                <img src="../images/vehicle.svg" alt="body type" class="disp-img">
+                                <p class="disp-detail body-type"> sedan</p>
+                            </div>
+                            <div>
+                                <img src="../images/images.svg" alt="images" class="disp-img">
+                                <p class="disp-detail images"> 6 </p>
+                            </div>
+                            <div>
+                                <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
+                                <p class="disp-detail owner"> John Doe </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- end of an ad-->
+        </div>
+
+
+        <div class="center mg-auto">
+            <button class="main-btn btn-primary block center mg-auto"> load more </button>
+        </div>
+    </div>
+
+    <script src="../js/index.js"></script>
+</body>
+
+</html>
