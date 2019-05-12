@@ -96,6 +96,28 @@
 }
 
 
+#po-input-form{
+    width: 300px;
+    margin: auto;
+    margin-top: 100px;
+    padding: 20px;
+    border-radius: 4px;
+    background: white;
+    box-shadow: 0 0 15px 5px rgba(128, 128, 128, 0.144); 
+    text-align: center;
+    display: none;
+}
+
+#offer-input {
+    background: #003542;
+    border: none;
+    padding: 8px;
+    display: block;
+    margin: auto;
+    outline: none;
+    color: white;
+}
+
 
 #purchase-order-div {
     background: whitesmoke;
