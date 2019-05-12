@@ -1,0 +1,96 @@
+@media screen and (min-width: 780px){
+    body{
+        height: 100vh;
+        overflow: hidden;
+        font-size: 0.9em;
+    }
+}
+
+#wrapper{
+    width: 1200px;
+    max-width: 90vw;
+    margin: auto;
+    padding-top: 50px;
+}
+
+
+#main {
+    /* overriding css in updatePrice.css*/
+    box-shadow: none;
+    margin: auto;
+}
+
+#related-ads-wrapper {
+    padding: 20px 0;
+}
+
+.related-ad-image {
+    max-width: 200px;
+    max-height: 200px;
+    overflow: hidden;
+}
+
+.related-ad {
+    font-size: 0.7em;
+    text-align: center;
+    width: 200px;
+    margin-bottom: 20px;  
+    box-shadow: 0 0 15px 5px rgba(128, 128, 128, 0.144); 
+    border-radius: 6px;
+    transition: 0.2s ease-in;
+}
+
+.related-ad:hover{
+    border: 2px solid transparent;
+}
+
+@media screen and (max-width: 780px){
+    #main {
+        height: auto;
+    }
+    #wrapper{
+        margin-top: 0;
+    }
+
+    #related-ads-wrapper {
+        padding: 0;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        margin-top: 30px;
+    }
+
+    #related-ads {
+        display: flex;
+        box-shadow: none;
+        width: 100%;
+        height: 220px;
+    }
+    h4{
+        margin-left: 10px;
+    }
+    .related-ad {
+        font-size: 0.5em;
+        text-align: center;
+        width: 150px;
+        margin: 10px;  
+        box-shadow: 0 0 15px 5px rgba(128, 128, 128, 0.144); 
+        border-radius: 6px;
+        transition: 0.2s ease-in;
+    }
+
+    .related-ad-image {
+        height: 100px;
+        overflow: hidden;
+    }
+    
+}
+
+@media screen and (min-width: 780px){
+    #related-ads {
+        width: 300px;
+        max-width: 90vw;
+        height: 70vh;
+        overflow-y: scroll;
+        margin: auto;
+    }
+}
