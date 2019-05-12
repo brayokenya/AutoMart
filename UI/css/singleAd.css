@@ -94,3 +94,87 @@
         margin: auto;
     }
 }
+
+
+#po-input-form{
+    width: 300px;
+    margin: auto;
+    margin-top: 100px;
+    padding: 20px;
+    border-radius: 4px;
+    background: white;
+    box-shadow: 0 0 15px 5px rgba(128, 128, 128, 0.144); 
+    text-align: center;
+    display: none;
+}
+
+#offer-input {
+    background: #003542;
+    border: none;
+    padding: 8px;
+    display: block;
+    margin: auto;
+    outline: none;
+    color: white;
+}
+
+
+#purchase-order-div {
+    background: whitesmoke;
+    width: 300px;
+    max-width: 80vw;
+    margin: auto;
+    margin-top: 50px;
+    color: black;
+    font-size: 0.9em;
+    overflow-x: hidden;
+    padding-bottom: 20px;
+    display: none;
+}
+
+@media screen and (max-width: 700px){
+    #purchase-order-div {
+        margin-bottom: 50px;
+    }
+}
+
+#purchase-order-div i, .label {
+    color:black;
+    margin-right: 15px;
+    font-size: 0.8em;
+}
+
+#offer {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: right;
+    font-family: 'Poppins', sans-serif;
+}
+
+#po-header {
+    background: #003542;
+    font-size: 0.9em;
+    color: lightgrey;
+    padding: 10px 5px;  
+    margin-bottom: -20px;
+    width: 100%;
+}
+
+#po-header h3 {
+    font-size: 1.5em;
+    color: white;
+    text-transform: uppercase;
+}
+
+
+.tiny-header {
+    background: #57CEA0;
+    color: white;
+    width: 100%;
+    margin: auto;
+    padding: 0 5px;
+}
+
+.po-details {
+    padding: 5px;
+}

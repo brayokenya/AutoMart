@@ -76,7 +76,7 @@
                 <p class="detail"> <span><i class="far fa-calendar-alt"></i></span> 10/05/2019</p>
             </div>
             <div>
-                <button class="main-btn btn-primary"> place order </button>
+                <button class="main-btn btn-primary" id="place-order-btn"> place order </button>
             </div>
         </div>
 
@@ -140,7 +140,47 @@
 
     </div>
 
+    <div id="po-input-form">
+        <p> how much are you offering? </p>
+        <input type="number" placeholder="enter amount" id="offer-input">
+        <button id="po-input-btn" class="sec-btn btn-primary mg-t-30"> continue </button>
+        <button class="sec-btn btn-tertiary cancel-po"> cancel </button>
+    </div>
+
+    <div id="purchase-order-div">
+        <div id="po-header">
+            <h3 class="center"> Purchase Order</h3>
+            <p> Jane Doe</p>
+            <p id="buyer-name"> 17 Dada Street, Ikeja, Lagos State</p>
+            <p id="buyer-email">janedoe@gmail.com</p>
+            <p>23-07-2019</p>
+        </div>
+        <div class="tiny-header">
+            <p> Purchase from: </p>
+        </div>
+        <div class="po-details">
+            <p> <span class="mg-r-30"><i class="fas fa-user"></i></span> John Doe </p>
+            <p> <span><i class="fas fa-at"></i></span> johndoe@gmail.com </p>
+            <p> <span><i class="fas fa-map-pin"></i></span> 19 Dada Street, Ikeja, Lagos State</p>
+        </div>
+        <div class="tiny-header">
+            <p> Automobile details: </p>
+        </div>
+        <div class="po-details">
+            <p> <span class="label">State:</span> Used </p>
+            <p> <span class="label">Make:</span> Toyota </p>
+            <p> <span class="label">Body Type:</span> Sedan </p>
+            <p> <span class="label">Asking Price:</span> <span>N3,000,000</span> </p>
+            <p> <span class="label">Offer:</span> <span id="offer"> N2,000,0000</span> </p>
+        </div>
+        <div class="flex-primary">
+            <button class="sec-btn btn-secondary" id="complete-po-btn"> complete </button>
+            <button class="sec-btn btn-tertiary cancel-po"> cancel </button>
+        </div>
+    </div>
+
     <script src="../js/index.js"></script>
+    <script src="../js/singleAd.js"></script>
 </body>
 
 </html>
