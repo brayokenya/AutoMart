@@ -27,6 +27,11 @@ a{
 .sec-color{
     color: #FF9A85;
 }
+
+.dark-color {
+    color: #003542;
+}
+
 .open-sans{
     font-family: 'Open Sans', sans-serif;
 }
@@ -287,6 +292,18 @@ nav{
 }
 
 .btn-tertiary:hover{
+    background: transparent;
+    color: #FF9A85;
+    border: 2px solid #FF9A85;
+}
+
+.btn-red{
+    background: firebrick;
+    color: white;
+    transition: 0.2s ease-in;
+}
+
+.btn-red:hover{
     background: transparent;
     color: #FF9A85;
     border: 2px solid #FF9A85;
