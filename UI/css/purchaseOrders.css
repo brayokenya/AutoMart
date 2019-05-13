@@ -89,12 +89,25 @@ nav {
     padding: 5px;
 }
 
-#edit-po-btn {
-    display: block;
-    margin: auto;
-    text-align: center;
-}
-
 .pending{
     color: yellow;
+}
+
+
+#po-update-div {
+    width: 300px;   
+    max-width: 70vw;
+    height: auto;
+    padding: 20px;
+    margin: auto;
+    margin-top: 150px;
+    text-align: center;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 5px 5px 20px 8px #0035422a; 
+    display: none;
+}
+
+#po-update-div input {
+    margin-bottom: 10px;
 }

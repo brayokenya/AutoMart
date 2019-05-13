@@ -169,7 +169,18 @@
             <p> <span class="label">Asking Price:</span> <span>N3,000,000</span> </p>
             <p> <span class="label">Offer:</span> <span id="offer" class="po-offer"> N2,000,0000</span> </p>
         </div>
-        <button class="sec-btn btn-red" id="edit-po-btn"> edit </button>
+        <div class="flex-primary">
+            <button class="sec-btn btn-secondary" id="edit-po-btn"> edit </button>
+            <button class="sec-btn btn-red cancel-btn"> close </button>
+        </div>
+
+    </div>
+
+    <div id="po-update-div">
+        <p> enter new offer </p>
+        <input type="number" id="po-update-value" class="default-input">
+        <button class="sec-btn btn-primary" id="po-update-btn"> update </button>
+        <button class="sec-btn btn-tertiary cancel-btn " id="po-update-btn"> cancel </button>
     </div>
 
     <script src="../js/index.js"></script>
