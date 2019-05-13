@@ -30,6 +30,7 @@ updateBtn.addEventListener('click', () => {
 
 cancelBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
+        inputValue.value = '';
         inputDiv.style.display = 'none';
         purchaseOrder.style.display = 'none';
         mainDiv.style.display = 'block';
