@@ -1,0 +1,100 @@
+
+nav {
+    background: #003542;
+}
+
+#main {
+    margin: auto;
+    margin-top: 70px;
+    width: 1200px;
+    max-width: 80vw;
+}
+
+.po-div {
+    width: 250px;
+    padding: 5px 20px;
+    background: #003542;
+    color: white;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.po-div:hover {
+    background: #002129;
+}
+
+#purchase-order-div {
+    background: whitesmoke;
+    width: 300px;
+    max-width: 80vw;
+    margin: auto;
+    margin-top: 80px;
+    color: black;
+    font-size: 0.9em;
+    overflow-x: hidden;
+    padding-bottom: 20px;
+    display: none;
+}
+
+@media screen and (max-width: 700px){
+    #purchase-order-div {
+        margin-bottom: 50px;
+    }
+}
+
+.po-icon, .label {
+    margin-right: 15px;
+    font-size: 0.8em;
+}
+
+
+.po-offer {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: right;
+    font-family: 'Poppins', sans-serif;
+    color: #57CEA0;
+}
+
+#offer.po-offer {
+    color: #003542;
+}
+
+#po-header {
+    background: #003542;
+    font-size: 0.9em;
+    color: lightgrey;
+    padding: 10px 5px;  
+    margin-bottom: -20px;
+    width: 100%;
+}
+
+#po-header h3 {
+    font-size: 1.5em;
+    color: white;
+    text-transform: uppercase;
+}
+
+
+.tiny-header {
+    background: #57CEA0;
+    color: white;
+    width: 100%;
+    margin: auto;
+    padding: 0 5px;
+}
+
+.po-details {
+    padding: 5px;
+}
+
+#edit-po-btn {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.pending{
+    color: yellow;
+}
