@@ -17,6 +17,16 @@ body{
     font-size: 0.9rem;
 }
 
+.default-input {
+    background: #003542;
+    padding: 5px;
+    outline: none;
+    color: white;
+    display: block;
+    border: none;
+    margin: auto;
+}
+
 
 a{
     text-decoration: none;
