@@ -7,6 +7,8 @@ const offer = document.querySelector('#offer');
 const poInputBtn = document.querySelector('#po-input-btn');
 const poDiv = document.querySelector('#purchase-order-div');
 const completePoBtn = document.querySelector('#complete-po-btn');
+const reportBtn = document.querySelector('#report-btn');
+const reportFormDiv = document.querySelector('#report-form-div');
 const cancelBtns = document.querySelectorAll('.cancel-po');
 
 
@@ -31,7 +33,16 @@ const completePo = () => {
     adPage.style.display = 'block';
     relatedAdsPage.style.display = 'block';
     offerInput.value = '';
-}
+};
+
+reportBtn.addEventListener('click', (e) => {
+    adPage.style.display = 'none';
+    relatedAdsPage.style.display = 'none';
+    reportFormDiv.style.display = 'block';
+    e.preventDefault();
+});
+
+
 cancelBtns.forEach(btn => {
     btn.addEventListener('click', completePo);
 });

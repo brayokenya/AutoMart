@@ -323,3 +323,50 @@ nav{
     color: #FF9A85;
     border: 2px solid #FF9A85;
 }
+
+.primary-form{
+    max-width: 200px;
+    margin: auto;
+    padding: 0;
+}
+
+
+.primary-form input, .primary-form select, .primary-form textarea {
+    background: transparent;
+    width: 90%;
+    margin-top: 20px;
+    padding: 8px;
+    border: 1px solid #57CEA0;
+    border-radius: 4px;
+    outline: none;
+    transition: 0.3s;
+    color: lightgrey;
+}
+
+.primary-form select{
+    color: grey;
+    width: 100%;
+    padding: 8px;
+    display: block;
+}
+
+.primary-form select:focus{
+    background: black;
+    border: 2px solid #57CEA0;
+}
+
+.primary-form select option:first-child{
+    display: none;
+}
+
+.primary-form input:focus, .primary-form textarea:focus {
+    background: black;
+    color: white;
+    padding: 10px;
+    border: 2px solid #57CEA0;
+}
+.primary-form option {
+    background: #003542;
+    color: white;
+    border: 1px solid #57CEA0;
+}
