@@ -7,7 +7,7 @@ menuBtn.addEventListener('click', () => {
     if (!blurLayer.style.display || blurLayer.style.display === 'none') {
         blurLayer.style.display = 'block';
         sideNav.style.width = '200px';
-        menuBtn.style.display = 'none';
+        menuBtn.style.opacity = 0;
         closeBtn.style.display = 'block';
     }
 });
@@ -16,7 +16,7 @@ closeBtn.addEventListener('click', () => {
     if (blurLayer.style.display = 'block') {
         blurLayer.style.display = 'none';
         sideNav.style.width = '0';
-        menuBtn.style.display = '';
+        menuBtn.style.opacity = 100;
         closeBtn.style.display = 'none';
     }
 });
@@ -25,7 +25,7 @@ const blur = () => {
     if (blurLayer.style.display = 'block') {
         blurLayer.style.display = 'none';
         sideNav.style.width = '0';
-        menuBtn.style.display = '';
+        menuBtn.style.opacity = 0;
         closeBtn.style.display = 'none';
     }
 }
