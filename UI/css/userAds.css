@@ -1,0 +1,58 @@
+nav {
+    background: #003542;
+}
+
+#main {
+    width: 800px;
+    max-width: 90vw;
+    margin: auto;
+    margin-top: 100px;
+}
+
+table{
+    width: 800pc;
+    border-collapse: collapse;
+    font-weight: 100;
+    margin: auto;
+    border: none;
+    display: block;
+}
+
+td, th {
+    border: 1px solid whitesmoke;
+    text-align: left;
+    padding: 10px 20px;
+}
+
+th {
+    background:#003542;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;    
+    color: white;    
+}
+
+
+  tr:nth-child(even) {
+    background-color: whitesmoke;
+}
+
+.btn-primary {
+    padding: 5px 20px;
+    border-radius: 2px;
+}
+
+.btn-primary:hover {
+    border: none;
+    background: rgb(70, 168, 131);
+    color: white;
+}
+
+@media screen and (max-width: 770px){
+    table {
+        font-size: 0.9em;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+}
