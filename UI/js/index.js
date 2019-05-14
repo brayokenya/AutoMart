@@ -25,7 +25,7 @@ const blur = () => {
     if (blurLayer.style.display = 'block') {
         blurLayer.style.display = 'none';
         sideNav.style.width = '0';
-        menuBtn.style.opacity = 0;
+        menuBtn.style.opacity = 100;
         closeBtn.style.display = 'none';
     }
 }
