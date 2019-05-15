@@ -259,30 +259,30 @@ input::placeholder{
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     font-size: 1.6em;
-    line-height: 0;
+    line-height: 1px;
     color: #368063;
 }
 
 .disp-details {
     border-top: 1px solid #DCDCDC;
+    margin-top: 40px;
+    margin-bottom: -10px;
 }
 
 
 .disp-detail {
     display: inline-block;
     text-align: center;
-    padding-bottom: 5px;
     color:  #696969;
 }
 
-.disp-img{
-    height: 12px;
-    margin: auto;
-    opacity: 0.5;
+.disp-detail i {
+    margin-right: 3px;
 }
 
-
 .owner-img{
+    height: 13px;
+    margin: auto;
     border-radius: 200px;    
     opacity: 1;
 }
