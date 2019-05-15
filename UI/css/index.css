@@ -264,21 +264,25 @@ input::placeholder{
 }
 
 .disp-details {
-    border-top: 1px solid #003542;
+    border-top: 1px solid #DCDCDC;
 }
+
 
 .disp-detail {
     display: inline-block;
     text-align: center;
     padding-bottom: 5px;
+    color:  #696969;
 }
 
 .disp-img{
     height: 12px;
     margin: auto;
+    opacity: 0.5;
 }
 
 
 .owner-img{
     border-radius: 200px;    
+    opacity: 1;
 }
