@@ -94,7 +94,7 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="./user-ad.html" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary view-btn"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
             <!-- an ad begins here-->
@@ -105,7 +105,7 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="./user-ad.html" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary view-btn"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
             <!-- an ad begins here-->
@@ -116,7 +116,7 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="./user-ad.html" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary view-btn"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
             <!-- an ad begins here-->
@@ -127,7 +127,7 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="./user-ad.html" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
             <!-- an ad begins here-->
@@ -138,7 +138,7 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="./user-ad.html" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
             <!-- an ad begins here-->
@@ -149,7 +149,7 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="./user-ad" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary viiew-btn"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
             <!-- an ad begins here-->
@@ -160,7 +160,7 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="./user-ad" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
             <!-- an ad begins here-->
@@ -171,14 +171,43 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="./user-ad" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary view-btn"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
         </table>
 
+        <div id="user-ad-div">
+            <img src="../images/honda.jpg" alt="ad image" id="ad-image">
+            <h3 class="product-title"> Brand-new 2018 Honda Accord</h3>
+            <h3 id="price"> N3,000,000 <sup id="edit-price-btn"> <i class="fas fa-pencil-alt"></i> </sup></h3>
+            <div id="details-div" class="flex-primary">
+                <p class="detail"> <span><i class="far fa-copyright"></i></span> Honda</p>
+                <p class="detail"> <span><i class="fas fa-car"></i></span> S.U.V.</p>
+                <p class="detail"> <span><i class="far fa-calendar-alt"></i></span> 10/05/2019</p>
+            </div>
+            <button class="main-btn btn-primary" id="mark-as-sold-btn"> mark as sold </button>
+            <button class="sec-btn btn-tertiary" id="close-user-ad"> close </button>
+        </div>
+        <div id="confirmation-prompt">
+            <p> Confirm automobile sale </p>
+            <button class="sec-btn btn-primary cancel-btn"> confirm </button>
+            <button class="sec-btn btn-tertiary cancel-btn"> cancel </button>
+        </div>
+
+        <div id="input-div">
+            <p> Enter new price</p>
+            <input type="number" id="new-price">
+            <div class="mg-t-30">
+                <button class="sec-btn btn-primary" id="update-btn"> update </button>
+                <button class="sec-btn btn-tertiary cancel-btn"> cancel </button>
+            </div>
+
+        </div>
+
     </div>
 
     <script src="../js/index.js"></script>
+    <script src="../js/userAds.js"></script>
 </body>
 
 </html>
