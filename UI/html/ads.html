@@ -16,7 +16,10 @@
 <body>
     <nav>
         <div id="logo-div">
-            <img src="../images/automart_white.png" alt="logo" id="logo">
+            <a href="./index.html">
+                <img src="../images/automart_white.png" alt="logo" id="logo">
+            </a>
+
         </div>
         <div>
 
@@ -32,31 +35,38 @@
     <aside id="side-nav">
         <img src="../images/close_btn.svg" alt="close button" id="close-btn">
         <ul id='menu-items'>
-            <li>
-                <span class="menu-icon"><i class="fas fa-filter"></i></span> Filter by:
-            </li>
+            <a href="" id="apply-filter">
+                <li>
+                    <span class="menu-icon"><i class="fas fa-filter"></i></span> Apply Filters
+                    <span id="filter-icon"> <i class="fas fa-chevron-right mg-l-10"></i> </span>
+                </li>
+            </a>
+
             <ul>
-                <a href="">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="far fa-copyright"></i></span> make </li>
                 </a>
-                <a href="">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="fas fa-car"></i></span> body type </li>
                 </a>
-                <a href="">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="fas fa-tags"></i></span> lowest price </li>
                 </a>
-                <a href="">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="fas fa-tags"></i></span> highest price </li>
                 </a>
             </ul>
+            <a href="./post-ad.html">
+                <li> <span><i class="fas fa-paper-plane"></i></span> Sell a car</li>
+            </a>
+            <a href="./user-ads.html">
+                <li> <span><i class="fas fa-bullhorn"></i></span> my ads </li>
+            </a>
+            <a href="./purchase-orders.html">
+                <li> <span><i class="fas fa-file-invoice"></i></span> purchase orders </li>
+            </a>
             <div class="mg-t-30">
-                <a href="">
-                    <li> <span><i class="fas fa-bullhorn"></i></span> my ads </li>
-                </a>
-                <a href="">
-                    <li> <span><i class="fas fa-file-invoice"></i></span> purchase orders </li>
-                </a>
-                <a href="" class="logout-btn">
+                <a href="./index.html" class="logout-btn">
                     <li> <span><i class="fas fa-sign-out-alt"></i></span> log out </li>
                 </a>
             </div>
@@ -70,7 +80,7 @@
         <div id="ads" class="flex-primary wrap">
             <!-- ad starts here-->
             <div class="ad" id="show-automobiles">
-                <a href="">
+                <a href="./specific-ad.html">
                     <div class="disp-box">
                         <div class="disp-img-container">
                             <img src="../images/toyota.jpg" alt="">
@@ -81,16 +91,13 @@
                         </div>
                         <div class="disp-details flex-between">
                             <div>
-                                <img src="../images/vehicle.svg" alt="body type" class="disp-img">
-                                <p class="disp-detail body-type"> s.u.v.</p>
+                                <p class="disp-detail body-type"> <i class="fas fa-car"></i> S.U.V.</p>
                             </div>
                             <div>
-                                <img src="../images/images.svg" alt="images" class="disp-img">
-                                <p class="disp-detail images"> 6 </p>
+                                <p class="disp-detail images"> <i class="fas fa-images"></i> 6 </p>
                             </div>
                             <div>
-                                <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
-                                <p class="disp-detail owner"> John Doe </p>
+                                <p class="disp-detail owner"> <i class="fas fa-user"></i> John Doe </p>
                             </div>
                         </div>
                     </div>
@@ -99,7 +106,7 @@
             <!-- end of an ad-->
             <!-- ad starts here-->
             <div class="ad">
-                <a href="">
+                <a href="./specific-ad.html">
                     <div class="disp-box">
                         <div class="disp-img-container">
                             <img src="../images/thundra.jpg" alt="">
@@ -110,16 +117,13 @@
                         </div>
                         <div class="disp-details flex-between">
                             <div>
-                                <img src="../images/vehicle.svg" alt="body type" class="disp-img">
-                                <p class="disp-detail body-type"> truck</p>
+                                <p class="disp-detail body-type"> <i class="fas fa-car"></i> Truck</p>
                             </div>
                             <div>
-                                <img src="../images/images.svg" alt="images" class="disp-img">
-                                <p class="disp-detail images"> 4 </p>
+                                <p class="disp-detail images"> <i class="fas fa-images"></i> 4 </p>
                             </div>
                             <div>
-                                <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
-                                <p class="disp-detail owner"> John Doe </p>
+                                <p class="disp-detail owner"> <i class="fas fa-user"></i> John Doe </p>
                             </div>
                         </div>
                     </div>
@@ -128,7 +132,7 @@
             <!-- end of an ad-->
             <!-- ad starts here-->
             <div class="ad">
-                <a href="">
+                <a href="./specific-ad.html">
                     <div class="disp-box">
                         <div class="disp-img-container">
                             <img src="../images/lexus.jpg" alt="">
@@ -139,16 +143,13 @@
                         </div>
                         <div class="disp-details flex-between">
                             <div>
-                                <img src="../images/vehicle.svg" alt="body type" class="disp-img">
-                                <p class="disp-detail body-type"> sedan </p>
+                                <p class="disp-detail body-type"> <i class="fas fa-car"></i> Sedan </p>
                             </div>
                             <div>
-                                <img src="../images/images.svg" alt="images" class="disp-img">
-                                <p class="disp-detail images"> 5 </p>
+                                <p class="disp-detail images"> <i class="fas fa-images"></i> 5 </p>
                             </div>
                             <div>
-                                <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
-                                <p class="disp-detail owner"> John Doe </p>
+                                <p class="disp-detail owner"> <i class="fas fa-user"></i> John Doe </p>
                             </div>
                         </div>
                     </div>
@@ -157,7 +158,7 @@
             <!-- end of an ad-->
             <!-- ad starts here-->
             <div class="ad">
-                <a href="">
+                <a href="./specific-ad.html">
                     <div class="disp-box">
                         <div class="disp-img-container">
                             <img src="../images/corolla.jpg" alt="">
@@ -168,16 +169,13 @@
                         </div>
                         <div class="disp-details flex-between">
                             <div>
-                                <img src="../images/vehicle.svg" alt="body type" class="disp-img">
-                                <p class="disp-detail body-type"> s.u.v.</p>
+                                <p class="disp-detail body-type"> <i class="fas fa-car"></i> S.U.V. </p>
                             </div>
                             <div>
-                                <img src="../images/images.svg" alt="images" class="disp-img">
-                                <p class="disp-detail images"> 6 </p>
+                                <p class="disp-detail images"> <i class="fas fa-images"></i> 6 </p>
                             </div>
                             <div>
-                                <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
-                                <p class="disp-detail owner"> John Doe </p>
+                                <p class="disp-detail owner"> <i class="fas fa-user"></i> John Doe </p>
                             </div>
                         </div>
                     </div>
@@ -186,7 +184,7 @@
             <!-- end of an ad-->
             <!-- ad starts here-->
             <div class="ad">
-                <a href="">
+                <a href="./specific-ad.html">
                     <div class="disp-box">
                         <div class="disp-img-container">
                             <img src="../images/honda.jpg" alt="">
@@ -197,16 +195,13 @@
                         </div>
                         <div class="disp-details flex-between">
                             <div>
-                                <img src="../images/vehicle.svg" alt="body type" class="disp-img">
-                                <p class="disp-detail body-type"> s.u.v.</p>
+                                <p class="disp-detail body-type"> <i class="fas fa-car"></i> S.U.V.</p>
                             </div>
                             <div>
-                                <img src="../images/images.svg" alt="images" class="disp-img">
-                                <p class="disp-detail images"> 8 </p>
+                                <p class="disp-detail images"> <i class="fas fa-images"></i> 8 </p>
                             </div>
                             <div>
-                                <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
-                                <p class="disp-detail owner"> Jane Doe </p>
+                                <p class="disp-detail owner"> <i class="fas fa-user"></i> Jane Doe </p>
                             </div>
                         </div>
                     </div>
@@ -215,7 +210,7 @@
             <!-- end of an ad-->
             <!-- ad starts here-->
             <div class="ad">
-                <a href="">
+                <a href="./specific-ad.html">
                     <div class="disp-box">
                         <div class="disp-img-container">
                             <img src="../images/mercedes_benz.jpg" alt="">
@@ -226,16 +221,13 @@
                         </div>
                         <div class="disp-details flex-between">
                             <div>
-                                <img src="../images/vehicle.svg" alt="body type" class="disp-img">
-                                <p class="disp-detail body-type"> sedan</p>
+                                <p class="disp-detail body-type"> <i class="fas fa-car"></i> Sedan</p>
                             </div>
                             <div>
-                                <img src="../images/images.svg" alt="images" class="disp-img">
-                                <p class="disp-detail images"> 6 </p>
+                                <p class="disp-detail images"> <i class="fas fa-images"></i> 6 </p>
                             </div>
                             <div>
-                                <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
-                                <p class="disp-detail owner"> John Doe </p>
+                                <p class="disp-detail owner"> <i class="fas fa-user"></i> John Doe </p>
                             </div>
                         </div>
                     </div>

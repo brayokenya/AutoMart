@@ -1,3 +1,7 @@
+const viewBtns = document.querySelectorAll('.view-btn');
+const table = document.querySelector('table');
+const userAdDiv = document.querySelector('#user-ad-div');
+const closeUserAdBtn = document.querySelector('#close-user-ad');
 const editPriceBtn = document.querySelector('#edit-price-btn');
 const price = document.querySelector('#price');
 const inputDiv = document.querySelector('#input-div');
@@ -8,6 +12,18 @@ const markAsSoldBtn = document.querySelector('#mark-as-sold-btn');
 const confirmationPrompt = document.querySelector('#confirmation-prompt');
 const confirmSaleBtn = document.querySelector('#confirm-sale-btn');
 
+
+viewBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        table.style.display = 'none';
+        userAdDiv.style.display = 'block';
+    });
+});
+
+closeUserAdBtn.addEventListener('click', () => {
+    table.style.display = 'block';
+    userAdDiv.style.display = 'none';
+});
 
 editPriceBtn.addEventListener('click', () => {
     blurLayer.style.display = 'block';

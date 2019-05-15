@@ -59,7 +59,9 @@ a{
 .lt-grey{
     color: lightgrey;
 }
-
+.mg-l-10 {
+    margin-left: 70px;
+}
 .mg-t-30{
     margin-top: 30px;
 }
@@ -82,6 +84,10 @@ a{
 
 .center{
     text-align: center;
+}
+
+.hide{
+    display: none;
 }
 
 .green-hlt{
@@ -229,6 +235,7 @@ nav{
     border-radius: 6px;
     transition: 0.3s;
     cursor: pointer;
+    text-transform: capitalize;
 }
 
 .sec-btn{
@@ -239,6 +246,7 @@ nav{
     border-radius: 6px;
     transition: 0.3s;
     cursor: pointer;
+    text-transform: capitalize;
 }
 
 .plain-link{

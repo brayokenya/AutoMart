@@ -15,7 +15,10 @@
 <body>
     <nav>
         <div id="logo-div">
-            <img src="../images/automart_white.png" alt="logo" id="logo">
+            <a href="./index.html">
+                <img src="../images/automart_white.png" alt="logo" id="logo">
+            </a>
+
         </div>
         <div>
 
@@ -31,38 +34,44 @@
     <aside id="side-nav">
         <img src="../images/close_btn.svg" alt="close button" id="close-btn">
         <ul id='menu-items'>
-            <li>
-                <span class="menu-icon"><i class="fas fa-filter"></i></span> Filter by:
-            </li>
+            <a href="" id="apply-filter">
+                <li>
+                    <span class="menu-icon"><i class="fas fa-filter"></i></span> Apply Filters
+                    <span id="filter-icon"> <i class="fas fa-chevron-right mg-l-10"></i> </span>
+                </li>
+            </a>
+
             <ul>
-                <a href="">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="far fa-copyright"></i></span> make </li>
                 </a>
-                <a href="">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="fas fa-car"></i></span> body type </li>
                 </a>
-                <a href="">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="fas fa-tags"></i></span> lowest price </li>
                 </a>
-                <a href="">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="fas fa-tags"></i></span> highest price </li>
                 </a>
             </ul>
+            <a href="./post-ad.html">
+                <li> <span><i class="fas fa-paper-plane"></i></span> Sell a car</li>
+            </a>
+            <a href="./user-ads.html">
+                <li> <span><i class="fas fa-bullhorn"></i></span> my ads </li>
+            </a>
+            <a href="./purchase-orders.html">
+                <li> <span><i class="fas fa-file-invoice"></i></span> purchase orders </li>
+            </a>
             <div class="mg-t-30">
-                <a href="">
-                    <li> <span><i class="fas fa-bullhorn"></i></span> my ads </li>
-                </a>
-                <a href="">
-                    <li> <span><i class="fas fa-file-invoice"></i></span> purchase orders </li>
-                </a>
-                <a href="" class="logout-btn">
+                <a href="./index.html" class="logout-btn">
                     <li> <span><i class="fas fa-sign-out-alt"></i></span> log out </li>
                 </a>
             </div>
 
         </ul>
     </aside>
-
     <div id="blur-layer"></div>
 
     <div id="main">
@@ -85,7 +94,7 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary view-btn"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
             <!-- an ad begins here-->
@@ -96,7 +105,7 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary view-btn"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
             <!-- an ad begins here-->
@@ -107,7 +116,7 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary view-btn"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
             <!-- an ad begins here-->
@@ -118,7 +127,7 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
             <!-- an ad begins here-->
@@ -129,7 +138,7 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
             <!-- an ad begins here-->
@@ -140,7 +149,7 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary viiew-btn"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
             <!-- an ad begins here-->
@@ -151,7 +160,7 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
             <!-- an ad begins here-->
@@ -162,14 +171,43 @@
                 <td> 4Runner </td>
                 <td class="lg-screen"> S.U.V </td>
                 <td> available </td>
-                <td> <a href="" class="sec-btn btn-primary"> view </a> </td>
+                <td> <button class="sec-btn btn-primary view-btn"> view </button> </td>
             </tr>
             <!-- an ad ends here-->
         </table>
 
+        <div id="user-ad-div">
+            <img src="../images/honda.jpg" alt="ad image" id="ad-image">
+            <h3 class="product-title"> Brand-new 2018 Honda Accord</h3>
+            <h3 id="price"> N3,000,000 <sup id="edit-price-btn"> <i class="fas fa-pencil-alt"></i> </sup></h3>
+            <div id="details-div" class="flex-primary">
+                <p class="detail"> <span><i class="far fa-copyright"></i></span> Honda</p>
+                <p class="detail"> <span><i class="fas fa-car"></i></span> S.U.V.</p>
+                <p class="detail"> <span><i class="far fa-calendar-alt"></i></span> 10/05/2019</p>
+            </div>
+            <button class="main-btn btn-primary" id="mark-as-sold-btn"> mark as sold </button>
+            <button class="sec-btn btn-tertiary" id="close-user-ad"> close </button>
+        </div>
+        <div id="confirmation-prompt">
+            <p> Confirm automobile sale </p>
+            <button class="sec-btn btn-primary cancel-btn"> confirm </button>
+            <button class="sec-btn btn-tertiary cancel-btn"> cancel </button>
+        </div>
+
+        <div id="input-div">
+            <p> Enter new price</p>
+            <input type="number" id="new-price">
+            <div class="mg-t-30">
+                <button class="sec-btn btn-primary" id="update-btn"> update </button>
+                <button class="sec-btn btn-tertiary cancel-btn"> cancel </button>
+            </div>
+
+        </div>
+
     </div>
 
     <script src="../js/index.js"></script>
+    <script src="../js/userAds.js"></script>
 </body>
 
 </html>
