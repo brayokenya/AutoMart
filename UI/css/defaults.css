@@ -229,6 +229,7 @@ nav{
     border-radius: 6px;
     transition: 0.3s;
     cursor: pointer;
+    text-transform: capitalize;
 }
 
 .sec-btn{
@@ -239,6 +240,7 @@ nav{
     border-radius: 6px;
     transition: 0.3s;
     cursor: pointer;
+    text-transform: capitalize;
 }
 
 .plain-link{
