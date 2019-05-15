@@ -2,9 +2,13 @@ nav {
     background: #003542;
 }
 
+#main {
+    width: 90%;
+    margin: auto;
+}
 
 table{
-    width: 800px;
+    width: 100%;
     max-width: 95vw;
     border-collapse: collapse;
     font-weight: 100;
@@ -15,8 +19,18 @@ table{
 
 td, th {
     border: 1px solid whitesmoke;
-    text-align: left;
+    text-align: center;
     padding: 10px 20px;
+    margin: auto;
+}
+
+@media screen and (min-width: 770px){
+    table {
+        margin-left: 40px;
+    }
+    td, th {
+        width: 120px;
+    }
 }
 
 th {
