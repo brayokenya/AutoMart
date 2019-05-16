@@ -1,46 +1,56 @@
 import isEmail from 'validator/lib/isEmail';
-import response422 from '../helpers/responseMessages';
+import errorMessage from '../helpers/responseMessages';
 
 const validateFirstName = (req, res, next) => {
     const { firstName } = req.body;
-    if (!firstName) return response422(res, 'First name was not provided');
+    if (!firstName) return errorMessage(res, 422, 'First name was not provided');
     const invalidCharacters = firstName.trim().match(/[^a-z]/i);
 
     return invalidCharacters
-        ? response422(res, 'Invalid first name')
+        ? errorMessage(res, 422, 'Invalid first name')
         : next();
 };
 
 const validateLastName = (req, res, next) => {
     const { lastName } = req.body;
-    if (!lastName) return response422(res, 'First name was not provided');
+    if (!lastName) return errorMessage(res, 422, 'Last name was not provided');
     const invalidCharacters = lastName.trim().match(/[^a-z]/i);
 
     return invalidCharacters
-        ? response422(res, 'Invalid last name')
+        ? errorMessage(res, 422, 'Invalid last name')
         : next();
 };
 
 const validateAddress = (req, res, next) => {
     const { address } = req.body;
-    if (!address) return response422('Address was not provided');
-    const invalidCharacters = address.match.trim()(/[^a-z0-9]/i);
+    if (!address) return errorMessage(res, 422, 'Address was not provided');
+    const invalidCharacters = address.trim().match(/[^a-z0-9,\s.]/i);
 
     return invalidCharacters
-        ? next()
-        : response422(res, 'Invalid address');
+        ? errorMessage(res, 422, 'Invalid address')
+        : next();
 };
 
 const validateEmail = (req, res, next) => {
     const { email } = req.body;
-    if (!email) return response422('Email was not provided');
+    if (!email) return errorMessage(res, 422, 'Email was not provided');
 
     return isEmail(email.trim())
         ? next()
-        : response422(res, 'Invalid email');
+        : errorMessage(res, 422, 'Invalid email');
 };
 
+const validatePassword = (req, res, next) => {
+    if (!req.body.password) return errorMessage(res, 422, 'Password was not provided');
+    return next();
+};
 
-const validateSignup = [validateFirstName, validateLastName, validateEmail, validateAddress];
+const validateSignup = [
+    validateFirstName,
+    validateLastName,
+    validateEmail,
+    validateAddress,
+    validatePassword
+];
 
 export default validateSignup;

@@ -1,8 +1,8 @@
-const response422 = (res, message) => {
-    res.status(422).json({
+const errorMessage = (res, statusCode, message) => {
+    res.status(statusCode).json({
         status: 'error',
         message
     });
 };
 
-export default response422;
+export default errorMessage;
