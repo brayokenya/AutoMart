@@ -15,41 +15,41 @@ const confirmSaleBtn = document.querySelector('#confirm-sale-btn');
 
 viewBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-        table.style.display = 'none';
-        userAdDiv.style.display = 'block';
+        hideElement(table);
+        showElement(userAdDiv);
     });
 });
 
 closeUserAdBtn.addEventListener('click', () => {
-    table.style.display = 'block';
-    userAdDiv.style.display = 'none';
+    showElement(table);
+    hideElement(userAdDiv);
 });
 
 editPriceBtn.addEventListener('click', () => {
-    blurLayer.style.display = 'block';
-    inputDiv.style.display = 'block';
+    showElement(blurLayer);
+    showElement(inputDiv);
     blurLayer.removeEventListener('click', blur);
 });
 
 updateBtn.addEventListener('click', () => {
     if (newPriceInput.value) {
         price.innerHTML = `N ${newPriceInput.value}`;
-        blurLayer.style.display = '';
-        inputDiv.style.display = '';
-        confirmationPrompt.style.display = '';
+        hideElement(blurLayer);
+        hideElement(inputDiv);
+        hideElement(confirmationPrompt);
     }
 });
 
 cancelBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-        blurLayer.style.display = '';
-        inputDiv.style.display = '';
-        confirmationPrompt.style.display = '';
+        hideElement(blurLayer);
+        hideElement(inputDiv);
+        hideElement(confirmationPrompt);
     });
 });
 
 markAsSoldBtn.addEventListener('click', () => {
-    blurLayer.style.display = 'block';
-    confirmationPrompt.style.display = 'block';
+    showElement(blurLayer);
+    showElement(confirmationPrompt);
     blurLayer.removeEventListener('click', blur);
 });

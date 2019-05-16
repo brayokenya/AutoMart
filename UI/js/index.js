@@ -6,30 +6,46 @@ const applyFilterBtn = document.querySelector('#apply-filter');
 const filterIcon = document.querySelector('#filter-icon');
 const hiddenFilters = document.querySelectorAll('.hide');
 
+const hideElement = (element) => {
+    return element.style.display = 'none';
+};
+
+const showElement = (element) => {
+    return element.style.display = 'block';
+};
+
+const giveOpacity = (element, value) => {
+    return element.style.opacity = value;
+};
+
+const giveWidth = (element, value) => {
+    return element.style.width = value;
+};
+
 menuBtn.addEventListener('click', () => {
     if (!blurLayer.style.display || blurLayer.style.display === 'none') {
-        blurLayer.style.display = 'block';
-        sideNav.style.width = '200px';
-        menuBtn.style.opacity = 0;
-        closeBtn.style.display = 'block';
+        showElement(blurLayer);
+        showElement(closeBtn);
+        giveWidth(sideNav, '200px');
+        giveOpacity(menuBtn, 0);
     }
 });
 
 closeBtn.addEventListener('click', () => {
-    if (blurLayer.style.display = 'block') {
-        blurLayer.style.display = 'none';
-        sideNav.style.width = '0';
-        menuBtn.style.opacity = 100;
-        closeBtn.style.display = 'none';
+    if (blurLayer.style.display === 'block') {
+        hideElement(blurLayer);
+        hideElement(closeBtn);
+        giveWidth(sideNav, '0px');
+        giveOpacity(menuBtn, 1);
     }
 });
 
 const blur = () => {
     if (blurLayer.style.display = 'block') {
-        blurLayer.style.display = 'none';
-        sideNav.style.width = '0';
-        menuBtn.style.opacity = 100;
-        closeBtn.style.display = 'none';
+        hideElement(blurLayer);
+        giveWidth(sideNav, '0px');
+        giveOpacity(menuBtn, 1);
+        hideElement(closeBtn);
     }
 }
 blurLayer.addEventListener('click', blur);

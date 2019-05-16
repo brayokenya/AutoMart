@@ -13,32 +13,31 @@ const cancelBtns = document.querySelectorAll('.cancel-po');
 
 
 placeOrderBtn.addEventListener('click', () => {
-    adPage.style.display = 'none';
-    relatedAdsPage.style.display = 'none';
-    poInputForm.style.display = 'block';
+    hideElement(adPage);
+    hideElement(relatedAdsPage);
+    showElement(poInputForm);
 });
 
 poInputBtn.addEventListener('click', () => {
     const offerAmount = offerInput.value;
-    poInputForm.style.display = 'none';
+    hideElement(poInputForm);
     offer.innerHTML = `N${offerAmount}`;
-    poInputForm.style.display = 'none';
-    poDiv.style.display = 'block';
+    showElement(poDiv);
 });
 
 
 const completePo = () => {
-    poInputForm.style.display = 'none';
-    poDiv.style.display = 'none';
-    adPage.style.display = 'block';
-    relatedAdsPage.style.display = 'block';
+    hideElement(poInputForm);
+    hideElement(poDiv);
+    showElement(adPage);
+    showElement(relatedAdsPage);
     offerInput.value = '';
 };
 
 reportBtn.addEventListener('click', (e) => {
-    adPage.style.display = 'none';
-    relatedAdsPage.style.display = 'none';
-    reportFormDiv.style.display = 'block';
+    hideElement(adPage);
+    hideElement(relatedAdsPage);
+    showElement(reportFormDiv);
     e.preventDefault();
 });
 
