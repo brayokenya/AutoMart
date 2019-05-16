@@ -45,7 +45,7 @@ const validatePassword = (req, res, next) => {
     return next();
 };
 
-const validateSignup = [
+export const validateSignup = [
     validateFirstName,
     validateLastName,
     validateEmail,
@@ -53,4 +53,4 @@ const validateSignup = [
     validatePassword
 ];
 
-export default validateSignup;
+export const validateSignin = [validateEmail, validatePassword];
