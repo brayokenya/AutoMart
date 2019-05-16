@@ -231,3 +231,89 @@ describe('POST /api/v1/auth/signup', () => {
             });
     });
 });
+
+describe('POST /api/v1/auth/signin', () => {
+    it('Should return a 422 status if email was not provided', (done) => {
+        chai.request(app)
+            .post('/api/v1/auth/signin')
+            .send({
+                pasword: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equals('error');
+                expect(res.body.message).to.deep.equal('Email was not provided');
+                done();
+            });
+    });
+    it('Should return a 422 status if password was not provided', (done) => {
+        chai.request(app)
+            .post('/api/v1/auth/signin')
+            .send({
+                email: 'johndoe@gmail.com'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equals('error');
+                expect(res.body.message).to.deep.equal('Password was not provided');
+                done();
+            });
+    });
+
+    it('Should return a 422 status if email has invalid characters', (done) => {
+        chai.request(app)
+            .post('/api/v1/auth/signin')
+            .send({
+                email: 'johndoe@gmail)(*).com**',
+                password: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equals('error');
+                expect(res.body.message).to.deep.equal('Invalid email');
+                done();
+            });
+    });
+
+    it('Should return a 404 status if account does not exist', (done) => {
+        chai.request(app)
+            .post('/api/v1/auth/signin')
+            .send({
+                email: 'notauser@gmail.com',
+                pasword: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body.status).to.deep.equals('error');
+                expect(res.body.message).to.deep.equal('Incorrect email or password');
+                done();
+            });
+    });
+
+    it('Should return a 200 status on successful login', (done) => {
+        chai.request(app)
+            .post('/api/v1/auth/signin')
+            .send({
+                email: 'johndoe@gmail.com',
+                pasword: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'message', 'data');
+                expect(res.body.status).to.deep.equals('success');
+                expect(res.body.message).to.deep.equal('Welcome back, John!');
+                expect(res.body.data).to.have.keys('token', 'id', 'firstName', 'lastName', 'email');
+                done();
+            });
+    });
+});
