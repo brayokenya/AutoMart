@@ -286,7 +286,7 @@ describe('POST /api/v1/auth/signin', () => {
             .post('/api/v1/auth/signin')
             .send({
                 email: 'notauser@gmail.com',
-                pasword: 'pass'
+                password: 'pass'
             })
             .end((error, res) => {
                 if (error) done(error);
@@ -303,7 +303,7 @@ describe('POST /api/v1/auth/signin', () => {
             .post('/api/v1/auth/signin')
             .send({
                 email: 'johndoe@gmail.com',
-                pasword: 'pass'
+                password: 'pass'
             })
             .end((error, res) => {
                 if (error) done(error);
