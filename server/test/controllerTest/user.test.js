@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 describe('POST /api/v1/auth/signup', () => {
     it('should return a 422 status if first name is not provided', (done) => {
         chai.request(app)
-            .post('/api/v1/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 lastName: 'Doe',
                 email: 'desmondoe@gmail.com',
@@ -27,7 +27,7 @@ describe('POST /api/v1/auth/signup', () => {
     });
     it('should return a 422 status if first name has invalid characters', (done) => {
         chai.request(app)
-            .post('/api/v1/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: '45Desmond',
                 lastName: 'Doe',
@@ -47,7 +47,7 @@ describe('POST /api/v1/auth/signup', () => {
     });
     it('should return a 422 status if last name is not provided', (done) => {
         chai.request(app)
-            .post('/api/v1/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: 'Doe',
                 email: 'desmondoe@gmail.com',
@@ -66,7 +66,7 @@ describe('POST /api/v1/auth/signup', () => {
     });
     it('should return a 422 status if last name has invalid characters', (done) => {
         chai.request(app)
-            .post('/api/v1/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: 'Desmond',
                 lastName: ')Doe',
@@ -86,7 +86,7 @@ describe('POST /api/v1/auth/signup', () => {
     });
     it('should return a 422 status if email was not provided', (done) => {
         chai.request(app)
-            .post('/api/v1/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: 'Desmond',
                 lastName: 'Doe',
@@ -105,7 +105,7 @@ describe('POST /api/v1/auth/signup', () => {
     });
     it('should return a 422 status if email is invalid', (done) => {
         chai.request(app)
-            .post('/api/v1/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: 'Desmond',
                 lastName: 'Doe',
@@ -119,14 +119,14 @@ describe('POST /api/v1/auth/signup', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equals('Email is invalid');
+                expect(res.body.message).to.deep.equals('Invalid email');
                 done();
             });
     });
 
     it('should return a 422 status if password was not provided', (done) => {
         chai.request(app)
-            .post('/api/v1/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: 'Desmond',
                 lastName: 'Doe',
@@ -147,7 +147,7 @@ describe('POST /api/v1/auth/signup', () => {
 
     it('should return a 422 status if address was not provided', (done) => {
         chai.request(app)
-            .post('/api/v1/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: 'Desmond',
                 lastName: 'Doe',
@@ -167,7 +167,7 @@ describe('POST /api/v1/auth/signup', () => {
 
     it('should return a 422 status if address is invalid', (done) => {
         chai.request(app)
-            .post('/api/v1/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: 'Desmond',
                 lastName: 'Doe',
@@ -188,7 +188,7 @@ describe('POST /api/v1/auth/signup', () => {
 
     it('should return a 409 status if account exists', (done) => {
         chai.request(app)
-            .post('/api/v1/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: 'John',
                 lastName: 'Doe',
@@ -209,7 +209,7 @@ describe('POST /api/v1/auth/signup', () => {
 
     it('should return a 201 status if account was created', (done) => {
         chai.request(app)
-            .post('/api/v1/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: 'Desmond',
                 lastName: 'Doe',
