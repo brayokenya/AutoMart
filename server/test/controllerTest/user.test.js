@@ -223,7 +223,7 @@ describe('POST /api/v1/auth/signup', () => {
                 expect(res).to.have.status(201);
                 expect(res.body).to.have.keys('status', 'data', 'message');
                 expect(res.body.data).to.have.keys('token', 'id', 'firstName', 'lastName', 'email');
-                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.status).to.deep.equal('status');
                 expect(res.body.message).to.deep.equals('Welcome Desmond!');
                 expect(res.body.data.firstName).to.deep.equals('Desmond');
                 expect(res.body.data.lastName).to.deep.equals('Doe');
