@@ -8,6 +8,7 @@ const cars = [
         manufacturer: 'Toyota',
         model: '2015 4Runner',
         bodyType: 's.u.v',
+        images: ['someimageurl'],
         createdOn: '13-02-2019'
     },
     {
@@ -19,6 +20,7 @@ const cars = [
         manufacturer: 'Lexus',
         model: '2012 Rx330',
         bodyType: 's.u.v',
+        images: ['someimageurl', 'anotherimageurl'],
         createdOn: '14-02-2019'
     },
     {
@@ -30,6 +32,7 @@ const cars = [
         manufacturer: 'Honda',
         model: '2012 Accord',
         bodyType: 'sedan',
+        images: ['someimageurl', 'anotherimageurl'],
         createdOn: '14-03-2019'
     },
     {
@@ -41,6 +44,7 @@ const cars = [
         manufacturer: 'Toyota',
         model: '2013 Camry',
         bodyType: 'sedan',
+        images: ['someimageurl', 'anotherimageurl'],
         createdOn: '15-03-2019'
     },
     {
@@ -52,6 +56,7 @@ const cars = [
         manufacturer: 'Ford',
         model: '2018 Ranger',
         bodyType: 'truck',
+        images: ['someimageurl', 'anotherimageurl', 'yet another image url'],
         createdOn: '18-03-2019'
     },
     {
@@ -63,6 +68,7 @@ const cars = [
         manufacturer: 'Ford',
         model: '2019 Ranger',
         bodyType: 'truck',
+        images: ['someimageurl', 'anotherimageurl'],
         createdOn: '19-03-2019'
     },
     {
@@ -74,6 +80,7 @@ const cars = [
         manufacturer: 'Nissan',
         model: '2011 Altima',
         bodyType: 'sedan',
+        images: ['someimageurl', 'anotherimageurl', 'moreimageurl'],
         createdOn: '21-03-2019'
     },
     {
@@ -85,6 +92,7 @@ const cars = [
         manufacturer: 'kia',
         model: '2008 Sorento',
         bodyType: 's.u.v',
+        images: ['someimageurl', 'anotherimageurl'],
         createdOn: '28-04-2019'
     }
 ];
