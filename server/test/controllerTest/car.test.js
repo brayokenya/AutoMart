@@ -198,7 +198,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Price should only consist of numbers');
+                expect(res.body.message).to.deep.equal('Invalid price');
                 done();
             });
     });
@@ -220,7 +220,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('That is almost too expensive. Do you mind beating it down?');
+                expect(res.body.message).to.deep.equal('Wow! That is expensive');
                 done();
             });
     });
@@ -371,7 +371,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal("Model's name exceeds the maximun lenth of 20");
+                expect(res.body.message).to.deep.equal('Body type exceeds the maximun lenth of 20');
                 done();
             });
     });
