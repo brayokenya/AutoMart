@@ -24,7 +24,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.status).to.deep.equal('Form enctype has to be "multipart/form-data"');
+                expect(res.body.message).to.deep.equal('Form enctype has to be "multipart/form-data"');
                 done();
             });
     });
@@ -47,7 +47,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.status).to.deep.equal('We currently do not support multiple images upload');
+                expect(res.body.message).to.deep.equal('We currently do not support multiple images upload');
                 done();
             });
     });
@@ -69,7 +69,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.status).to.deep.equal('Unsupported image type');
+                expect(res.body.message).to.deep.equal('Unsupported image type');
                 done();
             });
     });
@@ -91,7 +91,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.status).to.deep.equal('Image size exceeds 5mb limit');
+                expect(res.body.message).to.deep.equal('Image size exceeds 5mb limit');
                 done();
             });
     });
@@ -394,7 +394,7 @@ describe('POST /api/v1/car', () => {
                 expect(res.body).to.have.keys('status', 'data');
                 expect(res.body.status).to.deep.equal('error');
                 expect(res.body.data).to.have
-                    .keys('id', 'owner', 'createdOn', 'manufacturer', 'model', 'price', 'state', 'status');
+                    .keys('id', 'owner', 'createdOn', 'manufacturer', 'model', 'price', 'state', 'status', 'imageUrl');
                 done();
             });
     });
