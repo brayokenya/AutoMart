@@ -298,6 +298,23 @@ describe('POST /api/v1/auth/signin', () => {
             });
     });
 
+    it('Should return a 404 status if passwords do match', (done) => {
+        chai.request(app)
+            .post('/api/v1/auth/signin')
+            .send({
+                email: 'johndoe@gmail.com',
+                password: 'notpass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body.status).to.deep.equals('error');
+                expect(res.body.message).to.deep.equal('Incorrect email or password');
+                done();
+            });
+    });
+
     it('Should return a 200 status on successful login', (done) => {
         chai.request(app)
             .post('/api/v1/auth/signin')
