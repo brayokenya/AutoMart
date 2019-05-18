@@ -70,10 +70,10 @@ const validateImageField = (req, res, next) => {
         return errorMessage(res, 422, 'Image size exceeds 5mb limit');
     }
 
-    const wrongFiles = req.files[0]
-        .originalName
+    const rightFile = req.files[0]
+        .originalname
         .match(/(.jpg|.png|.jpeg)$/g);
-    if (wrongFiles) return errorMessage(res, 422, 'Unsupported image type');
+    if (!rightFile) return errorMessage(res, 422, 'Unsupported image type');
     return next();
 };
 
@@ -81,20 +81,18 @@ const validateState = (req, res, next) => {
     const { state } = req.body;
     if (!state) {
         return errorMessage(res, 422,
-            'Please specify the state of the automobile (new.used)');
+            'Please specify the state of the automobile (new/used)');
     }
     const lowerCase = state.toLowerCase();
-    if (lowerCase !== 'new' || lowerCase !== 'used') {
-        return errorMessage(res, 422, 'Car state can either be "new" or "used"');
-    }
-
-    return next();
+    return (lowerCase === 'new' || lowerCase === 'used')
+        ? next()
+        : errorMessage(res, 422, 'Car state can either be "new" or "used"');
 };
 
 const validatePrice = (req, res, next) => {
     const { price } = req.body;
     if (!price) return errorMessage(res, 422, 'Price was not specified');
-    if (typeof (price) === 'number') {
+    if (isNaN(+price)) {
         return errorMessage(res, 422, 'Invalid price');
     }
     const count = price.toString().length;
@@ -133,11 +131,11 @@ const validateBodyType = (req, res, next) => {
     const tooLong = bodyType.length > 20;
     if (tooLong) {
         return errorMessage(res, 422,
-            "Model's name exceeds the maximum length of 30");
+            'Body type exceeds the maximum length of 20');
     }
     const invalidCharacters = bodyType.match(/[^a-z]/i);
     if (invalidCharacters) {
-        return errorMessage(res, 422, 'Body type exceeds the maximun lenth of 20');
+        return errorMessage(res, 422, 'Body type has invalid characters');
     }
     return next();
 };

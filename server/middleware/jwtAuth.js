@@ -14,7 +14,7 @@ export const generateToken = (userId, userEmail) => {
 export const verifyToken = (req, res, next) => {
     const token = req.headers.authorization;
     if (!token) {
-        return errorMessage(res, 401, 'authorization token was not provided');
+        return errorMessage(res, 401, 'Authorization token was not provided');
     }
 
     try {
@@ -23,6 +23,6 @@ export const verifyToken = (req, res, next) => {
         req.user = decoded;
         return next();
     } catch (err) {
-        return errorMessage(res, 401, 'token authentication failed');
+        return errorMessage(res, 401, 'Invalid authorization token');
     }
 };
