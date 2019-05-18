@@ -37,7 +37,8 @@ describe('POST api/v1/order', () => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal("Car does not exist")
+                expect(res.body.message).to.deep.equal("Car does not exist");
+                done();
             });
     });
 
@@ -54,7 +55,8 @@ describe('POST api/v1/order', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal("Car id was not specified")
+                expect(res.body.message).to.deep.equal("Car id was not specified");
+                done();
             });
     });
 
@@ -72,7 +74,8 @@ describe('POST api/v1/order', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal("Order could not be placed. Ad does not exist")
+                expect(res.body.message).to.deep.equal("Order could not be placed. Ad does not exist");
+                done();
             });
     });
 
@@ -89,7 +92,8 @@ describe('POST api/v1/order', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal("Price was not specified")
+                expect(res.body.message).to.deep.equal("Price was not specified");
+                done();
             });
     });
 
@@ -104,10 +108,11 @@ describe('POST api/v1/order', () => {
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
-                expect(res).to.have.status(404);
+                expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal("Invalid offer")
+                expect(res.body.message).to.deep.equal("Invalid offer");
+                done();
             });
     });
 
@@ -122,10 +127,11 @@ describe('POST api/v1/order', () => {
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
-                expect(res).to.have.status(404);
+                expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal("Did you mean that?")
+                expect(res.body.message).to.deep.equal("Did you mean that?");
+                done();
             });
     });
 
@@ -144,6 +150,7 @@ describe('POST api/v1/order', () => {
                 expect(res.body).to.have.keys('status', 'data');
                 expect(res.body.status).to.deep.equal('success');
                 expect(res.body.data).to.have.keys('id', 'carId', 'status', 'price', 'offer', 'buyer', 'createdOn');
+                done();
             });
     });
 });
