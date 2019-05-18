@@ -143,7 +143,7 @@ describe('POST api/v1/order', () => {
                 expect(res).to.have.status(201);
                 expect(res.body).to.have.keys('status', 'data');
                 expect(res.body.status).to.deep.equal('success');
-                expect(res.body.data).to.have.keys('id', 'carId', 'status', 'price', 'offer', 'createdOn');
+                expect(res.body.data).to.have.keys('id', 'carId', 'status', 'price', 'offer', 'buyer', 'createdOn');
             });
     });
 });
