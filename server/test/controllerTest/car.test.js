@@ -7,10 +7,28 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
+let myToken;
+
+before((done) => {
+    chai.request(app)
+        .post('/api/v1/auth/signin')
+        .send({
+            email: 'osahonoboite@yahoo.com',
+            password: 'pass'
+        })
+        .end((err, res) => {
+            if (err) done(err);
+            myToken = res.body.body;
+            console.log(`this is the res: ${res}`);
+            done();
+        });
+});
+
 describe('POST /api/v1/car', () => {
     it('should return a 422 status if form is not a multipart/form-data', (done) => {
         chai.request(app)
             .post('/api/v1/car')
+            .set('Authorization', myToken)
             .type('form')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'used')
@@ -33,6 +51,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .attach('displayImage', fs.readFileSync('./server/test/assets/honda.jpg'), 'honda.png')
@@ -56,6 +75,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/honor-code.pdf'), 'honor-code.pdf')
             .field('state', 'used')
@@ -78,6 +98,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/large.jpg'), 'large.jpg')
             .field('state', 'used')
@@ -100,6 +121,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .field('state', 'used')
             .field('price', '300000')
@@ -121,6 +143,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('price', '300000')
@@ -142,6 +165,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new and used')
@@ -164,6 +188,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
@@ -185,6 +210,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
@@ -207,6 +233,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
@@ -229,6 +256,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
@@ -250,6 +278,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
@@ -272,6 +301,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
@@ -293,6 +323,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
@@ -315,6 +346,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
@@ -336,6 +368,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
@@ -358,6 +391,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
@@ -380,6 +414,7 @@ describe('POST /api/v1/car', () => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
+            .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'used')
