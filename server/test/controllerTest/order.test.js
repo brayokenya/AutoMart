@@ -37,7 +37,7 @@ describe('POST api/v1/order', () => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal("Order could not be placed. Ad does not exist")
+                expect(res.body.message).to.deep.equal("Car does not exist")
             });
     });
 
