@@ -13,13 +13,12 @@ before((done) => {
     chai.request(app)
         .post('/api/v1/auth/signin')
         .send({
-            email: 'osahonoboite@yahoo.com',
+            email: 'johndoe@gmail.com',
             password: 'pass'
         })
         .end((err, res) => {
             if (err) done(err);
-            myToken = res.body.body;
-            console.log(`this is the res: ${res}`);
+            myToken = res.body.data.token;
             done();
         });
 });
@@ -32,7 +31,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'used')
-            .field('price', '300000')
+            .field('price', 300000)
             .field('manufacturer', 'toyota')
             .field('model', 'corolla')
             .field('bodyType', 'sedan')
@@ -56,7 +55,7 @@ describe('POST /api/v1/car', () => {
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .attach('displayImage', fs.readFileSync('./server/test/assets/honda.jpg'), 'honda.png')
             .field('state', 'used')
-            .field('price', '300000')
+            .field('price', 300000)
             .field('manufacturer', 'toyota')
             .field('model', '2014 corolla')
             .field('bodyType', 'sedan')
@@ -79,7 +78,7 @@ describe('POST /api/v1/car', () => {
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/honor-code.pdf'), 'honor-code.pdf')
             .field('state', 'used')
-            .field('price', '300000')
+            .field('price', 300000)
             .field('manufacturer', 'toyota')
             .field('model', '2014 corolla')
             .field('bodyType', 'sedan')
@@ -102,7 +101,7 @@ describe('POST /api/v1/car', () => {
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/large.jpg'), 'large.jpg')
             .field('state', 'used')
-            .field('price', '300000')
+            .field('price', 300000)
             .field('manufacturer', 'toyota')
             .field('model', '2014 corolla')
             .field('bodyType', 'sedan')
@@ -124,7 +123,7 @@ describe('POST /api/v1/car', () => {
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .field('state', 'used')
-            .field('price', '300000')
+            .field('price', 300000)
             .field('manufacturer', 'toyota')
             .field('model', 'corolla')
             .field('bodyType', 'sedan')
@@ -146,7 +145,7 @@ describe('POST /api/v1/car', () => {
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
-            .field('price', '300000')
+            .field('price', 300000)
             .field('manufacturer', 'toyota')
             .field('model', 'corolla')
             .field('bodyType', 'sedan')
@@ -169,7 +168,7 @@ describe('POST /api/v1/car', () => {
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new and used')
-            .field('price', '300000')
+            .field('price', 300000)
             .field('manufacturer', 'toyota')
             .field('model', 'corolla')
             .field('bodyType', 'sedan')
@@ -187,9 +186,9 @@ describe('POST /api/v1/car', () => {
     it('should return a 422 error if price was not specified', (done) => {
         chai.request(app)
             .post('/api/v1/car')
-            .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
+            .type('form')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
             .field('manufacturer', 'toyota')
@@ -237,7 +236,7 @@ describe('POST /api/v1/car', () => {
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
-            .field('price', '2000000000000000')
+            .field('price', 2000000000000000)
             .field('manufacturer', 'toyota')
             .field('model', 'corolla')
             .field('bodyType', 'sedan')
@@ -260,7 +259,7 @@ describe('POST /api/v1/car', () => {
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
-            .field('price', '300000000')
+            .field('price', 300000000)
             .field('model', 'corolla')
             .field('bodyType', 'sedan')
             .end((error, res) => {
@@ -282,7 +281,7 @@ describe('POST /api/v1/car', () => {
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
-            .field('price', '300000000')
+            .field('price', 300000000)
             .field('manufacturer', 'toyotaaaaaaaaaaaaassddssddsssddssdssdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
             .field('model', 'corolla')
             .field('bodyType', 'sedan')
@@ -305,7 +304,7 @@ describe('POST /api/v1/car', () => {
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
-            .field('price', '300000000')
+            .field('price', 300000000)
             .field('manufacturer', 'toyota')
             .field('bodyType', 'sedan')
             .end((error, res) => {
@@ -327,7 +326,7 @@ describe('POST /api/v1/car', () => {
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
-            .field('price', '300000000')
+            .field('price', 300000000)
             .field('manufacturer', 'toyota')
             .field('model', 'hddjdjfjjdskdjdjjjzdskjdjdfsdhfjsdfhjdfhdjfhdfhskjdaksjdjdhfjdfhjsdkajdkadjdkjdakdjakjak')
             .field('bodyType', 'sedan')
@@ -337,7 +336,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal("Model's name exceeds the maximun lenth of 30");
+                expect(res.body.message).to.deep.equal("Model's name exceeds the maximum length of 30");
                 done();
             });
     });
@@ -350,7 +349,7 @@ describe('POST /api/v1/car', () => {
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
-            .field('price', '300000000')
+            .field('price', 300000000)
             .field('manufacturer', 'toyota')
             .field('model', 'corolla')
             .end((error, res) => {
@@ -364,6 +363,29 @@ describe('POST /api/v1/car', () => {
             });
     });
 
+    it('car status should default to "available"', (done) => {
+        chai.request(app)
+            .post('/api/v1/car')
+            .type('form')
+            .set('Authorization', myToken)
+            .set('enctype', 'multipart/form-data')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .field('state', 'new')
+            .field('price', 300000000)
+            .field('manufacturer', 'toyota')
+            .field('model', 'corolla')
+            .field('bodyType', 'sedan')
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(201);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data.status).to.deep.equal('available');
+                done();
+            });
+    });
+
     it('should return a 422 error if body type is not a pure string', (done) => {
         chai.request(app)
             .post('/api/v1/car')
@@ -372,7 +394,7 @@ describe('POST /api/v1/car', () => {
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
-            .field('price', '300000000')
+            .field('price', 300000000)
             .field('manufacturer', 'toyota')
             .field('model', 'corolla')
             .field('bodyType', '8djjddkmd')
@@ -395,7 +417,7 @@ describe('POST /api/v1/car', () => {
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'new')
-            .field('price', '300000000')
+            .field('price', 300000000)
             .field('manufacturer', 'toyota')
             .field('model', 'corolla')
             .field('bodyType', 'mmmjdjdjdkskdjfhndjjskndddhhdhddjdjdhdhjdkshjdksshdjdkjsdhdhndnjsdj')
@@ -405,7 +427,31 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Body type exceeds the maximun lenth of 20');
+                expect(res.body.message).to.deep.equal('Body type exceeds the maximum length of 20');
+                done();
+            });
+    });
+
+    it('should return a 201 status if everything but status or date is specified', (done) => {
+        chai.request(app)
+            .post('/api/v1/car')
+            .type('form')
+            .set('Authorization', myToken)
+            .set('enctype', 'multipart/form-data')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .field('state', 'used')
+            .field('price', 300000)
+            .field('manufacturer', 'toyota')
+            .field('model', 'corolla')
+            .field('bodyType', 'sedan')
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(201);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data).to.have
+                    .keys('id', 'manufacturer', 'price', 'state', 'model', 'bodyType', 'owner', 'status', 'imageUrl', 'createdOn');
                 done();
             });
     });
@@ -418,18 +464,21 @@ describe('POST /api/v1/car', () => {
             .set('enctype', 'multipart/form-data')
             .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
             .field('state', 'used')
-            .field('price', '300000')
+            .field('price', 300000)
             .field('manufacturer', 'toyota')
             .field('model', 'corolla')
             .field('bodyType', 'sedan')
+            .field('status', 'sold')
+            .field('createdOn', '20-07-2019')
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(201);
                 expect(res.body).to.have.keys('status', 'data');
-                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.status).to.deep.equal('success');
                 expect(res.body.data).to.have
-                    .keys('id', 'owner', 'createdOn', 'manufacturer', 'model', 'price', 'state', 'status', 'imageUrl');
+                    .keys('id', 'manufacturer', 'price', 'state', 'model', 'bodyType', 'owner', 'status', 'imageUrl', 'createdOn');
+                expect(res.body.data.status).to.deep.equal('sold');
                 done();
             });
     });
