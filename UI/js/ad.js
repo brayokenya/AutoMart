@@ -11,33 +11,33 @@ const priceRange = document.querySelector('#price-range');
 filterBtn.addEventListener('click', () => {
     blurLayer.removeEventListener('click', blur);
     if (blurLayer.style.display === 'block') {
-        blurLayer.style.display = 'none';
+        hideElement(blurLayer);
         filterBtn.innerHTML = '<i class="fas fa-filter"></i>';
-        filtersDiv.style.display = 'none';
+        hideElement(filtersDiv);
         blurLayer.addEventListener('click', blur);
     } else {
-        filtersDiv.style.display = 'block';
+        showElement(filtersDiv);
         filterBtn.innerHTML = 'X';
-        blurLayer.style.display = 'block';
-        inputDiv.style.display = 'block';
+        showElement(blurLayer);
+        showElement(inputDiv);
     }
 });
 
 makeFilter.addEventListener('click', () => {
-    makeOptions.style.display = 'block';
-    bodyTypeOptions.style.display = 'none';
-    priceRange.style.display = 'none';
+    showElement(makeOptions);
+    hideElement(bodyTypeOptions);
+    hideElement(priceRange);
 
 });
 
 bodyTypeFilter.addEventListener('click', () => {
-    makeOptions.style.display = 'none';
-    bodyTypeOptions.style.display = 'block';
-    priceRange.style.display = 'none';
+    hideElement(makeOptions);
+    showElement(bodyTypeOptions);
+    hideElement(priceRange);
 });
 
 priceRangeFilter.addEventListener('click', () => {
-    makeOptions.style.display = 'none';
-    bodyTypeOptions.style.display = 'none';
-    priceRange.style.display = 'block';
+    hideElement(makeOptions);
+    hideElement(bodyTypeOptions);
+    showElement(priceRange);
 });

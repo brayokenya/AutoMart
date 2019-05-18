@@ -1,11 +1,11 @@
-import users from '../models/mockDb/user';
-import userQueries from '../helpers/queries';
+import { userQueries } from '../helpers/queries';
 import { generateToken } from '../middleware/jwtAuth';
 import errorMessage from '../helpers/responseMessages';
 
 
 export const signupUser = (req, res) => {
-    const existingUser = userQueries.findUserByEmail(req.body.email);
+    const existingUser = userQueries
+        .findUserByEmail(req.body.email);
     if (existingUser) {
         return errorMessage(res, 409, 'Email is already in use');
     }
@@ -17,17 +17,15 @@ export const signupUser = (req, res) => {
         address
     } = req.body;
 
-    const newUser = userQueries.createUser(
-        {
-            id: users.length,
-            firstName: firstName.trim(),
-            lastName: lastName.trim(),
-            email: email.trim(),
-            address: address.trim(),
-            password: password.trim(),
-            isAdmin: false
-        }
-    );
+    const trimmedValues = {
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        email: email.trim(),
+        address: address.trim(),
+        password: password.trim()
+    };
+
+    const newUser = userQueries.createUser(trimmedValues);
     const token = generateToken(newUser.id, newUser.email);
 
     return res.status(201).json({

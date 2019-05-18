@@ -1,13 +1,29 @@
 import users from '../models/mockDb/user';
+import cars from '../models/mockDb/car';
 
-const userQueries = {
+export const userQueries = {
     findUserByEmail(email) {
         return users.find(user => user.email === email);
     },
-    createUser(newUserObject) {
+    createUser(userObject) {
+        const newUserObject = {
+            id: users.length,
+            ...userObject,
+            isAdmin: false
+        };
         users.push(newUserObject);
-        return users[users.length - 1];
+        return newUserObject;
     }
 };
 
-export default userQueries;
+
+export const carQueries = {
+    createCar(carObject) {
+        const newCar = {
+            id: cars.length,
+            ...carObject
+        };
+        cars.push(newCar);
+        return newCar;
+    }
+};

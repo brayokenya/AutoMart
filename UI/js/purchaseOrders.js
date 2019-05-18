@@ -10,29 +10,28 @@ const cancelBtns = document.querySelectorAll('.cancel-btn');
 
 poDivs.forEach((poDiv) => {
     poDiv.addEventListener('click', () => {
-        mainDiv.style.display = 'none';
-        purchaseOrder.style.display = 'block';
+        hideElement(mainDiv);
+        showElement(purchaseOrder);
     });
 });
 
 editBtn.addEventListener('click', () => {
-    purchaseOrder.style.display = 'none';
-    inputDiv.style.display = 'block';
+    hideElement(purchaseOrder);
+    showElement(inputDiv);
 });
 
 updateBtn.addEventListener('click', () => {
     const newValue = inputValue.value;
     offer.innerHTML = `N${newValue}`;
-    inputDiv.style.display = 'none';
-    purchaseOrder.style.display = 'block';
-
+    hideElement(inputDiv);
+    showElement(purchaseOrder);
 });
 
 cancelBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
         inputValue.value = '';
-        inputDiv.style.display = 'none';
-        purchaseOrder.style.display = 'none';
-        mainDiv.style.display = 'block';
+        hideElement(inputDiv);
+        hideElement(purchaseOrder);
+        showElement(mainDiv);
     });
 });
