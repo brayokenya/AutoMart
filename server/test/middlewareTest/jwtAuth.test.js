@@ -8,7 +8,7 @@ const { expect } = chai;
 
 const invalidToken = 'hdhdnjwnejwhfwjewfoidshd9r9i0q2qeiqhfkjdvd vhndknfmdlkqnjk dmsdk';
 
-describe('Auth manager', () => {
+describe('JWT Auth', () => {
     it('should return status code 401 if token is invalid', (done) => {
         chai.request(app)
             .post('/api/v1/car')

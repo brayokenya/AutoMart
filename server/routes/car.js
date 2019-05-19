@@ -2,7 +2,7 @@ import express from 'express';
 import { verifyToken } from '../middleware/jwtAuth';
 import upload from '../config/multer.config';
 import imageUploader from '../middleware/imageUploader';
-import { validatePostCar } from '../middleware/validator';
+import validatePostCar from '../middleware/vaidators/car';
 import postCarAd from '../controllers/car';
 
 
