@@ -182,3 +182,123 @@ describe('POST api/v1/order', () => {
             });
     });
 });
+
+describe('PATCH /api/v1/:order-id/price', () => {
+    it('should send a 404 status error if purchase order does not exist', (done) => {
+        chai.request(app)
+            .patch('/api/v1/300/price')
+            .set('Authorization', myToken)
+            .send({
+                newOffer: 4900000
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Purchase order not found');
+                done();
+            });
+    });
+
+    it('should send a 422 status error if new offer was not provided', (done) => {
+        chai.request(app)
+            .patch('/api/v1/2/price')
+            .set('Authorization', myToken)
+            .send()
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('New offer was not provided');
+                done();
+            });
+    });
+
+    it('should send a 422 status error if new offer is not a number', (done) => {
+        chai.request(app)
+            .patch('/api/v1/2/price')
+            .set('Authorization', myToken)
+            .send({
+                newOffer: 'yens8'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Invalid input. New offer should be a number');
+                done();
+            });
+    });
+
+    it('should send a 422 status error if new offer is longer than 12 digits', (done) => {
+        chai.request(app)
+            .patch('/api/v1/2/price')
+            .set('Authorization', myToken)
+            .send({
+                newOffer: 'yens8'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Invalid input. New offer should be a number');
+                done();
+            });
+    });
+
+    it('should send a 200 status error if purchase order was successfully updated', (done) => {
+        chai.request(app)
+            .patch('/api/v1/2/price')
+            .set('Authorization', myToken)
+            .send({
+                newOffer: 3000000
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.status).to.deep.equal('success');
+                expect(res.body.data).to.have.keys('id', 'carId', 'status', 'oldOffer', 'newOffer');
+                expect(res.body.data.id).to.be.a('number');
+                expect(res.body.data.carId).to.be.a('number');
+                expect(res.body.data.status).to.be.a('string');
+                expect(res.body.data.oldOffer).to.be.a('number');
+                expect(res.body.data.newOffer).to.be.a('number');
+                done();
+            });
+    });
+
+    it('ensure that urlencoded form works the same as application/json data', (done) => {
+        chai.request(app)
+            .patch('/api/v1/3/price')
+            .set('Authorization', myToken)
+            .type('form')
+            .send({
+                '_method': 'post',
+                'newOffer': 4000000
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.status).to.deep.equal('success');
+                expect(res.body.data).to.have.keys('id', 'carId', 'status', 'oldOffer', 'newOffer');
+                expect(res.body.data.id).to.be.a('number');
+                expect(res.body.data.carId).to.be.a('number');
+                expect(res.body.data.status).to.be.a('string');
+                expect(res.body.data.oldOffer).to.be.a('number');
+                expect(res.body.data.newOffer).to.be.a('number');
+                done();
+            });
+    });
+});
