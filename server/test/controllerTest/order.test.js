@@ -92,7 +92,7 @@ describe('POST api/v1/order', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal("Price was not specified");
+                expect(res.body.message).to.deep.equal("Offer was not specified");
                 done();
             });
     });
@@ -150,6 +150,34 @@ describe('POST api/v1/order', () => {
                 expect(res.body).to.have.keys('status', 'data');
                 expect(res.body.status).to.deep.equal('success');
                 expect(res.body.data).to.have.keys('id', 'carId', 'status', 'price', 'offer', 'buyer', 'createdOn');
+                done();
+            });
+    });
+
+    it('should send a 201 status if order was created from form data', (done) => {
+        chai.request(app)
+            .post('/api/v1/order')
+            .set('Authorization', myToken)
+            .type('form')
+            .send({
+                '_method': 'post',
+                'carId': 3,
+                'offer': 4000000
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(201);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data).to.have.keys('id', 'carId', 'status', 'price', 'offer', 'buyer', 'createdOn');
+                expect(res.body.data.id).to.be.a('number');
+                expect(res.body.data.carId).to.be.a('number');
+                expect(res.body.data.status).to.be.a('string');
+                expect(res.body.data.price).to.be.a('number');
+                expect(res.body.data.offer).to.be.a('number');
+                expect(res.body.data.buyer).to.be.a('number');
+                expect(res.body.data.createdOn).to.be.a('string');
                 done();
             });
     });
