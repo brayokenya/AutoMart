@@ -183,7 +183,7 @@ describe('POST api/v1/order', () => {
     });
 });
 
-describe('PATCH /api/v1/:order-id/price', () => {
+describe('PATCH /api/v1/:orderId/price', () => {
     it('should send a 404 status error if purchase order does not exist', (done) => {
         chai.request(app)
             .patch('/api/v1/300/price')
