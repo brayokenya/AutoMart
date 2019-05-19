@@ -213,7 +213,7 @@ describe('PATCH /api/v1/:order-id/price', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('New offer was not provided');
+                expect(res.body.message).to.deep.equal('New offer was not specified');
                 done();
             });
     });
@@ -241,7 +241,7 @@ describe('PATCH /api/v1/:order-id/price', () => {
             .patch('/api/v1/2/price')
             .set('Authorization', myToken)
             .send({
-                newOffer: 'yens8'
+                newOffer: 700000000000000
             })
             .end((error, res) => {
                 if (error) done(error);
@@ -249,7 +249,7 @@ describe('PATCH /api/v1/:order-id/price', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Invalid input. New offer should be a number');
+                expect(res.body.message).to.deep.equal('Did you mean that?');
                 done();
             });
     });
