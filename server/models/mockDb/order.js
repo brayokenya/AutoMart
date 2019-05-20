@@ -1,7 +1,7 @@
 const orders = [
     {
         id: 1,
-        buyer: 3,
+        buyerId: 3,
         carId: 1,
         offer: 800000,
         price: 3000000,
@@ -10,7 +10,7 @@ const orders = [
     },
     {
         id: 2,
-        buyer: 4,
+        buyerId: 4,
         carId: 2,
         offer: 2000000,
         price: 2500000,
@@ -19,7 +19,7 @@ const orders = [
     },
     {
         id: 3,
-        buyer: 2,
+        buyerId: 2,
         carId: 3,
         offer: 3500000,
         price: 2500000,
@@ -28,7 +28,7 @@ const orders = [
     },
     {
         id: 4,
-        buyer: 3,
+        buyerId: 3,
         carId: 4,
         offer: 4500000,
         price: 3500000,
@@ -37,7 +37,7 @@ const orders = [
     },
     {
         id: 4,
-        buyer: 5,
+        buyerId: 5,
         carId: 5,
         offer: 5500000,
         price: 8500000,
@@ -46,7 +46,7 @@ const orders = [
     },
     {
         id: 5,
-        buyer: 7,
+        buyerId: 7,
         carId: 6,
         offer: 5500000,
         price: 9500000,
@@ -55,7 +55,7 @@ const orders = [
     },
     {
         id: 6,
-        buyer: 4,
+        buyerId: 4,
         carId: 1,
         offer: 2700000,
         price: 3000000,
@@ -64,7 +64,7 @@ const orders = [
     },
     {
         id: 7,
-        buyer: 5,
+        buyerId: 5,
         carId: 7,
         offer: 2500000,
         price: 2500000,
@@ -73,7 +73,7 @@ const orders = [
     },
     {
         id: 8,
-        buyer: 2,
+        buyerId: 2,
         carId: 8,
         offer: 10900000,
         price: 1100000,
@@ -82,7 +82,7 @@ const orders = [
     },
     {
         id: 9,
-        buyer: 3,
+        buyerId: 3,
         carId: 6,
         offer: 95000000,
         price: 9500000,
