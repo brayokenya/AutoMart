@@ -87,7 +87,17 @@ const validateBodyType = (req, res, next) => {
     return next();
 };
 
-const validatePostCar = [
+const validateIdParam = (req, res, next) => {
+    const { carId } = req.params;
+    const transFormedId = +carId;
+    if (isNaN(transFormedId)) {
+        return errorMessage(res, 404, 'Car not found');
+    }
+    req.body.carId = transFormedId;
+    return next();
+};
+
+export const validatePostCar = [
     isMultipart,
     validateImageField,
     validateState,
@@ -97,4 +107,4 @@ const validatePostCar = [
     validateBodyType
 ];
 
-export default validatePostCar;
+export const validatePatchStatus = validateIdParam;

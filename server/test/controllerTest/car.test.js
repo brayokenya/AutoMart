@@ -13,7 +13,7 @@ before((done) => {
     chai.request(app)
         .post('/api/v1/auth/signin')
         .send({
-            email: 'johndoe@gmail.com',
+            email: 'ricardokaka@gmail.com',
             password: 'pass'
         })
         .end((err, res) => {
@@ -483,4 +483,69 @@ describe('POST /api/v1/car', () => {
             });
     });
 
+});
+
+describe('PATCH /api/v1/car/:carId/status', () => {
+
+    it('should return a 404 error if car does not exist', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/300000000/status')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Car not found');
+                done();
+            });
+    });
+
+    it('should return a 404 error if user tries to update a car that is not his', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/1/status')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Car not found');
+                done();
+            });
+    });
+
+    it('should return a 404 error if car id is not an integer', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/notcar/status')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Car not found');
+                done();
+            });
+    });
+
+    it('should return a 200 status if car status was successfully updated', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/2/status')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data).to.have
+                    .keys('id', 'owner', 'state', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
+                expect(res.body.data.status).to.deep.equal('sold');
+                done();
+            });
+    });
 });

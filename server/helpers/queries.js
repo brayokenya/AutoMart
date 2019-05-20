@@ -27,9 +27,22 @@ export const carQueries = {
         cars.push(newCar);
         return newCar;
     },
+
     findCarById(id) {
         const foundCar = cars.find(car => car.id === id);
         return foundCar;
+    },
+
+    updateProp(carId, property, value) {
+        const car = this.findCarById(carId);
+        car[property] = value;
+        this.updateEntity(car);
+        return car;
+    },
+
+    updateEntity(newCarObject) {
+        const carIndex = cars.indexOf(newCarObject);
+        cars.splice(carIndex, 1, newCarObject);
     }
 };
 
@@ -52,6 +65,12 @@ export const orderQueries = {
         const order = this.findOrderById(orderId);
         order.offer = newOffer;
         order.updatedOn = Date();
+        this.updateEntity(order);
         return order;
+    },
+
+    updateEntity(newOrderIndex) {
+        const orderIndex = orders.indexOf(newOrderIndex);
+        orders.splice(orderIndex, 1, newOrderIndex);
     }
 };
