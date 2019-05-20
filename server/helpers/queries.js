@@ -70,7 +70,7 @@ export const orderQueries = {
     },
 
     updateEntity(newOrderIndex) {
-        const orderIndex = cars.indexOf(newOrderIndex);
-        cars.splice(orderIndex, 1, newOrderIndex);
+        const orderIndex = orders.indexOf(newOrderIndex);
+        orders.splice(orderIndex, 1, newOrderIndex);
     }
 };
