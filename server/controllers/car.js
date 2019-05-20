@@ -1,6 +1,7 @@
 import { carQueries } from '../helpers/queries';
+import errorMessage from '../helpers/responseMessages';
 
-const postCarAd = (req, res) => {
+export const postCarAd = (req, res) => {
     const {
         manufacturer,
         price,
@@ -33,4 +34,16 @@ const postCarAd = (req, res) => {
     });
 };
 
-export default postCarAd;
+export const updateStatus = (req, res) => {
+    const { carId, userId } = req.body;
+    const car = carQueries.findCarById(carId);
+    if (!car || car.owner !== userId) {
+        return errorMessage(res, 404, 'Car not found');
+    }
+    const updatedCar = carQueries
+        .updateProp(carId, 'status', 'sold');
+    return res.status(200).json({
+        status: 'success',
+        data: updatedCar
+    });
+};
