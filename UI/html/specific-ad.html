@@ -35,34 +35,40 @@
     <aside id="side-nav">
         <img src="../images/close_btn.svg" alt="close button" id="close-btn">
         <ul id='menu-items'>
-            <li>
-                <span class="menu-icon"><i class="fas fa-filter"></i></span> Filter by:
-            </li>
+            <a href="" id="apply-filter">
+                <li>
+                    <span class="menu-icon"><i class="fas fa-filter"></i></span> Apply Filters
+                    <span id="filter-icon"> <i class="fas fa-chevron-right mg-l-10"></i> </span>
+                </li>
+            </a>
+
             <ul>
-                <a href="./ads.html">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="far fa-copyright"></i></span> make </li>
                 </a>
-                <a href="./ads.html">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="fas fa-car"></i></span> body type </li>
                 </a>
-                <a href=./ads.html""> <li> <span><i class="fas fa-tags"></i></span> lowest price </li>
+                <a href="./ads.html" class="hide">
+                    <li> <span><i class="fas fa-tags"></i></span> lowest price </li>
                 </a>
-                <a href="./ads.html">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="fas fa-tags"></i></span> highest price </li>
                 </a>
             </ul>
+            <a href="./post-ad.html">
+                <li> <span><i class="fas fa-paper-plane"></i></span> Sell a car</li>
+            </a>
+            <a href="./user-ads.html">
+                <li> <span><i class="fas fa-bullhorn"></i></span> my ads </li>
+            </a>
+            <a href="./purchase-orders.html">
+                <li> <span><i class="fas fa-file-invoice"></i></span> purchase orders </li>
+            </a>
             <div class="mg-t-30">
-                <a href="./post-ad.html" class="sec-btn btn-primary"> sell a car </a>
-                <a href="./user-ads.html">
-                    <li> <span><i class="fas fa-bullhorn"></i></span> my ads </li>
-                </a>
-                <a href="./purchase-orders.html">
-                    <li> <span><i class="fas fa-file-invoice"></i></span> purchase orders </li>
-                </a>
                 <a href="./index.html" class="logout-btn">
                     <li> <span><i class="fas fa-sign-out-alt"></i></span> log out </li>
                 </a>
-
             </div>
 
         </ul>

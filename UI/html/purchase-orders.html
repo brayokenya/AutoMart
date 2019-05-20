@@ -9,7 +9,7 @@
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/defaults.css">
     <link rel="stylesheet" href="../css/purchaseOrders.css">
-    <title>Automobile Ad</title>
+    <title>Purchase Orders</title>
 </head>
 
 <body>
@@ -34,34 +34,40 @@
     <aside id="side-nav">
         <img src="../images/close_btn.svg" alt="close button" id="close-btn">
         <ul id='menu-items'>
-            <li>
-                <span class="menu-icon"><i class="fas fa-filter"></i></span> Filter by:
-            </li>
+            <a href="" id="apply-filter">
+                <li>
+                    <span class="menu-icon"><i class="fas fa-filter"></i></span> Apply Filters
+                    <span id="filter-icon"> <i class="fas fa-chevron-right mg-l-10"></i> </span>
+                </li>
+            </a>
+
             <ul>
-                <a href="./ads.html">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="far fa-copyright"></i></span> make </li>
                 </a>
-                <a href="./ads.html">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="fas fa-car"></i></span> body type </li>
                 </a>
-                <a href=./ads.html""> <li> <span><i class="fas fa-tags"></i></span> lowest price </li>
+                <a href="./ads.html" class="hide">
+                    <li> <span><i class="fas fa-tags"></i></span> lowest price </li>
                 </a>
-                <a href="./ads.html">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="fas fa-tags"></i></span> highest price </li>
                 </a>
             </ul>
+            <a href="./post-ad.html">
+                <li> <span><i class="fas fa-paper-plane"></i></span> Sell a car</li>
+            </a>
+            <a href="./user-ads.html">
+                <li> <span><i class="fas fa-bullhorn"></i></span> my ads </li>
+            </a>
+            <a href="./purchase-orders.html">
+                <li> <span><i class="fas fa-file-invoice"></i></span> purchase orders </li>
+            </a>
             <div class="mg-t-30">
-                <a href="./post-ad.html" class="sec-btn btn-primary"> sell a car </a>
-                <a href="./user-ads.html">
-                    <li> <span><i class="fas fa-bullhorn"></i></span> my ads </li>
-                </a>
-                <a href="./purchase-orders.html">
-                    <li> <span><i class="fas fa-file-invoice"></i></span> purchase orders </li>
-                </a>
                 <a href="./index.html" class="logout-btn">
                     <li> <span><i class="fas fa-sign-out-alt"></i></span> log out </li>
                 </a>
-
             </div>
 
         </ul>
@@ -72,73 +78,67 @@
         <div id="po-list" class="flex-primary wrap">
             <!-- One purchase order starts here-->
             <div class="po-div">
-                <div class="po-summary">
-                    <p> <span><i class="fas fa-car po-icon lt-grey"></i></span> Used Toyota 4Runner </p>
-                </div>
-                <p class="status pending"> <span class="label lt-grey">status:</span> pending </p>
-                <p class=""> <span class="label lt-grey">date:</span> 21-08-2019 </p>
-                <p> <span class="label lt-grey">asking price:</span> N2,000,0000 </p>
-                <p> <span class="label lt-grey">offer:</span> <span class="po-offer">N2,000,0000</span> </p>
+                <p class="big-label"> <span class="label"><i class="fas fa-car"></i></span> Used Toyota 4Runner </p>
+                <p class="status"> <span class="label pending"><i class="fas fa-circle"></i></span> pending </p>
+                <p class=""> <span class="label"><i class="fas fa-calendar-week"></i></span> 21-08-2019 </p>
+                <p> <span class="label"><i class="fas fa-coins"></i></span> N2,000,0000 </p>
+                <hr>
+                <p> <span class="label offer-label">offer:</span> <span class="po-offer">N2,000,0000</span> </p>
 
             </div>
             <!-- One purchase order ends here-->
             <!-- One purchase order starts here-->
             <div class="po-div">
-                <div class="po-summary">
-                    <p> <span><i class="fas fa-car po-icon lt-grey"></i></span> Used Toyota 4Runner </p>
-                </div>
-                <p class="status pending"> <span class="label lt-grey">status:</span> pending </p>
-                <p class=""> <span class="label lt-grey">date:</span> 21-08-2019 </p>
-                <p> <span class="label lt-grey">asking price:</span> N2,000,0000 </p>
-                <p> <span class="label lt-grey">offer:</span> <span class="po-offer">N2,000,0000</span> </p>
+                <p class="big-label"> <span class="label"><i class="fas fa-car"></i></span> Used Toyota 4Runner </p>
+                <p class="status"> <span class="label pending"><i class="fas fa-circle"></i></span> pending </p>
+                <p class=""> <span class="label"><i class="fas fa-calendar-week"></i></span> 21-08-2019 </p>
+                <p> <span class="label"><i class="fas fa-coins"></i></span> N2,000,0000 </p>
+                <hr>
+                <p> <span class="label offer-label">offer:</span> <span class="po-offer">N2,000,0000</span> </p>
 
             </div>
             <!-- One purchase order ends here-->
             <!-- One purchase order starts here-->
             <div class="po-div">
-                <div class="po-summary">
-                    <p> <span><i class="fas fa-car po-icon lt-grey"></i></span> Used Toyota 4Runner </p>
-                </div>
-                <p class="status pending"> <span class="label lt-grey">status:</span> pending </p>
-                <p class=""> <span class="label lt-grey">date:</span> 21-08-2019 </p>
-                <p> <span class="label lt-grey">asking price:</span> N2,000,0000 </p>
-                <p> <span class="label lt-grey">offer:</span> <span class="po-offer">N2,000,0000</span> </p>
+                <p class="big-label"> <span class="label"><i class="fas fa-car"></i></span> Used Toyota 4Runner </p>
+                <p class="status"> <span class="label pending"><i class="fas fa-circle"></i></span> pending </p>
+                <p class=""> <span class="label"><i class="fas fa-calendar-week"></i></span> 21-08-2019 </p>
+                <p> <span class="label"><i class="fas fa-coins"></i></span> N2,000,0000 </p>
+                <hr>
+                <p> <span class="label offer-label">offer:</span> <span class="po-offer">N2,000,0000</span> </p>
 
             </div>
             <!-- One purchase order ends here-->
             <!-- One purchase order starts here-->
             <div class="po-div">
-                <div class="po-summary">
-                    <p> <span><i class="fas fa-car po-icon lt-grey"></i></span> Used Toyota 4Runner </p>
-                </div>
-                <p class="status pending"> <span class="label lt-grey">status:</span> pending </p>
-                <p class=""> <span class="label lt-grey">date:</span> 21-08-2019 </p>
-                <p> <span class="label lt-grey">asking price:</span> N2,000,0000 </p>
-                <p> <span class="label lt-grey">offer:</span> <span class="po-offer">N2,000,0000</span> </p>
+                <p class="big-label"> <span class="label"><i class="fas fa-car"></i></span> Used Toyota 4Runner </p>
+                <p class="status"> <span class="label pending"><i class="fas fa-circle"></i></span> pending </p>
+                <p class=""> <span class="label"><i class="fas fa-calendar-week"></i></span> 21-08-2019 </p>
+                <p> <span class="label"><i class="fas fa-coins"></i></span> N2,000,0000 </p>
+                <hr>
+                <p> <span class="label offer-label">offer:</span> <span class="po-offer">N2,000,0000</span> </p>
 
             </div>
             <!-- One purchase order ends here-->
             <!-- One purchase order starts here-->
             <div class="po-div">
-                <div class="po-summary">
-                    <p> <span><i class="fas fa-car po-icon lt-grey"></i></span> Used Toyota 4Runner </p>
-                </div>
-                <p class="status pending"> <span class="label lt-grey">status:</span> pending </p>
-                <p class=""> <span class="label lt-grey">date:</span> 21-08-2019 </p>
-                <p> <span class="label lt-grey">asking price:</span> N2,000,0000 </p>
-                <p> <span class="label lt-grey">offer:</span> <span class="po-offer">N2,000,0000</span> </p>
+                <p class="big-label"> <span class="label"><i class="fas fa-car"></i></span> Used Toyota 4Runner </p>
+                <p class="status"> <span class="label pending"><i class="fas fa-circle"></i></span> pending </p>
+                <p class=""> <span class="label"><i class="fas fa-calendar-week"></i></span> 21-08-2019 </p>
+                <p> <span class="label"><i class="fas fa-coins"></i></span> N2,000,0000 </p>
+                <hr>
+                <p> <span class="label offer-label">offer:</span> <span class="po-offer">N2,000,0000</span> </p>
 
             </div>
             <!-- One purchase order ends here-->
             <!-- One purchase order starts here-->
             <div class="po-div">
-                <div class="po-summary">
-                    <p> <span><i class="fas fa-car po-icon lt-grey"></i></span> Used Toyota 4Runner </p>
-                </div>
-                <p class="status pending"> <span class="label lt-grey">status:</span> pending </p>
-                <p class=""> <span class="label lt-grey">date:</span> 21-08-2019 </p>
-                <p> <span class="label lt-grey">asking price:</span> N2,000,0000 </p>
-                <p> <span class="label lt-grey">offer:</span> <span class="po-offer">N2,000,0000</span> </p>
+                <p class="big-label"> <span class="label"><i class="fas fa-car"></i></span> Used Toyota 4Runner </p>
+                <p class="status"> <span class="label pending"><i class="fas fa-circle"></i></span> pending </p>
+                <p class=""> <span class="label"><i class="fas fa-calendar-week"></i></span> 21-08-2019 </p>
+                <p> <span class="label"><i class="fas fa-coins"></i></span> N2,000,0000 </p>
+                <hr>
+                <p> <span class="label offer-label">offer:</span> <span class="po-offer">N2,000,0000</span> </p>
 
             </div>
             <!-- One purchase order ends here-->

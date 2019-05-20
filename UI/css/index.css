@@ -215,13 +215,12 @@ input::placeholder{
     margin-bottom: 50px;
     padding: 30px;
     padding-bottom: 0;
-    box-shadow: 8px 8px 7px 1px rgba(179, 178, 178, 0.253);
     border-radius: 6px;
     transition: 0.2s ease-out;
 }
 
 .ad:hover{
-    box-shadow: none;
+   box-shadow:  0.5rem 0.5rem 3rem rgba(0,0,0,0.2);
 }
 
 .disp-img-container{
@@ -260,26 +259,30 @@ input::placeholder{
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     font-size: 1.6em;
-    line-height: 0;
+    line-height: 1px;
     color: #368063;
 }
 
 .disp-details {
-    border-top: 1px solid #003542;
+    border-top: 1px solid #DCDCDC;
+    margin-top: 40px;
+    margin-bottom: -10px;
 }
+
 
 .disp-detail {
     display: inline-block;
     text-align: center;
-    padding-bottom: 5px;
+    color:  #696969;
 }
 
-.disp-img{
-    height: 12px;
-    margin: auto;
+.disp-detail i {
+    margin-right: 3px;
 }
-
 
 .owner-img{
+    height: 13px;
+    margin: auto;
     border-radius: 200px;    
+    opacity: 1;
 }

@@ -10,7 +10,7 @@ const loginNotes = document.querySelectorAll('.login-note');
 
 
 scrollBtn.addEventListener('click', () => {
-    wrapper.style.display = 'block';
+    showElement(wrapper);
     topNav.style.background = '#003542';
 });
 
@@ -66,38 +66,38 @@ const resetPasswordFormHtml = `
 signupBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
         searchFormDiv.innerHTML = signupFormHtml;
-        closeFormBtn.style.display = 'block';
+        showElement(closeFormBtn);
         closeBtn.click();
         window.scrollTo(0, 0);
-        loginNotes.forEach(note => note.style.display = '');
-        signupNotes.forEach(note => note.style.display = 'block');
+        loginNotes.forEach(note => hideElement(note));
+        signupNotes.forEach(note => showElement(note));
     });
 });
 
 loginBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
         searchFormDiv.innerHTML = loginFormHtml;
-        closeFormBtn.style.display = 'block';
+        showElement(closeFormBtn);
         closeBtn.click();
         window.scrollTo(0, 0);
-        loginNotes.forEach(note => note.style.display = 'block');
-        signupNotes.forEach(note => note.style.display = '');
+        loginNotes.forEach(note => showElement(note));
+        signupNotes.forEach(note => hideElement(note));
     });
 });
 
 resetPasswordBtn.addEventListener('click', () => {
     searchFormDiv.innerHTML = resetPasswordFormHtml;
-    closeFormBtn.style.display = 'block';
+    showElement(closeFormBtn);
     closeBtn.click();
     window.scrollTo(0, 0);
-    loginNotes.forEach(note => note.style.display = '');
-    signupNotes.forEach(note => note.style.display = 'block');
+    loginNotes.forEach(note => hideElement(note));
+    signupNotes.forEach(note => showElement(note));
 });
 
 closeFormBtn.addEventListener('click', () => {
     searchFormDiv.innerHTML = searchFormHtml;
-    closeFormBtn.style.display = 'none';
-    loginNotes.forEach(note => note.style.display = '');
-    signupNotes.forEach(note => note.style.display = '');
+    hideElement(closeFormBtn);
+    loginNotes.forEach(note => hideElement(note));
+    signupNotes.forEach(note => hideElement(note));
 });
 

@@ -1,4 +1,6 @@
-
+body {
+    background: rgb(251, 251, 251);
+}
 nav {
     background: #003542;
 }
@@ -11,17 +13,17 @@ nav {
 }
 
 .po-div {
+    background: white;
     width: 250px;
     padding: 5px 20px;
-    background: #003542;
-    color: white;
     margin: 10px;
     cursor: pointer;
-    font-size: 0.9em;
+    border: 1px solid rgba(71, 71, 71, 0.192);
+    box-shadow:  0.5rem 0.5rem 3rem rgba(0,0,0,0.2);
 }
 
 .po-div:hover {
-    background: #002129;
+    box-shadow:  0.5rem 0.5rem 3rem rgba(0,0,0,0.2);
 }
 
 #purchase-order-div {
@@ -90,7 +92,7 @@ nav {
 }
 
 .pending{
-    color: yellow;
+    color: #FF9A85;
 }
 
 
@@ -110,4 +112,16 @@ nav {
 
 #po-update-div input {
     margin-bottom: 10px;
+}
+
+.label {
+    font-size: 1em;
+}
+
+.big-label{
+    font-size: 1.1em;
+}
+
+.po-div hr {
+    border-top: 1px solid  #DCDCDC;
 }

@@ -21,9 +21,9 @@
 
         </div>
         <div>
-            <button class="sec-btn btn-white login-btn lg-screen"> <span><i class="fas fa-sign-in-alt"></i></span>
+            <button class="main-btn btn-white login-btn lg-screen"> <span><i class="fas fa-sign-in-alt"></i></span>
                 login</button>
-            <button class="sec-btn btn-white-reverse signup-btn mg-r-80 lg-screen"> <span><i
+            <button class="main-btn btn-white-reverse signup-btn mg-r-80 lg-screen"> <span><i
                         class="fas fa-user-plus"></i></span>
                 signup</button>
             <img src="../images/hamburger.svg" alt="menu button" id="menu-btn">
@@ -32,20 +32,24 @@
     <aside id="side-nav">
         <img src="../images/close_btn.svg" alt="close button" id="close-btn">
         <ul id='menu-items'>
-            <li>
-                <span class="menu-icon"><i class="fas fa-filter"></i></span> Filter by:
-            </li>
+            <a href="" id="apply-filter">
+                <li>
+                    <span class="menu-icon"><i class="fas fa-filter"></i></span> Apply Filters
+                    <span id="filter-icon"> <i class="fas fa-chevron-right mg-l-10"></i> </span>
+                </li>
+            </a>
+
             <ul>
-                <a href="./ads.html">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="far fa-copyright"></i></span> make </li>
                 </a>
-                <a href="./ads.html">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="fas fa-car"></i></span> body type </li>
                 </a>
-                <a href="./ads.html">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="fas fa-tags"></i></span> lowest price </li>
                 </a>
-                <a href="./ads.html">
+                <a href="./ads.html" class="hide">
                     <li> <span><i class="fas fa-tags"></i></span> highest price </li>
                 </a>
             </ul>
@@ -144,16 +148,13 @@
                                 </div>
                                 <div class="disp-details flex-between">
                                     <div>
-                                        <img src="../images/vehicle.svg" alt="body type" class="disp-img">
-                                        <p class="disp-detail body-type"> s.u.v.</p>
+                                        <p class="disp-detail body-type"> <i class="fas fa-car"></i> S.U.V.</p>
                                     </div>
                                     <div>
-                                        <img src="../images/images.svg" alt="images" class="disp-img">
-                                        <p class="disp-detail images"> 6 </p>
+                                        <p class="disp-detail images"> <i class="fas fa-images"></i> 6 </p>
                                     </div>
                                     <div>
-                                        <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
-                                        <p class="disp-detail owner"> John Doe </p>
+                                        <p class="disp-detail owner"> <i class="fas fa-user"></i> John Doe </p>
                                     </div>
                                 </div>
                             </div>
@@ -173,16 +174,13 @@
                                 </div>
                                 <div class="disp-details flex-between">
                                     <div>
-                                        <img src="../images/vehicle.svg" alt="body type" class="disp-img">
-                                        <p class="disp-detail body-type"> truck</p>
+                                        <p class="disp-detail body-type"> <i class="fas fa-car"></i> Truck</p>
                                     </div>
                                     <div>
-                                        <img src="../images/images.svg" alt="images" class="disp-img">
-                                        <p class="disp-detail images"> 4 </p>
+                                        <p class="disp-detail images"> <i class="fas fa-images"></i> 4 </p>
                                     </div>
                                     <div>
-                                        <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
-                                        <p class="disp-detail owner"> John Doe </p>
+                                        <p class="disp-detail owner"> <i class="fas fa-user"></i> John Doe </p>
                                     </div>
                                 </div>
                             </div>
@@ -202,16 +200,13 @@
                                 </div>
                                 <div class="disp-details flex-between">
                                     <div>
-                                        <img src="../images/vehicle.svg" alt="body type" class="disp-img">
-                                        <p class="disp-detail body-type"> sedan </p>
+                                        <p class="disp-detail body-type"> <i class="fas fa-car"></i> Sedan </p>
                                     </div>
                                     <div>
-                                        <img src="../images/images.svg" alt="images" class="disp-img">
-                                        <p class="disp-detail images"> 5 </p>
+                                        <p class="disp-detail images"> <i class="fas fa-images"></i> 5 </p>
                                     </div>
                                     <div>
-                                        <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
-                                        <p class="disp-detail owner"> John Doe </p>
+                                        <p class="disp-detail owner"> <i class="fas fa-user"></i> John Doe </p>
                                     </div>
                                 </div>
                             </div>
@@ -231,16 +226,13 @@
                                 </div>
                                 <div class="disp-details flex-between">
                                     <div>
-                                        <img src="../images/vehicle.svg" alt="body type" class="disp-img">
-                                        <p class="disp-detail body-type"> s.u.v.</p>
+                                        <p class="disp-detail body-type"> <i class="fas fa-car"></i> S.U.V. </p>
                                     </div>
                                     <div>
-                                        <img src="../images/images.svg" alt="images" class="disp-img">
-                                        <p class="disp-detail images"> 6 </p>
+                                        <p class="disp-detail images"> <i class="fas fa-images"></i> 6 </p>
                                     </div>
                                     <div>
-                                        <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
-                                        <p class="disp-detail owner"> John Doe </p>
+                                        <p class="disp-detail owner"> <i class="fas fa-user"></i> John Doe </p>
                                     </div>
                                 </div>
                             </div>
@@ -260,16 +252,13 @@
                                 </div>
                                 <div class="disp-details flex-between">
                                     <div>
-                                        <img src="../images/vehicle.svg" alt="body type" class="disp-img">
-                                        <p class="disp-detail body-type"> s.u.v.</p>
+                                        <p class="disp-detail body-type"> <i class="fas fa-car"></i> S.U.V.</p>
                                     </div>
                                     <div>
-                                        <img src="../images/images.svg" alt="images" class="disp-img">
-                                        <p class="disp-detail images"> 8 </p>
+                                        <p class="disp-detail images"> <i class="fas fa-images"></i> 8 </p>
                                     </div>
                                     <div>
-                                        <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
-                                        <p class="disp-detail owner"> Jane Doe </p>
+                                        <p class="disp-detail owner"> <i class="fas fa-user"></i> Jane Doe </p>
                                     </div>
                                 </div>
                             </div>
@@ -289,16 +278,13 @@
                                 </div>
                                 <div class="disp-details flex-between">
                                     <div>
-                                        <img src="../images/vehicle.svg" alt="body type" class="disp-img">
-                                        <p class="disp-detail body-type"> sedan</p>
+                                        <p class="disp-detail body-type"> <i class="fas fa-car"></i> Sedan</p>
                                     </div>
                                     <div>
-                                        <img src="../images/images.svg" alt="images" class="disp-img">
-                                        <p class="disp-detail images"> 6 </p>
+                                        <p class="disp-detail images"> <i class="fas fa-images"></i> 6 </p>
                                     </div>
                                     <div>
-                                        <img src="../images/user.jpg" alt="owner" class="disp-img owner-img">
-                                        <p class="disp-detail owner"> John Doe </p>
+                                        <p class="disp-detail owner"> <i class="fas fa-user"></i> John Doe </p>
                                     </div>
                                 </div>
                             </div>
@@ -307,45 +293,45 @@
                     <!-- end of an ad-->
                 </div>
                 <div class="center">
-                    <a href="./ads.html" class="sec-btn btn-primary"> view all ads </a>
+                    <a href="./ads.html" class="main-btn btn-primary"> VIEW ALL ADS </a>
                 </div>
 
             </div>
 
             <div class="flex-primary wrap">
                 <div class="md-box">
-                    <h3 class="center open-sans"> Filter by <span class="green-hlt">make</span></h3>
+                    <h3 class="center open-sans"> Filter by <span class="green-hlt">Make</span></h3>
                     <div class="flex-primary mg-b-50">
                         <div>
                             <img src="../images/mercedes.svg" alt="" class="category-icon">
-                            <a href="./ads.html" class="block plain-link"> mercedes </a>
+                            <a href="./ads.html" class="block plain-link"> Mercedes </a>
                         </div>
                         <div>
                             <img src="../images/bmw.svg" alt="" class="category-icon">
-                            <a href="./ads.html" class="block plain-link"> bmw </a>
+                            <a href="./ads.html" class="block plain-link"> B.M.W. </a>
                         </div>
                         <div>
                             <img src="../images/volks.svg" alt="" class="category-icon">
-                            <a href="./ads.html" class="block plain-link"> volkswagen </a>
+                            <a href="./ads.html" class="block plain-link"> Volkswagen </a>
                         </div>
                     </div>
                     <a href="./ads.html" class="sec-btn btn-primary"> view all makes </a>
                 </div>
 
                 <div class="md-box">
-                    <h3 class="center open-sans"> Filter by <span class="green-hlt">body type</span></h3>
+                    <h3 class="center open-sans"> Filter by <span class="green-hlt">Body Type</span></h3>
                     <div class="flex-primary mg-b-50">
                         <div>
                             <img src="../images/sedan.svg" alt="" class="category-icon">
-                            <a href="./ads.html" class="block plain-link"> sedan </a>
+                            <a href="./ads.html" class="block plain-link"> Sedan </a>
                         </div>
                         <div>
                             <img src="../images/suv.svg" alt="" class="category-icon">
-                            <a href="./ads.html" class="block plain-link"> s.u.v. </a>
+                            <a href="./ads.html" class="block plain-link"> S.U.V. </a>
                         </div>
                         <div>
                             <img src="../images/truck.svg" alt="" class="category-icon">
-                            <a href="./ads.html" class="block plain-link"> truck </a>
+                            <a href="./ads.html" class="block plain-link"> Truck </a>
                         </div>
                     </div>
                     <a href="./ads.html" class="sec-btn btn-primary"> view all body types </a>
