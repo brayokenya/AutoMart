@@ -41,5 +41,17 @@ export const orderQueries = {
         };
         orders.push(newOrder);
         return newOrder;
+    },
+
+    findOrderById(orderId) {
+        const foundOrder = orders.find(order => order.id === orderId);
+        return foundOrder;
+    },
+
+    updateOffer(orderId, newOffer) {
+        const order = this.findOrderById(orderId);
+        order.offer = newOffer;
+        order.updatedOn = Date();
+        return order;
     }
 };
