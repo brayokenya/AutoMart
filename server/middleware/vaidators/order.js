@@ -21,6 +21,17 @@ const validateCarId = (req, res, next) => {
         : next();
 };
 
-const validatePostOrder = [validateOffer, validateCarId];
+const validateNewOffer = (req, res, next) => {
+    const { newOffer } = req.body;
+    if (!newOffer) return errorMessage(res, 422, 'New offer was not specified');
+    if (isNaN(+newOffer)) {
+        return errorMessage(res, 422, 'Invalid input. New offer should be a number');
+    }
+    const count = newOffer.toString().length;
+    if (count > 12) return errorMessage(res, 422, 'Did you mean that?');
+    req.body.newOffer = +newOffer;
+    return next();
+};
 
-export default validatePostOrder;
+export const validatePostOrder = [validateOffer, validateCarId];
+export const validatePatchOrder = validateNewOffer;
