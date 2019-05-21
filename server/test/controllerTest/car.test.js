@@ -553,9 +553,9 @@ describe('PATCH/api/v1/car/:carId/price', () => {
     it('should return a 404 status if car is not found', (done) => {
         chai.request(app)
             .patch('/api/v1/car/400/price')
-            .send('Authorization', myToken)
+            .set('Authorization', myToken)
             .send({
-                newPrice: 4000000
+                price: 4000000
             })
             .end((error, res) => {
                 if (error) return done(error);
@@ -571,9 +571,9 @@ describe('PATCH/api/v1/car/:carId/price', () => {
     it('should return a 404 status if carId is not a valid integer', (done) => {
         chai.request(app)
             .patch('/api/v1/car/urusnsjd/price')
-            .send('Authorization', myToken)
+            .set('Authorization', myToken)
             .send({
-                newPrice: 4000000
+                price: 4000000
             })
             .end((error, res) => {
                 if (error) return done(error);
@@ -589,9 +589,9 @@ describe('PATCH/api/v1/car/:carId/price', () => {
     it('should return a 404 error if car does not belong to user', (done) => {
         chai.request(app)
             .patch('/api/v1/car/6/price')
-            .send('Authorization', myToken)
+            .set('Authorization', myToken)
             .send({
-                newPrice: 4000000
+                price: 4000000
             })
             .end((error, res) => {
                 if (error) return done(error);
@@ -604,12 +604,63 @@ describe('PATCH/api/v1/car/:carId/price', () => {
             });
     });
 
+    it('should return a 422 error if price was not provided', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/5/price')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).should.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Price was not specified');
+                done();
+            });
+    });
+
+    it('should return a 422 error if price is not an integer', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/5/price')
+            .set('Authorization', myToken)
+            .send({
+                price: 'hdhdhd'
+            })
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).should.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Invalid price');
+                done();
+            });
+    });
+
+    it('should return a 422 error if price has length greater than 12', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/5/price')
+            .set('Authorization', myToken)
+            .send({
+                price: 9000000000000000
+            })
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).should.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Wow! That is expensive');
+                done();
+            });
+    });
+
     it('should return a 200 status if price was successfully updated', (done) => {
         chai.request(app)
             .patch('/api/v1/car/5/price')
-            .send('Authorization', myToken)
+            .set('Authorization', myToken)
             .send({
-                newPrice: 4000000
+                price: 4000000
             })
             .end((error, res) => {
                 if (error) done(error);
