@@ -486,7 +486,6 @@ describe('POST /api/v1/car', () => {
 });
 
 describe('PATCH /api/v1/car/:carId/status', () => {
-
     it('should return a 404 error if car does not exist', (done) => {
         chai.request(app)
             .patch('/api/v1/car/300000000/status')
@@ -545,6 +544,82 @@ describe('PATCH /api/v1/car/:carId/status', () => {
                 expect(res.body.data).to.have
                     .keys('id', 'owner', 'state', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
                 expect(res.body.data.status).to.deep.equal('sold');
+                done();
+            });
+    });
+});
+
+describe('PATCH/api/v1/car/:carId/price', () => {
+    it('should return a 404 status if car is not found', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/400/price')
+            .send('Authorization', myToken)
+            .send({
+                newPrice: 4000000
+            })
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).should.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Car not found');
+                done();
+            });
+    });
+
+    it('should return a 404 status if carId is not a valid integer', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/urusnsjd/price')
+            .send('Authorization', myToken)
+            .send({
+                newPrice: 4000000
+            })
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).should.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Car not found');
+                done();
+            });
+    });
+
+    it('should return a 404 error if car does not belong to user', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/6/price')
+            .send('Authorization', myToken)
+            .send({
+                newPrice: 4000000
+            })
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).should.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Car not found');
+                done();
+            });
+    });
+
+    it('should return a 200 status if price was successfully updated', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/5/price')
+            .send('Authorization', myToken)
+            .send({
+                newPrice: 4000000
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data).to.have
+                    .keys('id', 'owner', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
+                expect(res.body.data.price).to.deep.equal(4000000);
                 done();
             });
     });
