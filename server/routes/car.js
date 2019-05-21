@@ -4,9 +4,14 @@ import upload from '../config/multer.config';
 import imageUploader from '../middleware/imageUploader';
 import {
     validatePostCar,
-    validatePatchStatus
+    validatePatchStatus,
+    validatePatchPrice
 } from '../middleware/vaidators/car';
-import { postCarAd, updateStatus } from '../controllers/car';
+import {
+    postCarAd,
+    updateStatus,
+    updatePrice
+} from '../controllers/car';
 
 
 const router = express.Router();
@@ -20,5 +25,6 @@ router.post('/car',
     postCarAd);
 
 router.patch('/car/:carId/status', verifyToken, validatePatchStatus, updateStatus);
+router.patch('/car/:carId/price', verifyToken, validatePatchPrice, updatePrice);
 
 export default router;
