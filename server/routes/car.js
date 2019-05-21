@@ -12,7 +12,8 @@ import {
     postCarAd,
     updateStatus,
     updatePrice,
-    getSpecificCar
+    getSpecificCar,
+    getAvailableCars
 } from '../controllers/car';
 
 
@@ -25,6 +26,8 @@ router.post('/car',
     validatePostCar,
     imageUploader,
     postCarAd);
+
+router.get('/car', getAvailableCars);
 
 router.patch('/car/:carId/status', verifyToken, validatePatchStatus, updateStatus);
 router.patch('/car/:carId/price', verifyToken, validatePatchPrice, updatePrice);

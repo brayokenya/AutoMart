@@ -75,3 +75,13 @@ export const getSpecificCar = (req, res) => {
             data: car
         });
 };
+
+export const getAvailableCars = (req, res) => {
+    const { status } = req.query;
+    if (status !== 'available') return errorMessage(res, 404, 'Cars not found');
+    const cars = carQueries.findAvailableCars();
+    return res.status(200).json({
+        status: 'success',
+        data: cars
+    });
+};
