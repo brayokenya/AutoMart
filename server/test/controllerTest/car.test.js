@@ -561,7 +561,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 if (error) return done(error);
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(404);
-                expect(res.body).should.have.keys('status', 'message');
+                expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
                 expect(res.body.message).to.deep.equal('Car not found');
                 done();
@@ -579,7 +579,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 if (error) return done(error);
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(404);
-                expect(res.body).should.have.keys('status', 'message');
+                expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
                 expect(res.body.message).to.deep.equal('Car not found');
                 done();
@@ -597,7 +597,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 if (error) return done(error);
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(404);
-                expect(res.body).should.have.keys('status', 'message');
+                expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
                 expect(res.body.message).to.deep.equal('Car not found');
                 done();
@@ -612,7 +612,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 if (error) return done(error);
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(422);
-                expect(res.body).should.have.keys('status', 'message');
+                expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
                 expect(res.body.message).to.deep.equal('Price was not specified');
                 done();
@@ -630,7 +630,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 if (error) return done(error);
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(422);
-                expect(res.body).should.have.keys('status', 'message');
+                expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
                 expect(res.body.message).to.deep.equal('Invalid price');
                 done();
@@ -648,7 +648,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 if (error) return done(error);
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(422);
-                expect(res.body).should.have.keys('status', 'message');
+                expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
                 expect(res.body.message).to.deep.equal('Wow! That is expensive');
                 done();
@@ -669,7 +669,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 expect(res.body).to.have.keys('status', 'data');
                 expect(res.body.status).to.deep.equal('success');
                 expect(res.body.data).to.have
-                    .keys('id', 'owner', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
+                    .keys('id', 'owner', 'state', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
                 expect(res.body.data.price).to.deep.equal(4000000);
                 done();
             });
