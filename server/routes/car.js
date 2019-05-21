@@ -5,12 +5,14 @@ import imageUploader from '../middleware/imageUploader';
 import {
     validatePostCar,
     validatePatchStatus,
-    validatePatchPrice
+    validatePatchPrice,
+    validateGetCar
 } from '../middleware/vaidators/car';
 import {
     postCarAd,
     updateStatus,
-    updatePrice
+    updatePrice,
+    getSpecificCar
 } from '../controllers/car';
 
 
@@ -26,5 +28,6 @@ router.post('/car',
 
 router.patch('/car/:carId/status', verifyToken, validatePatchStatus, updateStatus);
 router.patch('/car/:carId/price', verifyToken, validatePatchPrice, updatePrice);
+router.get('/car/:carId', validateGetCar, getSpecificCar);
 
 export default router;

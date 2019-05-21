@@ -64,3 +64,14 @@ export const updatePrice = (req, res) => {
         data: updatedCar
     });
 };
+
+export const getSpecificCar = (req, res) => {
+    const { carId } = req.body;
+    const car = carQueries.findCarById(carId);
+    return !car
+        ? errorMessage(res, 404, 'Car not found')
+        : res.status(200).json({
+            status: 'success',
+            data: car
+        });
+};
