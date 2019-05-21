@@ -675,3 +675,66 @@ describe('PATCH/api/v1/car/:carId/price', () => {
             });
     });
 });
+
+describe('GET /api/v1/car/:carId', () => {
+    it('Should return a 404 status if car does not exist', (done) => {
+        chai.request(app)
+            .get('/api/v1/car/33333')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Car not found');
+                done();
+            });
+    });
+
+    it('Should return a 404 status if carId is not an integer', (done) => {
+        chai.request(app)
+            .get('/api/v1/car/string')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Car not found');
+                done();
+            });
+    });
+
+    it('Should return a 200 status without an authorization token', (done) => {
+        chai.request(app)
+            .get('/api/v1/car/4')
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data).to.have
+                    .keys('id', 'owner', 'state', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
+                done();
+            });
+    });
+
+    it('Should return a 200 status when an authorization token is provided', (done) => {
+        chai.request(app)
+            .get('/api/v1/car/4')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data).to.have
+                    .keys('id', 'owner', 'state', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
+                done();
+            });
+    });
+});
