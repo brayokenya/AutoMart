@@ -34,14 +34,31 @@ export const postCarAd = (req, res) => {
     });
 };
 
+const validateOwnership = (carId, userId) => {
+    const car = carQueries.findCarById(carId);
+    return (!car || car.owner !== userId)
+        ? false
+        : car;
+};
+
 export const updateStatus = (req, res) => {
     const { carId, userId } = req.body;
-    const car = carQueries.findCarById(carId);
-    if (!car || car.owner !== userId) {
-        return errorMessage(res, 404, 'Car not found');
-    }
+    const car = validateOwnership(carId, userId);
+    if (!car) return errorMessage(res, 404, 'Car not found');
     const updatedCar = carQueries
         .updateProp(carId, 'status', 'sold');
+    return res.status(200).json({
+        status: 'success',
+        data: updatedCar
+    });
+};
+
+export const updatePrice = (req, res) => {
+    const { carId, userId, price: newPrice } = req.body;
+    const car = validateOwnership(carId, userId);
+    if (!car) return errorMessage(res, 404, 'Car not found');
+
+    const updatedCar = carQueries.updateProp(carId, 'price', newPrice);
     return res.status(200).json({
         status: 'success',
         data: updatedCar

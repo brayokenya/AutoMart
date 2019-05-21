@@ -36,15 +36,18 @@ const validateState = (req, res, next) => {
         : errorMessage(res, 422, 'Car state can either be "new" or "used"');
 };
 
+// TODO: test for kobo
 const validatePrice = (req, res, next) => {
     const { price } = req.body;
     if (!price) return errorMessage(res, 422, 'Price was not specified');
     if (isNaN(+price)) {
         return errorMessage(res, 422, 'Invalid price');
     }
+    req.body.price = +price;
     const count = price.toString().length;
-    if (count > 12) return errorMessage(res, 422, 'Wow! That is expensive');
-    return next();
+    return count > 12
+        ? errorMessage(res, 422, 'Wow! That is expensive')
+        : next();
 };
 
 const validateMake = (req, res, next) => {
@@ -108,3 +111,4 @@ export const validatePostCar = [
 ];
 
 export const validatePatchStatus = validateIdParam;
+export const validatePatchPrice = [validateIdParam, validatePrice];
