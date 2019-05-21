@@ -33,6 +33,11 @@ export const carQueries = {
         return foundCar;
     },
 
+    findAvailableCars() {
+        const availableCars = cars.filter(car => car.status === 'available');
+        return availableCars;
+    },
+
     updateProp(carId, property, value) {
         const car = this.findCarById(carId);
         car[property] = value;
