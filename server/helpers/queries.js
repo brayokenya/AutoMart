@@ -52,6 +52,13 @@ export const carQueries = {
     updateEntity(newCarObject) {
         const carIndex = cars.indexOf(newCarObject);
         cars.splice(carIndex, 1, newCarObject);
+    },
+
+    deleteCar(carObject) {
+        const carIndex = cars.indexOf(carObject);
+        cars.splice(carIndex, 1);
+        // returns true if car has been deleted and false if it hasn't
+        return !cars.indexOf(carObject);
     }
 };
 
