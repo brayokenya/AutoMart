@@ -1018,3 +1018,22 @@ describe('DELETE /api/v1/car/:carId', () => {
             });
     });
 });
+
+describe('GET /api/v1/car', () => {
+    it('should return a list of all cars, whether sold or not', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .set('Authorization', adminToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data.find(datum => datum.status === 'sold'))
+                    .to.be.an('object');
+                expect(res.body.data.find(datum => datum.status === 'available'))
+                    .to.be.an('object');
+                done();
+            });
+    });
+});

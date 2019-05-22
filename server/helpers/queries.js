@@ -41,7 +41,9 @@ export const carQueries = {
         ));
         return availableCars;
     },
-
+    findAllCars() {
+        return cars;
+    },
     updateProp(carId, property, value) {
         const car = this.findCarById(carId);
         car[property] = value;
