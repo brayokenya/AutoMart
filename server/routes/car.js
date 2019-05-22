@@ -28,7 +28,6 @@ router.post('/car',
     postCarAd);
 
 router.get('/car', getAvailableCars);
-
 router.patch('/car/:carId/status', verifyToken, validatePatchStatus, updateStatus);
 router.patch('/car/:carId/price', verifyToken, validatePatchPrice, updatePrice);
 router.get('/car/:carId', validateGetCar, getSpecificCar);
