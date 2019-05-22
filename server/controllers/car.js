@@ -1,5 +1,6 @@
 import { carQueries } from '../helpers/queries';
 import errorMessage from '../helpers/responseMessages';
+import { getUserFromToken } from '../middleware/jwtAuth';
 
 export const postCarAd = (req, res) => {
     const {
@@ -76,10 +77,21 @@ export const getSpecificCar = (req, res) => {
         });
 };
 
+const isInvalidMinAndMaxPrices = (minPrice, maxPrice) => {
+    if (isNaN(+minPrice)) return 'Invalid minimum price';
+    if (isNaN(+maxPrice)) return 'Invalid maximum price';
+    return false;
+};
+
+// TODO: Refactor code; separate validations from controller logic
 export const getAvailableCars = (req, res) => {
-    const { status } = req.query;
+    const { status, min_price: minPrice = 0, max_price: maxPrice = Infinity } = req.query;
+    const user = getUserFromToken(req.headers.authorization);
+    const invalidityMsg = isInvalidMinAndMaxPrices(minPrice, maxPrice);
+    if (invalidityMsg) return errorMessage(res, 422, invalidityMsg);
+    if (!status && !user.isAdmin) return errorMessage(res, 403, 'You do not have access to this resource');
     if (status !== 'available') return errorMessage(res, 404, 'Cars not found');
-    const cars = carQueries.findAvailableCars();
+    const cars = carQueries.findAvailableCars(minPrice, maxPrice);
     return res.status(200).json({
         status: 'success',
         data: cars

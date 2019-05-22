@@ -33,8 +33,12 @@ export const carQueries = {
         return foundCar;
     },
 
-    findAvailableCars() {
-        const availableCars = cars.filter(car => car.status === 'available');
+    findAvailableCars(minPrice, maxPrice) {
+        const availableCars = cars.filter(car => (
+            car.status === 'available'
+            && car.price >= minPrice
+            && car.price <= maxPrice
+        ));
         return availableCars;
     },
 
