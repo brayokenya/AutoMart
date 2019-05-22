@@ -97,3 +97,16 @@ export const getAvailableCars = (req, res) => {
         data: cars
     });
 };
+
+export const deleteAd = (req, res) => {
+    const { carId } = req.body;
+    const { isAdmin } = getUserFromToken(req.headers.authorization);
+    if (!isAdmin) return errorMessage(res, 403, 'You do not have access to this resource');
+    const car = carQueries.findCarById(carId);
+    if (!car) return errorMessage(res, 404, 'Car not found');
+    carQueries.deleteCar(car);
+    return res.status(200).json({
+        status: 'success',
+        message: 'Car Ad successfully deleted'
+    });
+};

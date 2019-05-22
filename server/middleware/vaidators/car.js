@@ -113,3 +113,4 @@ export const validatePostCar = [
 export const validatePatchStatus = validateIdParam;
 export const validatePatchPrice = [validateIdParam, validatePrice];
 export const validateGetCar = validateIdParam;
+export const validateDeleteCar = validateIdParam;

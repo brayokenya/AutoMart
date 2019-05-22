@@ -6,14 +6,16 @@ import {
     validatePostCar,
     validatePatchStatus,
     validatePatchPrice,
-    validateGetCar
+    validateGetCar,
+    validateDeleteCar
 } from '../middleware/vaidators/car';
 import {
     postCarAd,
     updateStatus,
     updatePrice,
     getSpecificCar,
-    getAvailableCars
+    getAvailableCars,
+    deleteAd
 } from '../controllers/car';
 
 
@@ -31,5 +33,6 @@ router.get('/car', getAvailableCars);
 router.patch('/car/:carId/status', verifyToken, validatePatchStatus, updateStatus);
 router.patch('/car/:carId/price', verifyToken, validatePatchPrice, updatePrice);
 router.get('/car/:carId', validateGetCar, getSpecificCar);
+router.delete('/car/:carId', verifyToken, validateDeleteCar, deleteAd);
 
 export default router;
