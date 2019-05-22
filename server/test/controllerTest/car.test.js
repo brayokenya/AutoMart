@@ -1006,7 +1006,7 @@ describe('DELETE /api/v1/car/:carId', () => {
 
     it('should return a 200 status if car was successfully deleted', (done) => {
         chai.request(app)
-            .delete('/api/v1/car/3')
+            .delete('/api/v1/car/6')
             .set('Authorization', adminToken)
             .end((error, res) => {
                 if (error) done(error);
