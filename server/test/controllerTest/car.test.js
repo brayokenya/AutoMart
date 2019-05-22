@@ -947,7 +947,7 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
     });
 });
 
-describe.only('DELETE /api/v1/car/:carId', () => {
+describe('DELETE /api/v1/car/:carId', () => {
     before((done) => {
         chai.request(app)
             .post('/api/v1/auth/signin')
