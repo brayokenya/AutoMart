@@ -83,19 +83,34 @@ const isInvalidMinAndMaxPrices = (minPrice, maxPrice) => {
     return false;
 };
 
-// TODO: Refactor code; separate validations from controller logic
-export const getAvailableCars = (req, res) => {
+const getAllCars = (res) => {
+    const cars = carQueries.findAllCars();
+    return res.status(200).json({
+        status: 'success',
+        data: cars
+    });
+};
+
+
+const getAvailableCars = (req, res) => {
     const { status, min_price: minPrice = 0, max_price: maxPrice = Infinity } = req.query;
-    const user = getUserFromToken(req.headers.authorization);
     const invalidityMsg = isInvalidMinAndMaxPrices(minPrice, maxPrice);
+
     if (invalidityMsg) return errorMessage(res, 422, invalidityMsg);
-    if (!status && !user.isAdmin) return errorMessage(res, 403, 'You do not have access to this resource');
+    if (!status) return errorMessage(res, 403, 'You do not have access to this resource');
     if (status !== 'available') return errorMessage(res, 404, 'Cars not found');
+
     const cars = carQueries.findAvailableCars(minPrice, maxPrice);
     return res.status(200).json({
         status: 'success',
         data: cars
     });
+};
+
+export const getCar = (req, res) => {
+    const { isAdmin } = getUserFromToken(req.headers.authorization);
+    if (isAdmin) return getAllCars(res);
+    return getAvailableCars(req, res);
 };
 
 export const deleteAd = (req, res) => {
