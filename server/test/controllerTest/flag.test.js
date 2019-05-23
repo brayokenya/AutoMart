@@ -24,6 +24,23 @@ before((done) => {
 
 
 describe('POST /api/v1/flag', () => {
+    it('should return a 422 status if carId was not provided', (done) => {
+        chai.request(app)
+            .post('/api/v1/flag')
+            .send({
+                reason: 'pricing'
+            })
+            .set('Authorization', userToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Car id was not specified');
+                done();
+            });
+    });
+
     it('should return a 404 status if car does not exist', (done) => {
         chai.request(app)
             .post('/api/v1/flag')
@@ -92,7 +109,7 @@ describe('POST /api/v1/flag', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(422);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Reason was not specified');
+                expect(res.body.message).to.deep.equal('Reason should not exxceed 100 characters');
                 done();
             });
     });
@@ -116,7 +133,7 @@ describe('POST /api/v1/flag', () => {
             });
     });
 
-    it('should return a 422 status error if reason is an integer', (done) => {
+    it('should return a 422 status error if description is an integer', (done) => {
         chai.request(app)
             .post('/api/v1/flag')
             .send({
@@ -149,7 +166,7 @@ describe('POST /api/v1/flag', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(201);
                 expect(res.body.status).to.deep.equal('success');
-                expect(res.body.data).should.have.keys('id', 'carId', 'reason', 'description', 'reportedBy', 'createdOn');
+                expect(res.body.data).to.have.keys('id', 'carId', 'reason', 'description', 'reportedBy', 'createdOn');
                 done();
             });
     });
