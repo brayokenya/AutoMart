@@ -1,0 +1,156 @@
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import app from '../../../app';
+
+const { expect } = chai;
+
+chai.use(chaiHttp);
+
+let userToken;
+
+before((done) => {
+    chai.request(app)
+        .post('/api/v1/auth/signin')
+        .send({
+            email: 'ricardokaka@gmail.com',
+            password: 'pass'
+        })
+        .end((error, res) => {
+            if (error) done(error);
+            userToken = res.body.data.token;
+            done();
+        });
+});
+
+
+describe('POST /api/v1/flag', () => {
+    it('should return a 404 status if car does not exist', (done) => {
+        chai.request(app)
+            .post('/api/v1/flag')
+            .send({
+                carId: 300,
+                reason: 'pricing'
+            })
+            .set('Authorization', userToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Car not found');
+                done();
+            });
+    });
+
+    it('should return a 404 status error if carId is not an integer', (done) => {
+        chai.request(app)
+            .post('/api/v1/flag')
+            .send({
+                carId: 'notInteger',
+                reason: 'pricing'
+            })
+            .set('Authorization', userToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Car not found');
+                done();
+            });
+    });
+
+    it('should return a 422 status error if reason was not specified', (done) => {
+        chai.request(app)
+            .post('/api/v1/flag')
+            .send({
+                carId: 4,
+                description: 'super weird reason'
+            })
+            .set('Authorization', userToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Reason was not specified');
+                done();
+            });
+    });
+
+    it('should return a 422 status error if reason is longer than 100 characters', (done) => {
+        chai.request(app)
+            .post('/api/v1/flag')
+            .send({
+                carId: 4,
+                reason: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Turpis massa sed elementum tempus egestas. Enim nec dui nunc mattis. Sapien eget mi proin sed libero.',
+                description: 'super weird reason'
+            })
+            .set('Authorization', userToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Reason was not specified');
+                done();
+            });
+    });
+
+    it('should return a 422 status error if reason is an integer', (done) => {
+        chai.request(app)
+            .post('/api/v1/flag')
+            .send({
+                carId: 4,
+                reason: 4949,
+                description: 'super weird reason'
+            })
+            .set('Authorization', userToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Invalid reason');
+                done();
+            });
+    });
+
+    it('should return a 422 status error if reason is an integer', (done) => {
+        chai.request(app)
+            .post('/api/v1/flag')
+            .send({
+                carId: 4,
+                reason: 'Weird pricing',
+                description: 299
+            })
+            .set('Authorization', userToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Invalid description');
+                done();
+            });
+    });
+
+    it('should return a 201 status if everything checks out', (done) => {
+        chai.request(app)
+            .post('/api/v1/flag')
+            .send({
+                carId: 4,
+                reason: 'Weird pricing',
+                description: 'It really feels weird'
+            })
+            .set('Authorization', userToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(201);
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data).should.have.keys('id', 'carId', 'reason', 'description', 'reportedBy', 'createdOn');
+                done();
+            });
+    });
+});
