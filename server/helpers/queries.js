@@ -1,6 +1,7 @@
 import users from '../models/mockDb/user';
 import cars from '../models/mockDb/car';
 import orders from '../models/mockDb/order';
+import flags from '../models/mockDb/flag';
 
 export const userQueries = {
     findUserByEmail(email) {
@@ -90,5 +91,21 @@ export const orderQueries = {
     updateEntity(newOrderIndex) {
         const orderIndex = orders.indexOf(newOrderIndex);
         orders.splice(orderIndex, 1, newOrderIndex);
+    }
+};
+
+export const flagQueries = {
+    createFlag(carId, reason, description, reportedBy) {
+        const newFlag = {
+            id: flags.length,
+            carId,
+            reason,
+            description,
+            reportedBy,
+            createdOn: Date()
+        };
+
+        flags.push(newFlag);
+        return newFlag;
     }
 };
