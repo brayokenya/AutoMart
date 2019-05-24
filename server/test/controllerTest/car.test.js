@@ -741,7 +741,7 @@ describe('GET /api/v1/car/:carId', () => {
 });
 
 describe('GET /api/v1/car?status=available', () => {
-    it('should return a 404 error if status query is not available', (done) => {
+    it('should return a 403 error if status query is not available', (done) => {
         chai.request(app)
             .get('/api/v1/car')
             .query({ status: 'notavailable' })
@@ -749,10 +749,10 @@ describe('GET /api/v1/car?status=available', () => {
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
-                expect(res).to.have.status(404);
+                expect(res).to.have.status(403);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Cars not found');
+                expect(res.body.message).to.deep.equal('You do not have access to this resource');
                 done();
             });
     });
@@ -807,9 +807,9 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
-                expect(res).to.have.status(404);
+                expect(res).to.have.status(422);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('We could not find any car that matches your search');
+                expect(res.body.message).to.deep.equal('Invalid query');
                 done();
             });
     });
