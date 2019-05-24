@@ -794,7 +794,26 @@ describe('GET /api/v1/car?status=available', () => {
 });
 
 describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue', () => {
-    it('should return a 422 status if min price is not a number', (done) => {
+    it('should return a 403 status if query is invalid', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({
+                status: 'available',
+                min_price: 'string',
+                max_price: 3000000,
+                notValid: 'somestring'
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('We could not find any car that matches your search');
+                done();
+            });
+    });
+    it('should return a 404 status if min price is not a number', (done) => {
         chai.request(app)
             .get('/api/v1/car')
             .query({
@@ -806,14 +825,14 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
-                expect(res).to.have.status(422);
+                expect(res).to.have.status(404);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Invalid minimum price');
+                expect(res.body.message).to.deep.equal('We could not find any car that matches your search');
                 done();
             });
     });
 
-    it('should return a 422 status if max price is not a number', (done) => {
+    it('should return a 404 status if max price is not a number', (done) => {
         chai.request(app)
             .get('/api/v1/car')
             .query({
@@ -825,9 +844,9 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
-                expect(res).to.have.status(422);
+                expect(res).to.have.status(404);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Invalid maximum price');
+                expect(res.body.message).to.deep.equal('We could not find any car that matches your search');
                 done();
             });
     });
@@ -891,7 +910,7 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
             });
     });
 
-    it('should return a 422 status if status is not equal to available', (done) => {
+    it('should return a 403 status if status is not equal to available', (done) => {
         chai.request(app)
             .get('/api/v1/car')
             .query({
@@ -903,10 +922,10 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
-                expect(res).to.have.status(404);
+                expect(res).to.have.status(403);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Cars not found');
+                expect(res.body.message).to.deep.equal('You do not have access to this resource');
                 done();
             });
     });
@@ -932,7 +951,8 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
             .query({
                 status: 'available',
                 min_price: 200000,
-                max_price: 8000000
+                max_price: 8000000,
+                state: 'new'
             })
             .end((error, res) => {
                 if (error) done(error);
