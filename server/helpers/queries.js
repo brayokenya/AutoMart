@@ -34,11 +34,27 @@ export const carQueries = {
         return foundCar;
     },
 
-    findAvailableCars(minPrice, maxPrice) {
+    findAvailableCars(queryObject) {
+        const getQueryValue = (car, query, string) => {
+            if (!query) return car[string];
+            return query;
+        };
+        const {
+            min_price: minPrice = 0,
+            max_price: maxPrice = Infinity,
+            state,
+            make: manufacturer,
+            body_type: bodyType
+        } = queryObject;
+
+
         const availableCars = cars.filter(car => (
             car.status === 'available'
             && car.price >= minPrice
             && car.price <= maxPrice
+            && car.manufacturer === getQueryValue(car, manufacturer, 'manufacturer')
+            && car.state === getQueryValue(car, state, 'state')
+            && car.bodyType === getQueryValue(car, bodyType, 'bodyType')
         ));
         return availableCars;
     },

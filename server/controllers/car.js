@@ -15,19 +15,20 @@ export const postCarAd = (req, res) => {
         createdOn = Date()
     } = req.body;
 
-    const newCar = carQueries.createCar(
-        {
-            manufacturer,
-            price,
-            state,
-            model,
-            bodyType,
-            owner,
-            status,
-            imageUrl,
-            createdOn
-        }
-    );
+    const newCar = carQueries
+        .createCar(
+            {
+                manufacturer,
+                price,
+                state,
+                model,
+                bodyType,
+                owner,
+                status,
+                imageUrl,
+                createdOn
+            }
+        );
 
     return res.status(201).json({
         status: 'success',
@@ -46,8 +47,7 @@ export const updateStatus = (req, res) => {
     const { carId, userId } = req.body;
     const car = validateOwnership(carId, userId);
     if (!car) return errorMessage(res, 404, 'Car not found');
-    const updatedCar = carQueries
-        .updateProp(carId, 'status', 'sold');
+    const updatedCar = carQueries.updateProp(carId, 'status', 'sold');
     return res.status(200).json({
         status: 'success',
         data: updatedCar
@@ -77,10 +77,20 @@ export const getSpecificCar = (req, res) => {
         });
 };
 
-const isInvalidMinAndMaxPrices = (minPrice, maxPrice) => {
-    if (isNaN(+minPrice)) return 'Invalid minimum price';
-    if (isNaN(+maxPrice)) return 'Invalid maximum price';
-    return false;
+const isInvalidQueryString = (req) => {
+    const values = [
+        'status',
+        'min_price',
+        'max_price',
+        'state',
+        'body_type',
+        'make',
+        ...Object.keys(req.query)
+    ];
+    // size will be greater than 5 if an unrecongnised query is entered
+    const querySet = new Set(values);
+    const isInvalid = querySet.size > 6;
+    return isInvalid;
 };
 
 const getAllCars = (res) => {
@@ -93,24 +103,27 @@ const getAllCars = (res) => {
 
 
 const getAvailableCars = (req, res) => {
-    const { status, min_price: minPrice = 0, max_price: maxPrice = Infinity } = req.query;
-    const invalidityMsg = isInvalidMinAndMaxPrices(minPrice, maxPrice);
-
-    if (invalidityMsg) return errorMessage(res, 422, invalidityMsg);
-    if (!status) return errorMessage(res, 403, 'You do not have access to this resource');
-    if (status !== 'available') return errorMessage(res, 404, 'Cars not found');
-
-    const cars = carQueries.findAvailableCars(minPrice, maxPrice);
-    return res.status(200).json({
-        status: 'success',
-        data: cars
-    });
+    const { status } = req.query;
+    const isInvalidStatus = status !== 'available';
+    if (isInvalidStatus) return errorMessage(res, 403, 'You do not have access to this resource');
+    if (isInvalidQueryString(req)) return errorMessage(res, 422, 'Invalid query');
+    const cars = carQueries.findAvailableCars(req.query);
+    return cars.length > 0
+        ? res.status(200).json({
+            status: 'success',
+            data: cars
+        })
+        : res.status(404).json({
+            status: 'error',
+            message: 'We could not find any car that matches your search'
+        });
 };
 
 export const getCar = (req, res) => {
     const { isAdmin } = getUserFromToken(req.headers.authorization);
-    if (isAdmin) return getAllCars(res);
-    return getAvailableCars(req, res);
+    return isAdmin
+        ? getAllCars(res)
+        : getAvailableCars(req, res);
 };
 
 export const deleteAd = (req, res) => {
