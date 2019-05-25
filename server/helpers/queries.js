@@ -7,6 +7,17 @@ export const userQueries = {
     findUserByEmail(email) {
         return users.find(user => user.email === email);
     },
+
+    findUserById(userId) {
+        return users.find(user => user.id === userId);
+    },
+
+    updatePassword(userId, newPassword) {
+        const user = this.findUserById(userId);
+        user.password = newPassword;
+        this.updateEntity(user);
+    },
+
     createUser(userObject) {
         const newUserObject = {
             id: users.length,
@@ -15,6 +26,11 @@ export const userQueries = {
         };
         users.push(newUserObject);
         return newUserObject;
+    },
+
+    updateEntity(userObject) {
+        const userIndex = users.indexOf(userObject);
+        cars.splice(userIndex, 1, userObject);
     }
 };
 

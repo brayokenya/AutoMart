@@ -52,6 +52,15 @@ const validatePassword = (req, res, next) => {
     }
     return next();
 };
+const validateConfirmPassword = (req, res, next) => {
+    const { password, confirmPassword } = req.body;
+    if (!req.body.confirmPassword) {
+        return errorMessage(res, 422, 'Password was not confirmed');
+    }
+    return password === confirmPassword
+        ? next()
+        : errorMessage(res, 422, 'Passwords do not match');
+};
 
 export const validateSignup = [
     validateFirstName,
@@ -62,3 +71,4 @@ export const validateSignup = [
 ];
 
 export const validateSignin = [validateEmail, validatePassword];
+export const confirmPassword = [validatePassword, validateConfirmPassword];
