@@ -384,3 +384,74 @@ describe('POST /api/v1/auth/reset-password', () => {
             });
     });
 });
+
+describe('POST /api/v1/auth/reset-password/:token', () => {
+    const resetLink = '/api/v1/auth/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsInVzZXJFbWFpbCI6Im9zYWhvbm9ib2l0ZUBnbWFpbC5jb20iLCJpYXQiOjE1NTg3NTE5NzIsImV4cCI6MTU1ODgzNjU3Mn0.4dWAprRtYf_dFQ4EM1LiHyxn5qbSwSohoDsOWqS3d58';
+
+    it('should return a 422 error if password was not provided', (done) => {
+        chai.request(app)
+            .post(resetLink)
+            .send({
+                confirmPassword: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Password was not provided');
+                done();
+            });
+    });
+
+    it('should return a 422 error if password was not confirmed', (done) => {
+        chai.request(app)
+            .post(resetLink)
+            .send({
+                password: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Password was not confirmed');
+                done();
+            });
+    });
+
+    it('should return a 422 error if passwords do not match', (done) => {
+        chai.request(app)
+            .post(resetLink)
+            .send({
+                password: 'pass',
+                confirmPassword: 'notpass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Passwords do not match');
+                done();
+            });
+    });
+
+    it('should update user password if everything checks out', (done) => {
+        chai.request(app)
+            .post(resetLink)
+            .send({
+                password: 'pass',
+                confirmPassword: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.message).to.deep.equal('Password was successfully updated');
+                done();
+            });
+    });
+
+});
