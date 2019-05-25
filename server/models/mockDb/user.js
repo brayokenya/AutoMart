@@ -48,7 +48,7 @@ const users = [
         id: 6,
         firstName: 'Osahon',
         lastName: 'Oboite',
-        email: 'osahon.dev@gmail.com',
+        email: 'osahonoboite@gmail.com',
         password: 'pass',
         address: 'Lagos, Nigeria',
         isAdmin: true

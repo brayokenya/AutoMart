@@ -35,7 +35,7 @@ const validateAddress = (req, res, next) => {
         : next();
 };
 
-const validateEmail = (req, res, next) => {
+export const validateEmail = (req, res, next) => {
     const { email } = req.body;
     if (!email) {
         return errorMessage(res, 422, 'Email was not provided');

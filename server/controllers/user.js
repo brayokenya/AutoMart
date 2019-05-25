@@ -1,7 +1,13 @@
+/* eslint-disable-next-line */
+import regeneratorRuntime from 'regenerator-runtime';
+import dotenv from 'dotenv';
 import { userQueries } from '../helpers/queries';
 import { generateToken } from '../middleware/jwtAuth';
 import errorMessage from '../helpers/responseMessages';
+import mailgun from '../config/mailgun.config';
+import generateMessageData from '../helpers/messageData';
 
+dotenv.config();
 
 export const signupUser = (req, res) => {
     const existingUser = userQueries
@@ -63,4 +69,22 @@ export const loginUser = (req, res) => {
             }
         })
         : errorMessage(res, 404, 'Incorrect email or password');
+};
+
+export const sendResetPasswordLink = async (req, res) => {
+    const user = userQueries
+        .findUserByEmail(req.body.email.trim());
+    if (!user) return errorMessage(res, 404, 'User account not found');
+    const token = generateToken(user.id, user.email);
+    const resetLink = `${process.env.APP_URL}/auth/reset-password/${token}`;
+    const messageData = generateMessageData(user, resetLink);
+    try {
+        await mailgun.messages().send(messageData);
+        return res.status(200).json({
+            status: 'success',
+            message: 'A password-reset link has been sent to your email'
+        });
+    } catch (error) {
+        return errorMessage(res, 500, 'Oops! Something went wrong');
+    }
 };
