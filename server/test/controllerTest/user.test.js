@@ -338,7 +338,7 @@ describe('POST /api/v1/auth/signin', () => {
 describe('POST /api/v1/auth/reset-password', () => {
     it('Should return a 422 error if email is not valid', (done) => {
         chai.request(app)
-            .post('api/v1/auth/reset-password')
+            .post('/api/v1/auth/reset-password')
             .send({
                 email: 'invalid.mail'
             })
@@ -354,7 +354,7 @@ describe('POST /api/v1/auth/reset-password', () => {
 
     it('Should return a 404 error if account does not exist', (done) => {
         chai.request(app)
-            .post('api/v1/auth/reset-password')
+            .post('/api/v1/auth/reset-password')
             .send({
                 email: 'notauser@gmail.com'
             })
@@ -370,7 +370,7 @@ describe('POST /api/v1/auth/reset-password', () => {
 
     it('Should send a 200 status if reset password mail was sent', (done) => {
         chai.request(app)
-            .post('api/v1/auth/reset-password')
+            .post('/api/v1/auth/reset-password')
             .send({
                 email: 'osahonoboite@gmail.com'
             })
