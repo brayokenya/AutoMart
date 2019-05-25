@@ -334,3 +334,124 @@ describe('POST /api/v1/auth/signin', () => {
             });
     });
 });
+
+describe('POST /api/v1/auth/reset-password', () => {
+    it('Should return a 422 error if email is not valid', (done) => {
+        chai.request(app)
+            .post('/api/v1/auth/reset-password')
+            .send({
+                email: 'invalid.mail'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Invalid email');
+                done();
+            });
+    });
+
+    it('Should return a 404 error if account does not exist', (done) => {
+        chai.request(app)
+            .post('/api/v1/auth/reset-password')
+            .send({
+                email: 'notauser@gmail.com'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('User account not found');
+                done();
+            });
+    });
+
+    it('Should send a 200 status if reset password mail was sent', (done) => {
+        chai.request(app)
+            .post('/api/v1/auth/reset-password')
+            .send({
+                email: 'osahonoboite@gmail.com'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.message).to.deep.equal('A password-reset link has been sent to your email');
+                done();
+            });
+    });
+});
+
+describe('POST /api/v1/auth/reset-password/:token', () => {
+    const resetLink = '/api/v1/auth/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsInVzZXJFbWFpbCI6Im9zYWhvbm9ib2l0ZUBnbWFpbC5jb20iLCJpYXQiOjE1NTg3NTE5NzIsImV4cCI6MTU1ODgzNjU3Mn0.4dWAprRtYf_dFQ4EM1LiHyxn5qbSwSohoDsOWqS3d58';
+
+    it('should return a 422 error if password was not provided', (done) => {
+        chai.request(app)
+            .post(resetLink)
+            .send({
+                confirmPassword: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Password was not provided');
+                done();
+            });
+    });
+
+    it('should return a 422 error if password was not confirmed', (done) => {
+        chai.request(app)
+            .post(resetLink)
+            .send({
+                password: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Password was not confirmed');
+                done();
+            });
+    });
+
+    it('should return a 422 error if passwords do not match', (done) => {
+        chai.request(app)
+            .post(resetLink)
+            .send({
+                password: 'pass',
+                confirmPassword: 'notpass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Passwords do not match');
+                done();
+            });
+    });
+
+    it('should update user password if everything checks out', (done) => {
+        chai.request(app)
+            .post(resetLink)
+            .send({
+                password: 'pass',
+                confirmPassword: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.message).to.deep.equal('Password was successfully updated');
+                done();
+            });
+    });
+
+});
