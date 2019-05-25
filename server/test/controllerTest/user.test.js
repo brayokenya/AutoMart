@@ -334,3 +334,53 @@ describe('POST /api/v1/auth/signin', () => {
             });
     });
 });
+
+describe('POST /api/v1/auth/reset-password', () => {
+    it('Should return a 422 error if email is not valid', (done) => {
+        chai.request(app)
+            .post('api/v1/auth/reset-password')
+            .send({
+                email: 'invalid.mail'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('Invalid email');
+                done();
+            });
+    });
+
+    it('Should return a 404 error if account does not exist', (done) => {
+        chai.request(app)
+            .post('api/v1/auth/reset-password')
+            .send({
+                email: 'notauser@gmail.com'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('User account not found');
+                done();
+            });
+    });
+
+    it('Should send a 200 status if reset password mail was sent', (done) => {
+        chai.request(app)
+            .post('api/v1/auth/reset-password')
+            .send({
+                email: 'osahonoboite@gmail.com'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.message).to.deep.equal('A password-reset link has been sent to your email');
+                done();
+            });
+    });
+});
