@@ -43,6 +43,15 @@ const users = [
         password: 'pass',
         address: '10 Milan, Italy.',
         isAdmin: false
+    },
+    {
+        id: 6,
+        firstName: 'Osahon',
+        lastName: 'Oboite',
+        email: 'osahon.dev@gmail.com',
+        password: 'pass',
+        address: 'Lagos, Nigeria',
+        isAdmin: true
     }
 ];
 
