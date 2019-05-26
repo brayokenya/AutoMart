@@ -3,7 +3,6 @@ const stringFormater = (req, res, next) => {
     stringKeys.forEach(key => {
         if (typeof (req.body[key]) === 'string') {
             req.body[key] = req.body[key].trim();
-            console.log(req.body[key]);
         }
     });
     return next();
