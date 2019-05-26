@@ -30,7 +30,7 @@ describe('POST /api/v1/car', () => {
             .post('/api/v1/car')
             .set('Authorization', myToken)
             .type('form')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'used')
             .field('price', 300000)
             .field('manufacturer', 'toyota')
@@ -53,7 +53,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .attach('displayImage', fs.readFileSync('./server/test/assets/honda.jpg'), 'honda.png')
             .field('state', 'used')
             .field('price', 300000)
@@ -145,7 +145,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('price', 300000)
             .field('manufacturer', 'toyota')
             .field('model', 'corolla')
@@ -167,7 +167,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new and used')
             .field('price', 300000)
             .field('manufacturer', 'toyota')
@@ -190,7 +190,7 @@ describe('POST /api/v1/car', () => {
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .type('form')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('manufacturer', 'toyota')
             .field('model', 'corolla')
@@ -212,7 +212,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', '4893y9')
             .field('manufacturer', 'toyota')
@@ -235,7 +235,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 2000000000000000)
             .field('manufacturer', 'toyota')
@@ -258,7 +258,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('model', 'corolla')
@@ -280,7 +280,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('manufacturer', 'toyotaaaaaaaaaaaaassddssddsssddssdssdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
@@ -303,7 +303,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('manufacturer', 'toyota')
@@ -325,7 +325,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('manufacturer', 'toyota')
@@ -348,7 +348,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('manufacturer', 'toyota')
@@ -370,7 +370,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('manufacturer', 'toyota')
@@ -393,7 +393,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('manufacturer', 'toyota')
@@ -416,7 +416,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('manufacturer', 'toyota')
@@ -433,44 +433,18 @@ describe('POST /api/v1/car', () => {
             });
     });
 
-    it('should return a 201 status if everything but status or date is specified', (done) => {
-        chai.request(app)
-            .post('/api/v1/car')
-            .type('form')
-            .set('Authorization', myToken)
-            .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
-            .field('state', 'used')
-            .field('price', 300000)
-            .field('manufacturer', 'toyota')
-            .field('model', 'corolla')
-            .field('bodyType', 'sedan')
-            .end((error, res) => {
-                if (error) done(error);
-                expect(res).to.be.an('object');
-                expect(res).to.have.status(201);
-                expect(res.body).to.have.keys('status', 'data');
-                expect(res.body.status).to.deep.equal('success');
-                expect(res.body.data).to.have
-                    .keys('id', 'manufacturer', 'price', 'state', 'model', 'bodyType', 'owner', 'status', 'imageUrl', 'createdOn');
-                done();
-            });
-    });
-
     it('should return a 201 status if everything checks out', (done) => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'used')
             .field('price', 300000)
             .field('manufacturer', 'toyota')
             .field('model', 'corolla')
             .field('bodyType', 'sedan')
-            .field('status', 'sold')
-            .field('createdOn', '20-07-2019')
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
@@ -479,11 +453,9 @@ describe('POST /api/v1/car', () => {
                 expect(res.body.status).to.deep.equal('success');
                 expect(res.body.data).to.have
                     .keys('id', 'manufacturer', 'price', 'state', 'model', 'bodyType', 'owner', 'status', 'imageUrl', 'createdOn');
-                expect(res.body.data.status).to.deep.equal('sold');
                 done();
             });
     });
-
 });
 
 describe('PATCH /api/v1/car/:carId/status', () => {

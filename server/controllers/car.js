@@ -10,25 +10,20 @@ export const postCarAd = (req, res) => {
         model,
         bodyType,
         userId: owner,
-        status = 'available',
-        imageUrl,
-        createdOn = Date()
+        imageUrl
     } = req.body;
 
-    const newCar = carQueries
-        .createCar(
-            {
-                manufacturer,
-                price,
-                state,
-                model,
-                bodyType,
-                owner,
-                status,
-                imageUrl,
-                createdOn
-            }
-        );
+    const newCar = carQueries.createCar(
+        {
+            manufacturer,
+            price,
+            state,
+            model,
+            bodyType,
+            owner,
+            imageUrl,
+        }
+    );
 
     return res.status(201).json({
         status: 'success',

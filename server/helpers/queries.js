@@ -39,7 +39,9 @@ export const carQueries = {
     createCar(carObject) {
         const newCar = {
             id: cars.length,
-            ...carObject
+            ...carObject,
+            status: 'available',
+            createdOn: Date()
         };
         cars.push(newCar);
         return newCar;
