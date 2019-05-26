@@ -91,6 +91,7 @@ export const sendResetPasswordLink = (req, res) => {
 export const resetPassword = (req, res) => {
     const { password } = req.body;
     const { id: userId } = getUserFromToken(req.params.token);
+    if (!userId) return errorMessage(res, 404, 'User not found. Reset link may have expired');
     userQueries.updatePassword(userId, password);
     return res.status(200).json({
         status: 'success',
