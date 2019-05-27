@@ -5,6 +5,8 @@ import app from '../../../app.js';
 const { expect } = chai;
 chai.use(chaiHttp);
 
+let userToken;
+
 describe('POST /api/v1/auth/signup', () => {
     it('should return a 422 status if first name is not provided', (done) => {
         chai.request(app)
@@ -319,7 +321,7 @@ describe('POST /api/v1/auth/signin', () => {
         chai.request(app)
             .post('/api/v1/auth/signin')
             .send({
-                email: 'johndoe@gmail.com',
+                email: 'osahonoboite@gmail.com',
                 password: 'pass'
             })
             .end((error, res) => {
@@ -328,8 +330,9 @@ describe('POST /api/v1/auth/signin', () => {
                 expect(res).to.have.status(200);
                 expect(res.body).to.have.keys('status', 'message', 'data');
                 expect(res.body.status).to.deep.equals('success');
-                expect(res.body.message).to.deep.equal('Welcome back, John!');
+                expect(res.body.message).to.deep.equal('Welcome back, Osahon!');
                 expect(res.body.data).to.have.keys('token', 'id', 'firstName', 'lastName', 'email');
+                userToken = res.body.data.token;
                 done();
             });
     });
@@ -385,12 +388,12 @@ describe('POST /api/v1/auth/reset-password', () => {
     });
 });
 
-describe('POST /api/v1/auth/reset-password/:token', () => {
-    const resetLink = '/api/v1/auth/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsInVzZXJFbWFpbCI6Im9zYWhvbm9ib2l0ZUBnbWFpbC5jb20iLCJpYXQiOjE1NTg3NTE5NzIsImV4cCI6MTU1ODgzNjU3Mn0.4dWAprRtYf_dFQ4EM1LiHyxn5qbSwSohoDsOWqS3d58';
+describe('PATCH /api/v1/auth/reset-password/:token', () => {
+    const wrongResetLink = '/api/v1/auth/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsInVzZXJFbWFpbCI6Im9zYWhvbm9ib2l0ZUBnbWFpbC5jb20iLCJpYXQiOjE1NTg3NTE5NzIsImV4cCI6MTU1ODgzNjU3Mn0.4dWAprRtYf_dFQ4EM1LiHyxn5qbSwSohoDsOWqS3d58';
 
     it('should return a 422 error if password was not provided', (done) => {
         chai.request(app)
-            .post(resetLink)
+            .patch(wrongResetLink)
             .send({
                 confirmPassword: 'pass'
             })
@@ -406,7 +409,7 @@ describe('POST /api/v1/auth/reset-password/:token', () => {
 
     it('should return a 422 error if password was not confirmed', (done) => {
         chai.request(app)
-            .post(resetLink)
+            .patch(wrongResetLink)
             .send({
                 password: 'pass'
             })
@@ -422,7 +425,7 @@ describe('POST /api/v1/auth/reset-password/:token', () => {
 
     it('should return a 422 error if passwords do not match', (done) => {
         chai.request(app)
-            .post(resetLink)
+            .patch(wrongResetLink)
             .send({
                 password: 'pass',
                 confirmPassword: 'notpass'
@@ -437,9 +440,26 @@ describe('POST /api/v1/auth/reset-password/:token', () => {
             });
     });
 
+    it('should return a 404 status if link has expired or is invalid', (done) => {
+        chai.request(app)
+            .patch(wrongResetLink)
+            .send({
+                password: 'pass',
+                confirmPassword: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('User not found. Reset link may have expired');
+                done();
+            });
+    });
+
     it('should update user password if everything checks out', (done) => {
         chai.request(app)
-            .post(resetLink)
+            .patch(`/api/v1/auth/reset-password/${userToken}`)
             .send({
                 password: 'pass',
                 confirmPassword: 'pass'

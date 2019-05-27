@@ -10,25 +10,20 @@ export const postCarAd = (req, res) => {
         model,
         bodyType,
         userId: owner,
-        status = 'available',
-        imageUrl,
-        createdOn = Date()
+        imageUrl
     } = req.body;
 
-    const newCar = carQueries
-        .createCar(
-            {
-                manufacturer,
-                price,
-                state,
-                model,
-                bodyType,
-                owner,
-                status,
-                imageUrl,
-                createdOn
-            }
-        );
+    const newCar = carQueries.createCar(
+        {
+            manufacturer,
+            price,
+            state,
+            model,
+            bodyType,
+            owner,
+            imageUrl,
+        }
+    );
 
     return res.status(201).json({
         status: 'success',
@@ -44,9 +39,10 @@ const validateOwnership = (carId, userId) => {
 };
 
 export const updateStatus = (req, res) => {
-    const { carId, userId } = req.body;
+    const { carId } = req.params;
+    const { userId } = req.body;
     const car = validateOwnership(carId, userId);
-    if (!car) return errorMessage(res, 404, 'Car not found');
+    if (!car) return errorMessage(res, 404, 'car not found');
     const updatedCar = carQueries.updateProp(carId, 'status', 'sold');
     return res.status(200).json({
         status: 'success',
@@ -55,9 +51,10 @@ export const updateStatus = (req, res) => {
 };
 
 export const updatePrice = (req, res) => {
-    const { carId, userId, price: newPrice } = req.body;
+    const { userId, newPrice } = req.body;
+    const { carId } = req.params;
     const car = validateOwnership(carId, userId);
-    if (!car) return errorMessage(res, 404, 'Car not found');
+    if (!car) return errorMessage(res, 404, 'car not found');
 
     const updatedCar = carQueries.updateProp(carId, 'price', newPrice);
     return res.status(200).json({
@@ -67,30 +64,14 @@ export const updatePrice = (req, res) => {
 };
 
 export const getSpecificCar = (req, res) => {
-    const { carId } = req.body;
+    const { carId } = req.params;
     const car = carQueries.findCarById(carId);
     return !car
-        ? errorMessage(res, 404, 'Car not found')
+        ? errorMessage(res, 404, 'car not found')
         : res.status(200).json({
             status: 'success',
             data: car
         });
-};
-
-const isInvalidQueryString = (req) => {
-    const values = [
-        'status',
-        'min_price',
-        'max_price',
-        'state',
-        'body_type',
-        'make',
-        ...Object.keys(req.query)
-    ];
-    // size will be greater than 5 if an unrecongnised query is entered
-    const querySet = new Set(values);
-    const isInvalid = querySet.size > 6;
-    return isInvalid;
 };
 
 const getAllCars = (res) => {
@@ -104,9 +85,8 @@ const getAllCars = (res) => {
 
 const getAvailableCars = (req, res) => {
     const { status } = req.query;
-    const isInvalidStatus = status !== 'available';
-    if (isInvalidStatus) return errorMessage(res, 403, 'You do not have access to this resource');
-    if (isInvalidQueryString(req)) return errorMessage(res, 422, 'Invalid query');
+    const isInvalidStatus = (status !== 'available');
+    if (isInvalidStatus) return errorMessage(res, 403, 'you do not have access to this resource');
     const cars = carQueries.findAvailableCars(req.query);
     return cars.length > 0
         ? res.status(200).json({
@@ -115,7 +95,7 @@ const getAvailableCars = (req, res) => {
         })
         : res.status(404).json({
             status: 'error',
-            message: 'We could not find any car that matches your search'
+            message: 'we could not find any car that matches your search'
         });
 };
 
@@ -127,14 +107,14 @@ export const getCar = (req, res) => {
 };
 
 export const deleteAd = (req, res) => {
-    const { carId } = req.body;
+    const { carId } = req.params;
     const { isAdmin } = getUserFromToken(req.headers.authorization);
-    if (!isAdmin) return errorMessage(res, 403, 'You do not have access to this resource');
+    if (!isAdmin) return errorMessage(res, 403, 'you do not have access to this resource');
     const car = carQueries.findCarById(carId);
-    if (!car) return errorMessage(res, 404, 'Car not found');
+    if (!car) return errorMessage(res, 404, 'car not found');
     carQueries.deleteCar(car);
     return res.status(200).json({
         status: 'success',
-        message: 'Car Ad successfully deleted'
+        message: 'car ad was successfully deleted'
     });
 };
