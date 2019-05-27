@@ -247,7 +247,30 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('whoa! that is expensive');
+                expect(res.body.message).to.deep.equal('whoa! that price is quite high');
+                done();
+            });
+    });
+
+    it('should return a 422 error if price has more than two decimal places', (done) => {
+        chai.request(app)
+            .post('/api/v1/car')
+            .type('form')
+            .set('Authorization', myToken)
+            .set('enctype', 'multipart/form-data')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
+            .field('state', 'new')
+            .field('price', 200000.9999)
+            .field('manufacturer', 'toyota')
+            .field('model', 'corolla')
+            .field('bodyType', 'sedan')
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('price has more than two decimal places');
                 done();
             });
     });
@@ -292,12 +315,35 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal("manufacturer's name exceeds the maximum length of 30");
+                expect(res.body.message).to.deep.equal("manufacturer exceeds the maximum length of 30");
                 done();
             });
     });
 
     it('should return a 422 error if model was not specified', (done) => {
+        chai.request(app)
+            .post('/api/v1/car')
+            .type('form')
+            .set('Authorization', myToken)
+            .set('enctype', 'multipart/form-data')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
+            .field('state', 'new')
+            .field('price', 300000000)
+            .field('manufacturer', 'toyota')
+            .field('model', '(*gdbsk)')
+            .field('bodyType', 'sedan')
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('model has invalid characters');
+                done();
+            });
+    });
+
+    it('should return a 422 error if model has invalid characters', (done) => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
@@ -410,7 +456,7 @@ describe('POST /api/v1/car', () => {
             });
     });
 
-    it('should return a 422 error if body type is longer than 20 characters', (done) => {
+    it('should return a 422 error if body type is longer than 25 characters', (done) => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
@@ -428,7 +474,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('body type exceeds the maximum length of 20');
+                expect(res.body.message).to.deep.equal('body type exceeds the maximum length of 25');
                 done();
             });
     });
@@ -469,7 +515,7 @@ describe('PATCH /api/v1/car/:carId/status', () => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car not found');
+                expect(res.body.message).to.deep.equal('car not found');
                 done();
             });
     });
@@ -489,17 +535,17 @@ describe('PATCH /api/v1/car/:carId/status', () => {
             });
     });
 
-    it('should return a 404 error if car id is not an integer', (done) => {
+    it('should return a 422 error if car id is not an integer', (done) => {
         chai.request(app)
             .patch('/api/v1/car/notcar/status')
             .set('Authorization', myToken)
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
-                expect(res).to.have.status(404);
+                expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('car not found');
+                expect(res.body.message).to.deep.equal('invalid car id');
                 done();
             });
     });
@@ -528,7 +574,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
             .patch('/api/v1/car/400/price')
             .set('Authorization', myToken)
             .send({
-                price: 4000000
+                newPrice: 4000000
             })
             .end((error, res) => {
                 if (error) return done(error);
@@ -541,20 +587,20 @@ describe('PATCH/api/v1/car/:carId/price', () => {
             });
     });
 
-    it('should return a 404 status if carId is not a valid integer', (done) => {
+    it('should return a 422 status if carId is not a valid integer', (done) => {
         chai.request(app)
             .patch('/api/v1/car/urusnsjd/price')
             .set('Authorization', myToken)
             .send({
-                price: 4000000
+                newPrice: 4000000
             })
             .end((error, res) => {
                 if (error) return done(error);
                 expect(res).to.be.an('object');
-                expect(res).to.have.status(404);
+                expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('car not found');
+                expect(res.body.message).to.deep.equal('invalid car id');
                 done();
             });
     });
@@ -564,7 +610,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
             .patch('/api/v1/car/6/price')
             .set('Authorization', myToken)
             .send({
-                price: 4000000
+                newPrice: 4000000
             })
             .end((error, res) => {
                 if (error) return done(error);
@@ -577,7 +623,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
             });
     });
 
-    it('should return a 422 error if price was not provided', (done) => {
+    it('should return a 422 error if new price was not provided', (done) => {
         chai.request(app)
             .patch('/api/v1/car/5/price')
             .set('Authorization', myToken)
@@ -587,7 +633,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('price was not specified');
+                expect(res.body.message).to.deep.equal('new price was not specified');
                 done();
             });
     });
@@ -597,7 +643,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
             .patch('/api/v1/car/5/price')
             .set('Authorization', myToken)
             .send({
-                price: 'hdhdhd'
+                newPrice: 'hdhdhd'
             })
             .end((error, res) => {
                 if (error) return done(error);
@@ -605,7 +651,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('invalid price');
+                expect(res.body.message).to.deep.equal('invalid new price');
                 done();
             });
     });
@@ -615,7 +661,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
             .patch('/api/v1/car/5/price')
             .set('Authorization', myToken)
             .send({
-                price: 9000000000000000
+                newPrice: 9000000000000000
             })
             .end((error, res) => {
                 if (error) return done(error);
@@ -623,7 +669,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('whoa! that is expensive');
+                expect(res.body.message).to.deep.equal('whoa! that new price is quite high');
                 done();
             });
     });
@@ -633,7 +679,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
             .patch('/api/v1/car/5/price')
             .set('Authorization', myToken)
             .send({
-                price: 4000000
+                newPrice: 4000000
             })
             .end((error, res) => {
                 if (error) done(error);
@@ -665,17 +711,17 @@ describe('GET /api/v1/car/:carId', () => {
             });
     });
 
-    it('Should return a 404 status if carId is not an integer', (done) => {
+    it('Should return a 422 status if carId is not an integer', (done) => {
         chai.request(app)
             .get('/api/v1/car/string')
             .set('Authorization', myToken)
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
-                expect(res).to.have.status(404);
+                expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('car not found');
+                expect(res.body.message).to.deep.equal('invalid car id');
                 done();
             });
     });
@@ -781,11 +827,11 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(422);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('invalid query');
+                expect(res.body.message).to.deep.equal('invalid query: notValid');
                 done();
             });
     });
-    it('should return a 404 status if min price is not a number', (done) => {
+    it('should return a 422 status if min price is not a number', (done) => {
         chai.request(app)
             .get('/api/v1/car')
             .query({
@@ -797,14 +843,14 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
-                expect(res).to.have.status(404);
+                expect(res).to.have.status(422);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('we could not find any car that matches your search');
+                expect(res.body.message).to.deep.equal('invalid minimum price');
                 done();
             });
     });
 
-    it('should return a 404 status if max price is not a number', (done) => {
+    it('should return a 422 status if max price is not a number', (done) => {
         chai.request(app)
             .get('/api/v1/car')
             .query({
@@ -816,9 +862,29 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
-                expect(res).to.have.status(404);
+                expect(res).to.have.status(422);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('we could not find any car that matches your search');
+                expect(res.body.message).to.deep.equal('invalid maximum price');
+                done();
+            });
+    });
+
+    it('should return a 422 state if status is neither new nor used', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({
+                status: 'available',
+                min_price: 3000000,
+                max_price: 9000000,
+                state: 'any'
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('car state can either be new or used');
                 done();
             });
     });
@@ -937,6 +1003,26 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
                 done();
             });
     });
+
+    it('should return a 404 status even if no car matches search condition', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({
+                status: 'available',
+                min_price: 2000000000,
+                max_price: 8000000000000,
+                state: 'new'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('we could not find any car that matches your search');
+                done();
+            });
+    });
 });
 
 describe('DELETE /api/v1/car/:carId', () => {
@@ -977,21 +1063,21 @@ describe('DELETE /api/v1/car/:carId', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(404);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car not found');
+                expect(res.body.message).to.deep.equal('car not found');
                 done();
             });
     });
 
-    it('should return a 404 status if carId is not an integer', (done) => {
+    it('should return a 422 status if carId is not an integer', (done) => {
         chai.request(app)
             .delete('/api/v1/car/string')
             .set('Authorization', adminToken)
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
-                expect(res).to.have.status(404);
+                expect(res).to.have.status(422);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('car not found');
+                expect(res.body.message).to.deep.equal('invalid car id');
                 done();
             });
     });
