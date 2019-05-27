@@ -54,7 +54,7 @@ describe('POST /api/v1/flag', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(404);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car not found');
+                expect(res.body.message).to.deep.equal('car not found');
                 done();
             });
     });
@@ -72,7 +72,7 @@ describe('POST /api/v1/flag', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(404);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car not found');
+                expect(res.body.message).to.deep.equal('car not found');
                 done();
             });
     });
