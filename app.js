@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(stringFormater);
 
 app.use('/api/v1/', userRouter, carRouter, orderRouter, flagRouter);
+
 app.all('/*', (req, res) => {
     res.status(404).json({
         status: 'error',
