@@ -4,10 +4,9 @@ import upload from '../config/multer.config';
 import imageUploader from '../middleware/imageUploader';
 import {
     validatePostCar,
-    validatePatchStatus,
+    validateIdParam,
     validatePatchPrice,
-    validateGetCar,
-    validateDeleteCar
+    validateQueries
 } from '../middleware/vaidators/car';
 import {
     postCarAd,
@@ -29,10 +28,10 @@ router.post('/car',
     imageUploader,
     postCarAd);
 
-router.get('/car', getCar);
-router.patch('/car/:carId/status', verifyToken, validatePatchStatus, updateStatus);
+router.get('/car', validateQueries, getCar);
+router.patch('/car/:carId/status', verifyToken, validateIdParam, updateStatus);
 router.patch('/car/:carId/price', verifyToken, validatePatchPrice, updatePrice);
-router.get('/car/:carId', validateGetCar, getSpecificCar);
-router.delete('/car/:carId', verifyToken, validateDeleteCar, deleteAd);
+router.get('/car/:carId', validateIdParam, getSpecificCar);
+router.delete('/car/:carId', verifyToken, validateIdParam, deleteAd);
 
 export default router;
