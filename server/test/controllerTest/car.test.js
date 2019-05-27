@@ -42,7 +42,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Form enctype has to be "multipart/form-data"');
+                expect(res.body.message).to.deep.equal('form enctype has to be "multipart/form-data"');
                 done();
             });
     });
@@ -66,7 +66,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('We currently do not support multiple images upload');
+                expect(res.body.message).to.deep.equal('we currently do not support multiple images upload');
                 done();
             });
     });
@@ -89,7 +89,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Unsupported image type');
+                expect(res.body.message).to.deep.equal('unsupported image type');
                 done();
             });
     });
@@ -112,7 +112,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Image size exceeds 5mb limit');
+                expect(res.body.message).to.deep.equal('image size exceeds 5mb limit');
                 done();
             });
     });
@@ -134,7 +134,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Please upload a display image');
+                expect(res.body.message).to.deep.equal('please upload a display image');
                 done();
             });
     });
@@ -156,7 +156,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Please specify the state of the automobile (new/used)');
+                expect(res.body.message).to.deep.equal('please specify the state of the automobile (new/used)');
                 done();
             });
     });
@@ -179,7 +179,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car state can either be "new" or "used"');
+                expect(res.body.message).to.deep.equal('car state can either be "new" or "used"');
                 done();
             });
     });
@@ -201,7 +201,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Price was not specified');
+                expect(res.body.message).to.deep.equal('price was not specified');
                 done();
             });
     });
@@ -224,7 +224,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Invalid price');
+                expect(res.body.message).to.deep.equal('invalid price');
                 done();
             });
     });
@@ -247,7 +247,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Wow! That is expensive');
+                expect(res.body.message).to.deep.equal('whoa! that is expensive');
                 done();
             });
     });
@@ -269,7 +269,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Manufacturer was not specified');
+                expect(res.body.message).to.deep.equal('manufacturer was not specified');
                 done();
             });
     });
@@ -292,7 +292,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal("Manufacturer's name exceeds the maximum length of 30");
+                expect(res.body.message).to.deep.equal("manufacturer's name exceeds the maximum length of 30");
                 done();
             });
     });
@@ -314,7 +314,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Model was not specified');
+                expect(res.body.message).to.deep.equal('model was not specified');
                 done();
             });
     });
@@ -337,7 +337,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal("Model's name exceeds the maximum length of 30");
+                expect(res.body.message).to.deep.equal("model exceeds the maximum length of 30");
                 done();
             });
     });
@@ -359,7 +359,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Body type was not specified');
+                expect(res.body.message).to.deep.equal('body type was not specified');
                 done();
             });
     });
@@ -405,7 +405,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Body type has invalid characters');
+                expect(res.body.message).to.deep.equal('body type has invalid characters');
                 done();
             });
     });
@@ -428,7 +428,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Body type exceeds the maximum length of 20');
+                expect(res.body.message).to.deep.equal('body type exceeds the maximum length of 20');
                 done();
             });
     });
@@ -484,7 +484,7 @@ describe('PATCH /api/v1/car/:carId/status', () => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car not found');
+                expect(res.body.message).to.deep.equal('car not found');
                 done();
             });
     });
@@ -499,7 +499,7 @@ describe('PATCH /api/v1/car/:carId/status', () => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car not found');
+                expect(res.body.message).to.deep.equal('car not found');
                 done();
             });
     });
@@ -536,7 +536,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car not found');
+                expect(res.body.message).to.deep.equal('car not found');
                 done();
             });
     });
@@ -554,7 +554,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car not found');
+                expect(res.body.message).to.deep.equal('car not found');
                 done();
             });
     });
@@ -572,7 +572,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car not found');
+                expect(res.body.message).to.deep.equal('car not found');
                 done();
             });
     });
@@ -587,7 +587,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Price was not specified');
+                expect(res.body.message).to.deep.equal('price was not specified');
                 done();
             });
     });
@@ -605,7 +605,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Invalid price');
+                expect(res.body.message).to.deep.equal('invalid price');
                 done();
             });
     });
@@ -623,7 +623,7 @@ describe('PATCH/api/v1/car/:carId/price', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Wow! That is expensive');
+                expect(res.body.message).to.deep.equal('whoa! that is expensive');
                 done();
             });
     });
@@ -660,7 +660,7 @@ describe('GET /api/v1/car/:carId', () => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car not found');
+                expect(res.body.message).to.deep.equal('car not found');
                 done();
             });
     });
@@ -675,7 +675,7 @@ describe('GET /api/v1/car/:carId', () => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car not found');
+                expect(res.body.message).to.deep.equal('car not found');
                 done();
             });
     });
@@ -724,7 +724,7 @@ describe('GET /api/v1/car?status=available', () => {
                 expect(res).to.have.status(403);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('You do not have access to this resource');
+                expect(res.body.message).to.deep.equal('you do not have access to this resource');
                 done();
             });
     });
@@ -781,7 +781,7 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(422);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Invalid query');
+                expect(res.body.message).to.deep.equal('invalid query');
                 done();
             });
     });
@@ -799,7 +799,7 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(404);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('We could not find any car that matches your search');
+                expect(res.body.message).to.deep.equal('we could not find any car that matches your search');
                 done();
             });
     });
@@ -818,7 +818,7 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(404);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('We could not find any car that matches your search');
+                expect(res.body.message).to.deep.equal('we could not find any car that matches your search');
                 done();
             });
     });
@@ -877,7 +877,7 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
                 expect(res).to.have.status(403);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('You do not have access to this resource');
+                expect(res.body.message).to.deep.equal('you do not have access to this resource');
                 done();
             });
     });
@@ -897,7 +897,7 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
                 expect(res).to.have.status(403);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('You do not have access to this resource');
+                expect(res.body.message).to.deep.equal('you do not have access to this resource');
                 done();
             });
     });
@@ -912,7 +912,7 @@ describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue
                 expect(res).to.have.status(403);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('You do not have access to this resource');
+                expect(res.body.message).to.deep.equal('you do not have access to this resource');
                 done();
             });
     });
@@ -963,7 +963,7 @@ describe('DELETE /api/v1/car/:carId', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(403);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('You do not have access to this resource');
+                expect(res.body.message).to.deep.equal('you do not have access to this resource');
                 done();
             });
     });
@@ -991,7 +991,7 @@ describe('DELETE /api/v1/car/:carId', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(404);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car not found');
+                expect(res.body.message).to.deep.equal('car not found');
                 done();
             });
     });
@@ -1005,7 +1005,7 @@ describe('DELETE /api/v1/car/:carId', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(200);
                 expect(res.body.status).to.deep.equal('success');
-                expect(res.body.message).to.deep.equal('Car Ad successfully deleted');
+                expect(res.body.message).to.deep.equal('car ad was successfully deleted');
                 done();
             });
     });
