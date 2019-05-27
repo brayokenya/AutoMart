@@ -10,7 +10,7 @@ const flagAd = (req, res) => {
     } = req.body;
 
     const car = carQueries.findCarById(carId);
-    if (!car) return erroMessage(res, 404, 'Car not found');
+    if (!car) return erroMessage(res, 404, 'car not found');
     const newFlag = flagQueries
         .createFlag(carId, reason, description, reportedBy);
     return res.status(201).json({
