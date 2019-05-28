@@ -8,6 +8,7 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 let myToken;
+let adminToken;
 
 before((done) => {
     chai.request(app)
@@ -29,7 +30,7 @@ describe('POST /api/v1/car', () => {
             .post('/api/v1/car')
             .set('Authorization', myToken)
             .type('form')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'used')
             .field('price', 300000)
             .field('manufacturer', 'toyota')
@@ -41,7 +42,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Form enctype has to be "multipart/form-data"');
+                expect(res.body.message).to.deep.equal('form enctype has to be "multipart/form-data"');
                 done();
             });
     });
@@ -52,7 +53,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .attach('displayImage', fs.readFileSync('./server/test/assets/honda.jpg'), 'honda.png')
             .field('state', 'used')
             .field('price', 300000)
@@ -65,7 +66,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('We currently do not support multiple images upload');
+                expect(res.body.message).to.deep.equal('we currently do not support multiple images upload');
                 done();
             });
     });
@@ -88,7 +89,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Unsupported image type');
+                expect(res.body.message).to.deep.equal('unsupported image type');
                 done();
             });
     });
@@ -111,7 +112,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Image size exceeds 5mb limit');
+                expect(res.body.message).to.deep.equal('image size exceeds 5mb limit');
                 done();
             });
     });
@@ -133,7 +134,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Please upload a display image');
+                expect(res.body.message).to.deep.equal('please upload a display image');
                 done();
             });
     });
@@ -144,7 +145,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('price', 300000)
             .field('manufacturer', 'toyota')
             .field('model', 'corolla')
@@ -155,7 +156,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Please specify the state of the automobile (new/used)');
+                expect(res.body.message).to.deep.equal('please specify the state of the automobile (new/used)');
                 done();
             });
     });
@@ -166,7 +167,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new and used')
             .field('price', 300000)
             .field('manufacturer', 'toyota')
@@ -178,7 +179,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car state can either be "new" or "used"');
+                expect(res.body.message).to.deep.equal('car state can either be "new" or "used"');
                 done();
             });
     });
@@ -189,7 +190,7 @@ describe('POST /api/v1/car', () => {
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
             .type('form')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('manufacturer', 'toyota')
             .field('model', 'corolla')
@@ -200,7 +201,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Price was not specified');
+                expect(res.body.message).to.deep.equal('price was not specified');
                 done();
             });
     });
@@ -211,7 +212,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', '4893y9')
             .field('manufacturer', 'toyota')
@@ -223,7 +224,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Invalid price');
+                expect(res.body.message).to.deep.equal('invalid price');
                 done();
             });
     });
@@ -234,7 +235,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 2000000000000000)
             .field('manufacturer', 'toyota')
@@ -246,7 +247,30 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Wow! That is expensive');
+                expect(res.body.message).to.deep.equal('whoa! that price is quite high');
+                done();
+            });
+    });
+
+    it('should return a 422 error if price has more than two decimal places', (done) => {
+        chai.request(app)
+            .post('/api/v1/car')
+            .type('form')
+            .set('Authorization', myToken)
+            .set('enctype', 'multipart/form-data')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
+            .field('state', 'new')
+            .field('price', 200000.9999)
+            .field('manufacturer', 'toyota')
+            .field('model', 'corolla')
+            .field('bodyType', 'sedan')
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('price has more than two decimal places');
                 done();
             });
     });
@@ -257,7 +281,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('model', 'corolla')
@@ -268,7 +292,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Manufacturer was not specified');
+                expect(res.body.message).to.deep.equal('manufacturer was not specified');
                 done();
             });
     });
@@ -279,7 +303,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('manufacturer', 'toyotaaaaaaaaaaaaassddssddsssddssdssdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
@@ -291,7 +315,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal("Manufacturer's name exceeds the maximum length of 30");
+                expect(res.body.message).to.deep.equal("manufacturer exceeds the maximum length of 30");
                 done();
             });
     });
@@ -302,7 +326,30 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
+            .field('state', 'new')
+            .field('price', 300000000)
+            .field('manufacturer', 'toyota')
+            .field('model', '(*gdbsk)')
+            .field('bodyType', 'sedan')
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('model has invalid characters');
+                done();
+            });
+    });
+
+    it('should return a 422 error if model has invalid characters', (done) => {
+        chai.request(app)
+            .post('/api/v1/car')
+            .type('form')
+            .set('Authorization', myToken)
+            .set('enctype', 'multipart/form-data')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('manufacturer', 'toyota')
@@ -313,7 +360,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Model was not specified');
+                expect(res.body.message).to.deep.equal('model was not specified');
                 done();
             });
     });
@@ -324,7 +371,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('manufacturer', 'toyota')
@@ -336,7 +383,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal("Model's name exceeds the maximum length of 30");
+                expect(res.body.message).to.deep.equal("model exceeds the maximum length of 30");
                 done();
             });
     });
@@ -347,7 +394,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('manufacturer', 'toyota')
@@ -358,7 +405,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Body type was not specified');
+                expect(res.body.message).to.deep.equal('body type was not specified');
                 done();
             });
     });
@@ -369,7 +416,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('manufacturer', 'toyota')
@@ -392,7 +439,7 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('manufacturer', 'toyota')
@@ -404,18 +451,18 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Body type has invalid characters');
+                expect(res.body.message).to.deep.equal('body type has invalid characters');
                 done();
             });
     });
 
-    it('should return a 422 error if body type is longer than 20 characters', (done) => {
+    it('should return a 422 error if body type is longer than 25 characters', (done) => {
         chai.request(app)
             .post('/api/v1/car')
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'new')
             .field('price', 300000000)
             .field('manufacturer', 'toyota')
@@ -427,31 +474,7 @@ describe('POST /api/v1/car', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Body type exceeds the maximum length of 20');
-                done();
-            });
-    });
-
-    it('should return a 201 status if everything but status or date is specified', (done) => {
-        chai.request(app)
-            .post('/api/v1/car')
-            .type('form')
-            .set('Authorization', myToken)
-            .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
-            .field('state', 'used')
-            .field('price', 300000)
-            .field('manufacturer', 'toyota')
-            .field('model', 'corolla')
-            .field('bodyType', 'sedan')
-            .end((error, res) => {
-                if (error) done(error);
-                expect(res).to.be.an('object');
-                expect(res).to.have.status(201);
-                expect(res.body).to.have.keys('status', 'data');
-                expect(res.body.status).to.deep.equal('success');
-                expect(res.body.data).to.have
-                    .keys('id', 'manufacturer', 'price', 'state', 'model', 'bodyType', 'owner', 'status', 'imageUrl', 'createdOn');
+                expect(res.body.message).to.deep.equal('body type exceeds the maximum length of 25');
                 done();
             });
     });
@@ -462,14 +485,12 @@ describe('POST /api/v1/car', () => {
             .type('form')
             .set('Authorization', myToken)
             .set('enctype', 'multipart/form-data')
-            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.png')
+            .attach('displayImage', fs.readFileSync('./server/test/assets/toyota.jpg'), 'toyota.jpg')
             .field('state', 'used')
             .field('price', 300000)
             .field('manufacturer', 'toyota')
             .field('model', 'corolla')
             .field('bodyType', 'sedan')
-            .field('status', 'sold')
-            .field('createdOn', '20-07-2019')
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
@@ -478,15 +499,12 @@ describe('POST /api/v1/car', () => {
                 expect(res.body.status).to.deep.equal('success');
                 expect(res.body.data).to.have
                     .keys('id', 'manufacturer', 'price', 'state', 'model', 'bodyType', 'owner', 'status', 'imageUrl', 'createdOn');
-                expect(res.body.data.status).to.deep.equal('sold');
                 done();
             });
     });
-
 });
 
 describe('PATCH /api/v1/car/:carId/status', () => {
-
     it('should return a 404 error if car does not exist', (done) => {
         chai.request(app)
             .patch('/api/v1/car/300000000/status')
@@ -497,7 +515,7 @@ describe('PATCH /api/v1/car/:carId/status', () => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car not found');
+                expect(res.body.message).to.deep.equal('car not found');
                 done();
             });
     });
@@ -512,22 +530,22 @@ describe('PATCH /api/v1/car/:carId/status', () => {
                 expect(res).to.have.status(404);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car not found');
+                expect(res.body.message).to.deep.equal('car not found');
                 done();
             });
     });
 
-    it('should return a 404 error if car id is not an integer', (done) => {
+    it('should return a 422 error if car id is not an integer', (done) => {
         chai.request(app)
             .patch('/api/v1/car/notcar/status')
             .set('Authorization', myToken)
             .end((error, res) => {
                 if (error) done(error);
                 expect(res).to.be.an('object');
-                expect(res).to.have.status(404);
+                expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Car not found');
+                expect(res.body.message).to.deep.equal('invalid car id');
                 done();
             });
     });
@@ -545,6 +563,554 @@ describe('PATCH /api/v1/car/:carId/status', () => {
                 expect(res.body.data).to.have
                     .keys('id', 'owner', 'state', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
                 expect(res.body.data.status).to.deep.equal('sold');
+                done();
+            });
+    });
+});
+
+describe('PATCH/api/v1/car/:carId/price', () => {
+    it('should return a 404 status if car is not found', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/400/price')
+            .set('Authorization', myToken)
+            .send({
+                newPrice: 4000000
+            })
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('car not found');
+                done();
+            });
+    });
+
+    it('should return a 422 status if carId is not a valid integer', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/urusnsjd/price')
+            .set('Authorization', myToken)
+            .send({
+                newPrice: 4000000
+            })
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('invalid car id');
+                done();
+            });
+    });
+
+    it('should return a 404 error if car does not belong to user', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/6/price')
+            .set('Authorization', myToken)
+            .send({
+                newPrice: 4000000
+            })
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('car not found');
+                done();
+            });
+    });
+
+    it('should return a 422 error if new price was not provided', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/5/price')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('new price was not specified');
+                done();
+            });
+    });
+
+    it('should return a 422 error if price is not an integer', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/5/price')
+            .set('Authorization', myToken)
+            .send({
+                newPrice: 'hdhdhd'
+            })
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('invalid new price');
+                done();
+            });
+    });
+
+    it('should return a 422 error if price has length greater than 12', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/5/price')
+            .set('Authorization', myToken)
+            .send({
+                newPrice: 9000000000000000
+            })
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('whoa! that new price is quite high');
+                done();
+            });
+    });
+
+    it('should return a 200 status if price was successfully updated', (done) => {
+        chai.request(app)
+            .patch('/api/v1/car/5/price')
+            .set('Authorization', myToken)
+            .send({
+                newPrice: 4000000
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data).to.have
+                    .keys('id', 'owner', 'state', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
+                expect(res.body.data.price).to.deep.equal(4000000);
+                done();
+            });
+    });
+});
+
+describe('GET /api/v1/car/:carId', () => {
+    it('Should return a 404 status if car does not exist', (done) => {
+        chai.request(app)
+            .get('/api/v1/car/33333')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('car not found');
+                done();
+            });
+    });
+
+    it('Should return a 422 status if carId is not an integer', (done) => {
+        chai.request(app)
+            .get('/api/v1/car/string')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('invalid car id');
+                done();
+            });
+    });
+
+    it('Should return a 200 status without an authorization token', (done) => {
+        chai.request(app)
+            .get('/api/v1/car/4')
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data).to.have
+                    .keys('id', 'owner', 'state', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
+                done();
+            });
+    });
+
+    it('Should return a 200 status when an authorization token is provided', (done) => {
+        chai.request(app)
+            .get('/api/v1/car/4')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data).to.have
+                    .keys('id', 'owner', 'state', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
+                done();
+            });
+    });
+});
+
+describe('GET /api/v1/car?status=available', () => {
+    it('should return a 403 error if status query is not available', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({ status: 'notavailable' })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(403);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('you do not have access to this resource');
+                done();
+            });
+    });
+
+    it('should return available cars when authorization token is not provided', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({ status: 'available' })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data).to.be.an('array');
+                expect(res.body.data[0]).to.have
+                    .keys('id', 'owner', 'state', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
+                done();
+            });
+    });
+
+    it('should return available cars when authorization token is provided', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({ status: 'available' })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data).to.be.an('array');
+                expect(res.body.data[0]).to.have
+                    .keys('id', 'owner', 'state', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
+                done();
+            });
+    });
+});
+
+describe('GET /api/v1/car?status=available&min_price=XXXvalue&max_price=XXXvalue', () => {
+    it('should return a 403 status if query is invalid', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({
+                status: 'available',
+                min_price: 'string',
+                max_price: 3000000,
+                notValid: 'somestring'
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('invalid query: notValid');
+                done();
+            });
+    });
+    it('should return a 422 status if min price is not a number', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({
+                status: 'available',
+                min_price: 'string',
+                max_price: 3000000
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('invalid minimum price');
+                done();
+            });
+    });
+
+    it('should return a 422 status if max price is not a number', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({
+                status: 'available',
+                min_price: 3000000,
+                max_price: 'another string'
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('invalid maximum price');
+                done();
+            });
+    });
+
+    it('should return a 422 state if status is neither new nor used', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({
+                status: 'available',
+                min_price: 3000000,
+                max_price: 9000000,
+                state: 'any'
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('car state can either be new or used');
+                done();
+            });
+    });
+
+    it('should set minimum pice to zero if not defined', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({
+                status: 'available',
+                max_price: 30000000
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data[0]).to.have
+                    .keys('id', 'owner', 'state', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
+                done();
+            });
+    });
+
+    it('should set maximum price to Infinity if it not defined', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({
+                status: 'available',
+                min_price: 1000000
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data[0]).to.have
+                    .keys('id', 'owner', 'state', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
+                done();
+            });
+    });
+
+    it('should return a 403 status if status is not defined and user is not an admin', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({
+                min_price: 1000000,
+                max_price: 30000000
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(403);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('you do not have access to this resource');
+                done();
+            });
+    });
+
+    it('should return a 403 status if status is not equal to available', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({
+                status: 'notavailable',
+                min_price: 1000000,
+                max_price: 30000000
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(403);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('you do not have access to this resource');
+                done();
+            });
+    });
+
+    it('should return a 403 status no query parameter is supplied and user is not an admin', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(403);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('you do not have access to this resource');
+                done();
+            });
+    });
+
+    it('should return a 200 status even if user is not authenticated', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({
+                status: 'available',
+                min_price: 200000,
+                max_price: 8000000,
+                state: 'new'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data[0]).to.have
+                    .keys('id', 'owner', 'state', 'status', 'price', 'manufacturer', 'model', 'bodyType', 'imageUrl', 'createdOn');
+                done();
+            });
+    });
+
+    it('should return a 404 status even if no car matches search condition', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .query({
+                status: 'available',
+                min_price: 2000000000,
+                max_price: 8000000000000,
+                state: 'new'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('we could not find any car that matches your search');
+                done();
+            });
+    });
+});
+
+describe('DELETE /api/v1/car/:carId', () => {
+    before((done) => {
+        chai.request(app)
+            .post('/api/v1/auth/signin')
+            .send({
+                email: 'johndoe@gmail.com',
+                password: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                adminToken = res.body.data.token;
+                done();
+            });
+    });
+
+    it('should return a 403 status if user is not an admin', (done) => {
+        chai.request(app)
+            .delete('/api/v1/car/3')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(403);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('you do not have access to this resource');
+                done();
+            });
+    });
+
+    it('should return a 404 status if car does not exist', (done) => {
+        chai.request(app)
+            .delete('/api/v1/car/39999')
+            .set('Authorization', adminToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('car not found');
+                done();
+            });
+    });
+
+    it('should return a 422 status if carId is not an integer', (done) => {
+        chai.request(app)
+            .delete('/api/v1/car/string')
+            .set('Authorization', adminToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('invalid car id');
+                done();
+            });
+    });
+
+    it('should return a 200 status if car was successfully deleted', (done) => {
+        chai.request(app)
+            .delete('/api/v1/car/6')
+            .set('Authorization', adminToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.message).to.deep.equal('car ad was successfully deleted');
+                done();
+            });
+    });
+});
+
+describe('GET /api/v1/car', () => {
+    it('should return a list of all cars, whether sold or not', (done) => {
+        chai.request(app)
+            .get('/api/v1/car')
+            .set('Authorization', adminToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data.find(datum => datum.status === 'sold'))
+                    .to.be.an('object');
+                expect(res.body.data.find(datum => datum.status === 'available'))
+                    .to.be.an('object');
                 done();
             });
     });

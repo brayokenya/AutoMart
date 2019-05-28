@@ -1,11 +1,23 @@
 import users from '../models/mockDb/user';
 import cars from '../models/mockDb/car';
 import orders from '../models/mockDb/order';
+import flags from '../models/mockDb/flag';
 
 export const userQueries = {
     findUserByEmail(email) {
         return users.find(user => user.email === email);
     },
+
+    findUserById(userId) {
+        return users.find(user => user.id === userId);
+    },
+
+    updatePassword(userId, newPassword) {
+        const user = this.findUserById(userId);
+        user.password = newPassword;
+        this.updateEntity(user);
+    },
+
     createUser(userObject) {
         const newUserObject = {
             id: users.length,
@@ -14,6 +26,11 @@ export const userQueries = {
         };
         users.push(newUserObject);
         return newUserObject;
+    },
+
+    updateEntity(userObject) {
+        const userIndex = users.indexOf(userObject);
+        cars.splice(userIndex, 1, userObject);
     }
 };
 
@@ -22,7 +39,9 @@ export const carQueries = {
     createCar(carObject) {
         const newCar = {
             id: cars.length,
-            ...carObject
+            ...carObject,
+            status: 'available',
+            createdOn: Date()
         };
         cars.push(newCar);
         return newCar;
@@ -33,6 +52,33 @@ export const carQueries = {
         return foundCar;
     },
 
+    findAvailableCars(queryObject) {
+        const getQueryValue = (car, query, string) => {
+            if (!query) return car[string];
+            return query;
+        };
+        const {
+            min_price: minPrice = 0,
+            max_price: maxPrice = Infinity,
+            state,
+            make: manufacturer,
+            body_type: bodyType
+        } = queryObject;
+
+
+        const availableCars = cars.filter(car => (
+            car.status === 'available'
+            && car.price >= minPrice
+            && car.price <= maxPrice
+            && car.manufacturer === getQueryValue(car, manufacturer, 'manufacturer')
+            && car.state === getQueryValue(car, state, 'state')
+            && car.bodyType === getQueryValue(car, bodyType, 'bodyType')
+        ));
+        return availableCars;
+    },
+    findAllCars() {
+        return cars;
+    },
     updateProp(carId, property, value) {
         const car = this.findCarById(carId);
         car[property] = value;
@@ -43,6 +89,13 @@ export const carQueries = {
     updateEntity(newCarObject) {
         const carIndex = cars.indexOf(newCarObject);
         cars.splice(carIndex, 1, newCarObject);
+    },
+
+    deleteCar(carObject) {
+        const carIndex = cars.indexOf(carObject);
+        cars.splice(carIndex, 1);
+        // returns true if car has been deleted and false if it hasn't
+        return !cars.indexOf(carObject);
     }
 };
 
@@ -70,7 +123,23 @@ export const orderQueries = {
     },
 
     updateEntity(newOrderIndex) {
-        const orderIndex = cars.indexOf(newOrderIndex);
-        cars.splice(orderIndex, 1, newOrderIndex);
+        const orderIndex = orders.indexOf(newOrderIndex);
+        orders.splice(orderIndex, 1, newOrderIndex);
+    }
+};
+
+export const flagQueries = {
+    createFlag(carId, reason, description, reportedBy) {
+        const newFlag = {
+            id: flags.length,
+            carId,
+            reason,
+            description,
+            reportedBy,
+            createdOn: Date()
+        };
+
+        flags.push(newFlag);
+        return newFlag;
     }
 };
