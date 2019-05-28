@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
 import stringFormater from './server/middleware/stringFormater';
@@ -14,12 +15,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(stringFormater);
 
+app.get('/', (req, res) => {
+    res.status(301).redirect('/docs');
+});
+
+app.get('/docs', (req, res) => {
+    res.status(200)
+        .sendFile(path.resolve('documentation.html'));
+});
+
 app.use('/api/v1/', userRouter, carRouter, orderRouter, flagRouter);
 
 app.all('/*', (req, res) => {
     res.status(404).json({
         status: 'error',
-        message: 'page not found'
+        message: 'this api endpoint does not exist'
     });
 });
 
