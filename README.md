@@ -31,6 +31,12 @@ Auto Mart is an online marketplace for automobiles of diverse makes, model or bo
 - User can view all new unsold cars.
 
 
+## Links
+- UI Templates can be found [here](https://o-osahon.github.io/AutoMart/UI/html/index.html)
+- APIs are hosted on Heroku [here](https://automart-app.herokuapp.com)
+- API documentation can be found [here](https://automart-app.herokuapp.com/docs)
+- This project is managed with Pivotal Tracker [here](https://www.pivotaltracker.com/n/projects/2345917)
+
 
 # Getting Started
 To have this application running on your computer, follow the following steps
@@ -50,14 +56,21 @@ To have this application running on your computer, follow the following steps
 - Set the following environment variables in your `.env` file:
 
     - `PORT` - An Integer specifying the PORT your application will run on.
+  
     - `SECRET_KEY` - A random string used for generation authorization tokens.
+  
     - `CLOUDINARY_URL` - A URL provided by [Cloudinary](https://cloudinary.com).
+  
     - `MAILGUN_API_KEY` - API key provided by [Mailgun](https://mailgun.com).
+  
     - `MAILGUN_DOMAIN` - A URL provided by  [Mailgun](https://mailgun.com).
-    - `APPLICATION_URL` - It should be formated thus:  ***http(s)://(localhost/live domain)(:port)(TLD)/api/v1*** eg:
-    
+  
+    - `APPLICATION_URL` - It should be formated thus:  http(s)://(host)(:port)(TLD)/api/v1 
+       Example:
+
  ```
     http://localhost:300/api/v1 or https://automart-app.herokuapp.com/api/v1
+
  ```
     
     
@@ -91,14 +104,6 @@ To have this application running on your computer, follow the following steps
 
 ### Coding Style
 - [AirBnB](https://github.com/airbnb/javascript)
-
-
-
-## Links
-- UI Templates can be found [here](https://o-osahon.github.io/AutoMart/UI/html/index.html)
-- APIs are hosted on [Heroku](https://heroku.com) [here](https://automart-app.herokuapp.com)
-- API documentation can be found [here](https://automart-app.herokuapp.com/docs)
-- This project is managed with [Pivotal Tracker](https://pivotaltracker.com) [here](https://www.pivotaltracker.com/n/projects/2345917)
 
 
 
