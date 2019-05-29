@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://automart-app.herokuapp.com/
+HOST: http://automart-app.herokuapp.com
 
 # AutoMart
 
@@ -15,13 +15,13 @@ This API endpoint creates a user account. It takes a JSON object.
     + Body
                 
 
-                    {
-                        "firstName": String,
-                        "lastName": String,
-                        "email": String,
-                        "password": String,
-                        "address": String
-                    }
+                {
+                    "firstName": String,
+                    "lastName": String,
+                    "email": String,
+                    "password": String,
+                    "address": String
+                }
 
 
 + Response 201 (application/json)
@@ -29,17 +29,17 @@ This API endpoint creates a user account. It takes a JSON object.
     + Body
 
 
-                    {
-                        "status": "success",
-                        "message": "welcome (user firstname)",
-                        "data": {
-                            "token": Json web token,
-                            "id": Integer (generated user id),
-                            "firstName": String,
-                            "lastName": String,
-                            "email": string
-                        }
+                {
+                    "status": "success",
+                    "message": "welcome (user firstname)",
+                    "data": {
+                        "token": Json web token,
+                        "id": Integer (generated user id),
+                        "firstName": String,
+                        "lastName": String,
+                        "email": string
                     }
+                }
 
 
 
@@ -51,10 +51,10 @@ This API endpoint logs in an existing user. It takes a JSON object
     + Body
 
     
-                    {
-                        "email": String,
-                        "password": String
-                    }
+                {
+                    "email": String,
+                    "password": String
+                }
 
 
 + Response 200 (application/json)
@@ -62,17 +62,17 @@ This API endpoint logs in an existing user. It takes a JSON object
     + Body
 
 
-                    {
-                        "status": "success",
-                        "message": "welcome back (user's first name)!",
-                        "data": {
-                            "token": Json web token,
-                            "id": Integer (References User Id),
-                            "firstName": String,
-                            "lastName": String,
-                            "email": string
-                        }
+                {
+                    "status": "success",
+                    "message": "welcome back (user's first name)!",
+                    "data": {
+                        "token": Json web token,
+                        "id": Integer (References User Id),
+                        "firstName": String,
+                        "lastName": String,
+                        "email": string
                     }
+                }
 
 
 ### Get Password Reset Link [POST /api/v1/auth/reset-password]
@@ -81,10 +81,10 @@ If user email exists, a password rest link will be sent to the user's email addr
 
     + Body 
 
-        
-                    {
-                        "email": String
-                    }
+    
+                {
+                    "email": String
+                }
 
 
 + Response 200 (application/json)
@@ -92,10 +92,10 @@ If user email exists, a password rest link will be sent to the user's email addr
     + Body
 
 
-                    {
-                        "status": "success",
-                        "message": "A password-reset link has been sent to your email"
-                    }
+                {
+                    "status": "success",
+                    "message": "A password-reset link has been sent to your email"
+                }
 
                     
 ### Reset Password [PATCH /api/v1/auth/reset-password/{token}]
@@ -106,10 +106,10 @@ If user email exists, a password rest link will be sent to the user's email addr
     + Body
 
 
-                    {
-                        "password": String (new password),
-                        "confirmPassword": String (must match password)
-                    }
+                {
+                    "password": String (new password),
+                    "confirmPassword": String (must match password)
+                }
 
 
 + Response 200 (application/json)
@@ -117,10 +117,10 @@ If user email exists, a password rest link will be sent to the user's email addr
     + Body
 
 
-                    {
-                        "status": "success",
-                        "message": "Password was successfully updated"
-                    }
+                {
+                    "status": "success",
+                    "message": "Password was successfully updated"
+                }
 
 
 ## Car [/api/v1/car]
@@ -137,12 +137,12 @@ This API endpoint creates an automobile advertisement. It takes a multipart/form
     + Body
         
 
-                    make: String (manufacturer's name)
-                    price: Float (maximum of two decimal places)
-                    sate: String (new/used)
-                    model: String
-                    bodyTpe: String (e.g. sedan, truck...)
-                    displayImage: File (.jpg, .jpeg or .png)
+                make: String (manufacturer's name)
+                price: Float (maximum of two decimal places)
+                sate: String (new/used)
+                model: String
+                bodyTpe: String (e.g. sedan, truck...)
+                displayImage: File (.jpg, .jpeg or .png)
                 
         
 
@@ -150,23 +150,23 @@ This API endpoint creates an automobile advertisement. It takes a multipart/form
 
     + Body
 
-                    {
-                        "status": "success",
-                        "data": {
-                            "id": Integer,
-                            "price": Float,
-                            "state": String,
-                            "model": string,
-                            "bodyType": String,
-                            "owner": Integer (References User Id),
-                            "status": String (available),
-                            "imageUrl": String,
-                            "createdOn": Date
-                        }
+                {
+                    "status": "success",
+                    "data": {
+                        "id": Integer,
+                        "price": Float,
+                        "state": String,
+                        "model": string,
+                        "bodyType": String,
+                        "owner": Integer (References User Id),
+                        "status": String (available),
+                        "imageUrl": String,
+                        "createdOn": Date
                     }
+                }
 
 
-### View All Car Ads [GET /api/v1/car{{?status}=available{?max_price}{?min_price}{?make}{?state}{?body_type}}]
+### View All Car Ads [GET /api/v1/car{?status}{?max_price}{?min_price}{?make}{?state}{?body_type}]
 This API endpoint retrieves available car advertisements. Users can filter result based on the cars' properties
 
 + Request
@@ -189,10 +189,10 @@ This API endpoint retrieves available car advertisements. Users can filter resul
     + Body
 
 
-                    {
-                        "status": "success",
-                        "data": Array
-                    }
+                {
+                    "status": "success",
+                    "data": Array
+                }
 
 
 
@@ -215,10 +215,10 @@ This api endpoint retrieves all car advertisements irrespective of whether they 
     + Body
 
         
-                    {
-                        "status": "success",
-                        "data": Array (array of car objects)
-                    }
+                {
+                    "status": "success",
+                    "data": Array (array of car objects)
+                }
 
 
 ### Mark Car As Sold [PATCH /api/v1/car/{carId}/status]
@@ -239,20 +239,20 @@ This API endpoint enables advertisers to mark their cars as sold
     + Body
 
                     
-                    {
-                        "status": "success",
-                        "data": {   
-                            "id": Integer,
-                            "price": Float,
-                            "state": String,
-                            "model": string,
-                            "bodyType": String,
-                            "owner": Integer (References User Id),
-                            "status": String (available),
-                            "imageUrl": String,
-                            "createdOn": Date
-                        }
+                {
+                    "status": "success",
+                    "data": {   
+                        "id": Integer,
+                        "price": Float,
+                        "state": String,
+                        "model": string,
+                        "bodyType": String,
+                        "owner": Integer (References User Id),
+                        "status": String (available),
+                        "imageUrl": String,
+                        "createdOn": Date
                     }
+                }
                     
                 
 
@@ -265,9 +265,9 @@ This API endpoint enables advertisers to update the price of their advertisments
     + Body
         
                
-                    {
-                        "newPrice": Integer
-                    }
+                {
+                    "newPrice": Integer
+                }
 
     + Headers
     
@@ -282,20 +282,20 @@ This API endpoint enables advertisers to update the price of their advertisments
     + Body
 
     
-                    {
-                        "status": "success",
-                        "data": {   
-                            "id": Integer,
-                            "price": Float,
-                            "state": String,
-                            "model": string,
-                            "bodyType": String,
-                            "owner": Integer (References User Id),
-                            "status": String,
-                            "imageUrl": String,
-                            "createdOn": Date
-                        }
+                {
+                    "status": "success",
+                    "data": {   
+                        "id": Integer,
+                        "price": Float,
+                        "state": String,
+                        "model": string,
+                        "bodyType": String,
+                        "owner": Integer (References User Id),
+                        "status": String,
+                        "imageUrl": String,
+                        "createdOn": Date
                     }
+                }
                     
         
 ### Find A Specific Car [GET /api/v1/car/{carId}]
@@ -316,21 +316,21 @@ This API endpoint allows users find one specific car
     + Body
     
                 
-                    {
-                        "status": "success",
-                        "data": {   
-                            "id": Integer (generated car id),
-                            "price": Float,
-                            "state": String,
-                            "model": string,
-                            "bodyType": String,
-                            "owner": Integer (References User Id),
-                            "status": String,
-                            "imageUrl": String,
-                            "createdOn": Date
-                        }
+                {
+                    "status": "success",
+                    "data": {   
+                        "id": Integer (generated car id),
+                        "price": Float,
+                        "state": String,
+                        "model": string,
+                        "bodyType": String,
+                        "owner": Integer (References User Id),
+                        "status": String,
+                        "imageUrl": String,
+                        "createdOn": Date
                     }
-                    
+                }
+                
 
 ### Delete A Specific Car (Admin Only) [DELETE /api/v1/car/{carId}]
 This API endpoint allows users find one specific car
@@ -350,10 +350,10 @@ This API endpoint allows users find one specific car
     + Body
 
     
-                    {
-                        "status": "success",
-                        "message": "car ad was successfully deleted"
-                    }
+                {
+                    "status": "success",
+                    "message": "car ad was successfully deleted"
+                }
                         
 
 
@@ -367,10 +367,10 @@ This API endpoint enables users to place purchase orders for car ads
     + Body
     
 
-                    {
+                {
                     "carId": Integer,
                     "offer": Float
-                    }
+                }
 
     + Headers
     
@@ -381,18 +381,18 @@ This API endpoint enables users to place purchase orders for car ads
     + Body 
     
                    
-                    {
-                        "status": "success",
-                        "data": {
-                            "id": Integer,
-                            "carId": Integer,
-                            "status": String (defaults to 'pending')
-                            "price": Float,
-                            "offer": Float,
-                            "buyer": Integer (References User Id),
-                            "createdOn": Date
-                        }
+                {
+                    "status": "success",
+                    "data": {
+                        "id": Integer,
+                        "carId": Integer,
+                        "status": String (defaults to 'pending')
+                        "price": Float,
+                        "offer": Float,
+                        "buyer": Integer (References User Id),
+                        "createdOn": Date
                     }
+                }
                 
 
 
@@ -404,9 +404,9 @@ This API endpoint enables users to update the offering price of their purchase o
     + Body
     
                     
-                    {
+                {
                     "newOffer": Float
-                    }
+                }
 
     + Headers
     
@@ -421,20 +421,20 @@ This API endpoint enables users to update the offering price of their purchase o
     + Body 
         
                     
-                    {
-                        "status": "success",
-                        "data": {
-                            "id": Integer,
-                            "carId": Integer,
-                            "status": String,
-                            "price": Float,
-                            "offer": Float,
-                            "buyer": Integer (References User Id),
-                            "createdOn": Date,
-                            "updatedOn": Date,
-                            "oldOffer": Integer
-                        }
+                {
+                    "status": "success",
+                    "data": {
+                        "id": Integer,
+                        "carId": Integer,
+                        "status": String,
+                        "price": Float,
+                        "offer": Float,
+                        "buyer": Integer (References User Id),
+                        "createdOn": Date,
+                        "updatedOn": Date,
+                        "oldOffer": Integer
                     }
+                }
                 
 
 ## Flags [/api/v1/flag]
@@ -446,12 +446,12 @@ This API endpoint enables users to report fraudulent advertisements
 
     + Body
     
-                   
-                    {
-                        "carId": Integer,
-                        "reason": String,
-                        "description": String
-                    }
+                
+                {
+                    "carId": Integer,
+                    "reason": String,
+                    "description": String
+                }
 
     + Headers
     
@@ -462,15 +462,15 @@ This API endpoint enables users to report fraudulent advertisements
     + Body 
     
         
-                    {
-                        "status": "success",
-                        "data": {
-                            "id": Integer,
-                            "reason": String,
-                            "description": String,
-                            "reportedBy": Integer (References User Id),
-                            "createdOn": Date
-                        }
+                {
+                    "status": "success",
+                    "data": {
+                        "id": Integer,
+                        "reason": String,
+                        "description": String,
+                        "reportedBy": Integer (References User Id),
+                        "createdOn": Date
                     }
-                
+                }
+            
 
