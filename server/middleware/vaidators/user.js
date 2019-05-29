@@ -1,65 +1,63 @@
 import isEmail from 'validator/lib/isEmail';
+import {
+    isInvalidName,
+    isNotSpecified,
+    pureString
+} from './validator.schema';
 import errorMessage from '../../helpers/responseMessages';
+
 
 const validateFirstName = (req, res, next) => {
     const { firstName } = req.body;
-    if (!firstName) {
-        return errorMessage(res, 422, 'First name was not provided');
-    }
-    const invalidCharacters = firstName.trim().match(/[^a-z]/i);
-
-    return invalidCharacters
-        ? errorMessage(res, 422, 'Invalid first name')
+    const message = isInvalidName(firstName, 'first name', 20)
+    return message
+        ? errorMessage(res, 422, message)
         : next();
 };
 
 const validateLastName = (req, res, next) => {
     const { lastName } = req.body;
-    if (!lastName) {
-        return errorMessage(res, 422, 'Last name was not provided');
-    }
-    const invalidCharacters = lastName.trim().match(/[^a-z]/i);
-
-    return invalidCharacters
-        ? errorMessage(res, 422, 'Invalid last name')
+    const message = isInvalidName(lastName, 'last name', 20)
+    return message
+        ? errorMessage(res, 422, message)
         : next();
 };
 
 const validateAddress = (req, res, next) => {
     const { address } = req.body;
-    if (!address) return errorMessage(res, 422, 'Address was not provided');
-    const invalidCharacters = address.trim().match(/[^a-z0-9,\s.]/i);
+    if (!address) return errorMessage(res, 422, 'address was not specified');
+    const invalidCharacters = address.match(/[^a-z0-9,\s.]/i);
 
     return invalidCharacters
-        ? errorMessage(res, 422, 'Invalid address')
+        ? errorMessage(res, 422, 'address has invalid characters')
         : next();
 };
 
 export const validateEmail = (req, res, next) => {
     const { email } = req.body;
     if (!email) {
-        return errorMessage(res, 422, 'Email was not provided');
+        return errorMessage(res, 422, 'email was not provided');
     }
 
     return isEmail(email.trim())
         ? next()
-        : errorMessage(res, 422, 'Invalid email');
+        : errorMessage(res, 422, 'invalid email');
 };
 
 const validatePassword = (req, res, next) => {
     if (!req.body.password) {
-        return errorMessage(res, 422, 'Password was not provided');
+        return errorMessage(res, 422, 'password was not provided');
     }
     return next();
 };
 const validateConfirmPassword = (req, res, next) => {
     const { password, confirmPassword } = req.body;
     if (!req.body.confirmPassword) {
-        return errorMessage(res, 422, 'Password was not confirmed');
+        return errorMessage(res, 422, 'password was not confirmed');
     }
     return password === confirmPassword
         ? next()
-        : errorMessage(res, 422, 'Passwords do not match');
+        : errorMessage(res, 422, 'passwords do not match');
 };
 
 export const validateSignup = [
