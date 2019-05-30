@@ -9,12 +9,7 @@ import generateMessageData from '../helpers/messageData';
 
 dotenv.config();
 
-export const signupUser = (req, res) => {
-    const existingUser = userQueries
-        .findUserByEmail(req.body.email);
-    if (existingUser) {
-        return errorMessage(res, 409, 'email is already in use');
-    }
+const createUser = (req) => {
     const {
         firstName,
         lastName,
@@ -30,6 +25,16 @@ export const signupUser = (req, res) => {
         password,
         address
     });
+    return newUser;
+};
+
+export const signupUser = (req, res) => {
+    const existingUser = userQueries
+        .findUserByEmail(req.body.email);
+    if (existingUser) {
+        return errorMessage(res, 409, 'email is already in use');
+    }
+    const newUser = createUser(req);
     const token = generateToken(newUser.id, newUser.email);
 
     return res.status(201).json({
@@ -39,7 +44,7 @@ export const signupUser = (req, res) => {
             token,
             id: newUser.id,
             firstName: newUser.firstName,
-            lastName,
+            lastName: newUser.lastName,
             email: newUser.email
         }
     });
