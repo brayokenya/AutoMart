@@ -47,6 +47,13 @@ export const money = {
 
 
 export const pureString = {
+    name(value, key) {
+        const invaliidCharacters = value.match(/[^a-z]/i);
+        return invaliidCharacters
+            ? `${key} has invalid characters`
+            : false;
+    },
+
     isInvalid(value, key) {
         const hasInvaliidCharacters = value.match(/[^a-z\s]/i);
         return hasInvaliidCharacters
@@ -67,4 +74,12 @@ export const pureString = {
             ? `${key} has invalid characters`
             : false;
     }
+};
+
+export const isInvalidName = (value, key, length) => {
+    const isInvalid = isNotSpecified(value, key)
+        || pureString.name(value, key)
+        || pureString.isTooLong(value, key, length);
+
+    return isInvalid;
 };

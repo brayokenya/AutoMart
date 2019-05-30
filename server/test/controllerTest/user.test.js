@@ -23,7 +23,7 @@ describe('POST /api/v1/auth/signup', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equals('First name was not provided');
+                expect(res.body.message).to.deep.equals('first name was not specified');
                 done();
             });
     });
@@ -43,7 +43,28 @@ describe('POST /api/v1/auth/signup', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equals('Invalid first name');
+                expect(res.body.message).to.deep.equals('first name has invalid characters');
+                done();
+            });
+    });
+
+    it('should return a 422 status if first name has more than 20 characters', (done) => {
+        chai.request(app)
+            .post('/api/v1/auth/signup')
+            .send({
+                firstName: 'somereallylongnamethatimadeupitistrulylong',
+                lastName: 'Doe',
+                email: 'desmondoe@gmail.com',
+                password: 'pass',
+                address: '17 Lagos'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equals('first name exceeds the maximum length of 20');
                 done();
             });
     });
@@ -62,7 +83,7 @@ describe('POST /api/v1/auth/signup', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equals('Last name was not provided');
+                expect(res.body.message).to.deep.equals('last name was not specified');
                 done();
             });
     });
@@ -82,7 +103,28 @@ describe('POST /api/v1/auth/signup', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equals('Invalid last name');
+                expect(res.body.message).to.deep.equals('last name has invalid characters');
+                done();
+            });
+    });
+
+    it('should return a 422 status if last name has more than 20 characters', (done) => {
+        chai.request(app)
+            .post('/api/v1/auth/signup')
+            .send({
+                firstName: 'Desmond',
+                lastName: 'somereallylongnamethatimadeupitistrulylong',
+                email: 'desmondoe@gmail.com',
+                password: 'pass',
+                address: '17 Lagos'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equals('last name exceeds the maximum length of 20');
                 done();
             });
     });
@@ -101,7 +143,7 @@ describe('POST /api/v1/auth/signup', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equals('Email was not provided');
+                expect(res.body.message).to.deep.equals('email was not provided');
                 done();
             });
     });
@@ -121,7 +163,7 @@ describe('POST /api/v1/auth/signup', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equals('Invalid email');
+                expect(res.body.message).to.deep.equals('invalid email');
                 done();
             });
     });
@@ -141,7 +183,7 @@ describe('POST /api/v1/auth/signup', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equals('Password was not provided');
+                expect(res.body.message).to.deep.equals('password was not provided');
                 done();
             });
     });
@@ -161,7 +203,7 @@ describe('POST /api/v1/auth/signup', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equals('Address was not provided');
+                expect(res.body.message).to.deep.equals('address was not specified');
                 done();
             });
     });
@@ -182,7 +224,7 @@ describe('POST /api/v1/auth/signup', () => {
                 expect(res).to.have.status(422);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equals('Invalid address');
+                expect(res.body.message).to.deep.equals('address has invalid characters');
                 done();
             });
     });
@@ -203,7 +245,7 @@ describe('POST /api/v1/auth/signup', () => {
                 expect(res).to.have.status(409);
                 expect(res.body).to.have.keys('status', 'message');
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equals('Email is already in use');
+                expect(res.body.message).to.deep.equals('email is already in use');
                 done();
             });
     });
@@ -225,7 +267,7 @@ describe('POST /api/v1/auth/signup', () => {
                 expect(res.body).to.have.keys('status', 'data', 'message');
                 expect(res.body.data).to.have.keys('token', 'id', 'firstName', 'lastName', 'email');
                 expect(res.body.status).to.deep.equal('success');
-                expect(res.body.message).to.deep.equals('Welcome, Desmond!');
+                expect(res.body.message).to.deep.equals('welcome, Desmond!');
                 expect(res.body.data.firstName).to.deep.equals('Desmond');
                 expect(res.body.data.lastName).to.deep.equals('Doe');
                 expect(res.body.data.email).to.deep.equals('desmonddoe@gmail.com');
@@ -246,7 +288,7 @@ describe('POST /api/v1/auth/signin', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(422);
                 expect(res.body.status).to.deep.equals('error');
-                expect(res.body.message).to.deep.equal('Email was not provided');
+                expect(res.body.message).to.deep.equal('email was not provided');
                 done();
             });
     });
@@ -261,7 +303,7 @@ describe('POST /api/v1/auth/signin', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(422);
                 expect(res.body.status).to.deep.equals('error');
-                expect(res.body.message).to.deep.equal('Password was not provided');
+                expect(res.body.message).to.deep.equal('password was not provided');
                 done();
             });
     });
@@ -278,7 +320,7 @@ describe('POST /api/v1/auth/signin', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(422);
                 expect(res.body.status).to.deep.equals('error');
-                expect(res.body.message).to.deep.equal('Invalid email');
+                expect(res.body.message).to.deep.equal('invalid email');
                 done();
             });
     });
@@ -295,7 +337,7 @@ describe('POST /api/v1/auth/signin', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(404);
                 expect(res.body.status).to.deep.equals('error');
-                expect(res.body.message).to.deep.equal('Incorrect email or password');
+                expect(res.body.message).to.deep.equal('incorrect email or password');
                 done();
             });
     });
@@ -312,7 +354,7 @@ describe('POST /api/v1/auth/signin', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(404);
                 expect(res.body.status).to.deep.equals('error');
-                expect(res.body.message).to.deep.equal('Incorrect email or password');
+                expect(res.body.message).to.deep.equal('incorrect email or password');
                 done();
             });
     });
@@ -330,7 +372,7 @@ describe('POST /api/v1/auth/signin', () => {
                 expect(res).to.have.status(200);
                 expect(res.body).to.have.keys('status', 'message', 'data');
                 expect(res.body.status).to.deep.equals('success');
-                expect(res.body.message).to.deep.equal('Welcome back, Osahon!');
+                expect(res.body.message).to.deep.equal('welcome back, Osahon!');
                 expect(res.body.data).to.have.keys('token', 'id', 'firstName', 'lastName', 'email');
                 userToken = res.body.data.token;
                 done();
@@ -350,7 +392,7 @@ describe('POST /api/v1/auth/reset-password', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(422);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Invalid email');
+                expect(res.body.message).to.deep.equal('invalid email');
                 done();
             });
     });
@@ -366,7 +408,7 @@ describe('POST /api/v1/auth/reset-password', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(404);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('User account not found');
+                expect(res.body.message).to.deep.equal('user account not found');
                 done();
             });
     });
@@ -382,7 +424,7 @@ describe('POST /api/v1/auth/reset-password', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(200);
                 expect(res.body.status).to.deep.equal('success');
-                expect(res.body.message).to.deep.equal('A password-reset link has been sent to your email');
+                expect(res.body.message).to.deep.equal('a password-reset link has been sent to your email');
                 done();
             });
     });
@@ -402,7 +444,7 @@ describe('PATCH /api/v1/auth/reset-password/:token', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(422);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Password was not provided');
+                expect(res.body.message).to.deep.equal('password was not provided');
                 done();
             });
     });
@@ -418,7 +460,7 @@ describe('PATCH /api/v1/auth/reset-password/:token', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(422);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Password was not confirmed');
+                expect(res.body.message).to.deep.equal('password was not confirmed');
                 done();
             });
     });
@@ -435,7 +477,7 @@ describe('PATCH /api/v1/auth/reset-password/:token', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(422);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('Passwords do not match');
+                expect(res.body.message).to.deep.equal('passwords do not match');
                 done();
             });
     });
@@ -452,7 +494,7 @@ describe('PATCH /api/v1/auth/reset-password/:token', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(404);
                 expect(res.body.status).to.deep.equal('error');
-                expect(res.body.message).to.deep.equal('User not found. Reset link may have expired');
+                expect(res.body.message).to.deep.equal('user not found. reset link may have expired');
                 done();
             });
     });
@@ -469,7 +511,7 @@ describe('PATCH /api/v1/auth/reset-password/:token', () => {
                 expect(res).to.be.an('object');
                 expect(res).to.have.status(200);
                 expect(res.body.status).to.deep.equal('success');
-                expect(res.body.message).to.deep.equal('Password was successfully updated');
+                expect(res.body.message).to.deep.equal('password was successfully updated');
                 done();
             });
     });
