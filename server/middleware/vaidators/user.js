@@ -1,23 +1,11 @@
 import isEmail from 'validator/lib/isEmail';
-import {
-    isInvalidName,
-    isNotSpecified,
-    pureString
-} from './validator.schema';
+import { isInvalidName } from './validator.schema';
 import errorMessage from '../../helpers/responseMessages';
 
-
-const validateFirstName = (req, res, next) => {
-    const { firstName } = req.body;
+const validateFullName = (req, res, next) => {
+    const { firstName, lastName } = req.body;
     const message = isInvalidName(firstName, 'first name', 20)
-    return message
-        ? errorMessage(res, 422, message)
-        : next();
-};
-
-const validateLastName = (req, res, next) => {
-    const { lastName } = req.body;
-    const message = isInvalidName(lastName, 'last name', 20)
+        || isInvalidName(lastName, 'last name', 20);
     return message
         ? errorMessage(res, 422, message)
         : next();
@@ -61,8 +49,7 @@ const validateConfirmPassword = (req, res, next) => {
 };
 
 export const validateSignup = [
-    validateFirstName,
-    validateLastName,
+    validateFullName,
     validateEmail,
     validateAddress,
     validatePassword
