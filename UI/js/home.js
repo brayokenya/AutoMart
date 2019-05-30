@@ -62,6 +62,21 @@ const resetPasswordFormHtml = `
 </form>
 `;
 
+const showSignupNotes = () => {
+    signupNotes.forEach(note => showElement(note));
+};
+
+const hideSignupNotes = () => {
+    signupNotes.forEach(note => hideElement(note));
+};
+
+const showLoginNotes = () => {
+    loginNotes.forEach(note => showElement(note));
+};
+
+const hideLoginNotes = () => {
+    loginNotes.forEach(note => hideElement(note));
+};
 
 signupBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -69,8 +84,8 @@ signupBtns.forEach((btn) => {
         showElement(closeFormBtn);
         closeBtn.click();
         window.scrollTo(0, 0);
-        loginNotes.forEach(note => hideElement(note));
-        signupNotes.forEach(note => showElement(note));
+        hideLoginNotes();
+        showSignupNotes();
     });
 });
 
@@ -80,8 +95,8 @@ loginBtns.forEach((btn) => {
         showElement(closeFormBtn);
         closeBtn.click();
         window.scrollTo(0, 0);
-        loginNotes.forEach(note => showElement(note));
-        signupNotes.forEach(note => hideElement(note));
+        showLoginNotes();
+        hideSignupNotes();
     });
 });
 
@@ -90,14 +105,14 @@ resetPasswordBtn.addEventListener('click', () => {
     showElement(closeFormBtn);
     closeBtn.click();
     window.scrollTo(0, 0);
-    loginNotes.forEach(note => hideElement(note));
-    signupNotes.forEach(note => showElement(note));
+    hideLoginNotes();
+    showSignupNotes();
 });
 
 closeFormBtn.addEventListener('click', () => {
     searchFormDiv.innerHTML = searchFormHtml;
     hideElement(closeFormBtn);
-    loginNotes.forEach(note => hideElement(note));
-    signupNotes.forEach(note => hideElement(note));
+    hideLoginNotes();
+    hideSignupNotes();
 });
 
