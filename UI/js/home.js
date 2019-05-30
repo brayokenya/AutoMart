@@ -10,7 +10,7 @@ const loginNotes = document.querySelectorAll('.login-note');
 
 
 scrollBtn.addEventListener('click', () => {
-    wrapper.style.display = 'block';
+    showElement(wrapper);
     topNav.style.background = '#003542';
 });
 
@@ -62,42 +62,57 @@ const resetPasswordFormHtml = `
 </form>
 `;
 
+const showSignupNotes = () => {
+    signupNotes.forEach(note => showElement(note));
+};
+
+const hideSignupNotes = () => {
+    signupNotes.forEach(note => hideElement(note));
+};
+
+const showLoginNotes = () => {
+    loginNotes.forEach(note => showElement(note));
+};
+
+const hideLoginNotes = () => {
+    loginNotes.forEach(note => hideElement(note));
+};
 
 signupBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
         searchFormDiv.innerHTML = signupFormHtml;
-        closeFormBtn.style.display = 'block';
+        showElement(closeFormBtn);
         closeBtn.click();
         window.scrollTo(0, 0);
-        loginNotes.forEach(note => note.style.display = '');
-        signupNotes.forEach(note => note.style.display = 'block');
+        hideLoginNotes();
+        showSignupNotes();
     });
 });
 
 loginBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
         searchFormDiv.innerHTML = loginFormHtml;
-        closeFormBtn.style.display = 'block';
+        showElement(closeFormBtn);
         closeBtn.click();
         window.scrollTo(0, 0);
-        loginNotes.forEach(note => note.style.display = 'block');
-        signupNotes.forEach(note => note.style.display = '');
+        showLoginNotes();
+        hideSignupNotes();
     });
 });
 
 resetPasswordBtn.addEventListener('click', () => {
     searchFormDiv.innerHTML = resetPasswordFormHtml;
-    closeFormBtn.style.display = 'block';
+    showElement(closeFormBtn);
     closeBtn.click();
     window.scrollTo(0, 0);
-    loginNotes.forEach(note => note.style.display = '');
-    signupNotes.forEach(note => note.style.display = 'block');
+    hideLoginNotes();
+    showSignupNotes();
 });
 
 closeFormBtn.addEventListener('click', () => {
     searchFormDiv.innerHTML = searchFormHtml;
-    closeFormBtn.style.display = 'none';
-    loginNotes.forEach(note => note.style.display = '');
-    signupNotes.forEach(note => note.style.display = '');
+    hideElement(closeFormBtn);
+    hideLoginNotes();
+    hideSignupNotes();
 });
 
