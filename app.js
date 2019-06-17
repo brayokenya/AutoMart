@@ -2,6 +2,7 @@ import path from 'path';
 import express from 'express';
 import appVariables from './server/config/app.config';
 import stringFormater from './server/middleware/stringFormater';
+import userRouter from './server/routes/user';
 
 const app = express();
 
@@ -18,6 +19,8 @@ app.get('/docs', (req, res) => {
         .sendFile(path.resolve('documentation.html'));
 });
 
+app.use('/api/v2/', userRouter);
+
 app.all('/*', (req, res) => {
     res.status(404).json({
         status: 'error',
@@ -33,8 +36,9 @@ app.use((err, req, res, next) => {
     });
 });
 
-/* eslint-disable-next-line */
+
 const { port } = appVariables;
+/* eslint-disable-next-line */
 app.listen(port, () => console.log(`App is running on port: ${port}`));
 
 export default app;

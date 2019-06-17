@@ -1,11 +1,10 @@
+/* eslint-disable-next-line */
+import regenratorRuntime from 'regenerator-runtime';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+import appVariables from '../config/app.config';
 import errorMessage from '../helpers/responseMessages';
-import { userQueries } from '../helpers/queries';
 
-dotenv.config();
-
-const secretKey = process.env.SECRET_KEY;
+const { secretKey } = appVariables;
 
 export const generateToken = (userId, userEmail) => {
     const token = jwt.sign({ userId, userEmail }, secretKey, { expiresIn: 84600 });
@@ -25,16 +24,5 @@ export const verifyToken = (req, res, next) => {
         return next();
     } catch (err) {
         return errorMessage(res, 401, 'Invalid authorization token');
-    }
-};
-
-export const getUserFromToken = (token) => {
-    try {
-        const decoded = jwt.verify(token, secretKey);
-        const { userEmail } = decoded;
-        const user = userQueries.findUserByEmail(userEmail);
-        return user;
-    } catch (error) {
-        return false;
     }
 };
