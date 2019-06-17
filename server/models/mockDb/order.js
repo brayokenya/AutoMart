@@ -1,93 +1,73 @@
 const orders = [
     {
-        id: 1,
         buyerId: 3,
         carId: 1,
         offer: 800000,
         price: 3000000,
-        status: 'rejected',
-        createdOn: '14-02-2019'
+        status: 'rejected'
     },
     {
-        id: 2,
         buyerId: 4,
         carId: 2,
         offer: 2000000,
         price: 2500000,
-        status: 'pending',
-        createdOn: '19-02-2019'
+        status: 'pending'
     },
     {
-        id: 3,
         buyerId: 2,
         carId: 3,
         offer: 3500000,
         price: 2500000,
-        status: 'accepted',
-        createdOn: '20-03-2019'
+        status: 'accepted'
     },
     {
-        id: 4,
         buyerId: 3,
         carId: 4,
         offer: 4500000,
         price: 3500000,
-        status: 'pending',
-        createdOn: '20-03-2019'
+        status: 'pending'
     },
     {
-        id: 4,
         buyerId: 5,
         carId: 5,
         offer: 5500000,
         price: 8500000,
-        status: 'pending',
-        createdOn: '20-03-2019'
+        status: 'pending'
     },
     {
-        id: 5,
-        buyerId: 7,
+        buyerId: 6,
         carId: 6,
         offer: 5500000,
         price: 9500000,
-        status: 'rejected',
-        createdOn: '22-03-2019'
+        status: 'rejected'
     },
     {
-        id: 6,
         buyerId: 4,
         carId: 1,
         offer: 2700000,
         price: 3000000,
-        status: 'pending',
-        createdOn: '24-03-2019'
+        status: 'pending'
     },
     {
-        id: 7,
         buyerId: 5,
         carId: 7,
         offer: 2500000,
         price: 2500000,
-        status: 'pending',
-        createdOn: '31-03-2019'
+        status: 'pending'
     },
     {
-        id: 8,
         buyerId: 2,
         carId: 8,
         offer: 10900000,
         price: 1100000,
-        status: 'pending',
-        createdOn: '01-04-2019'
+        status: 'pending'
     },
     {
-        id: 9,
         buyerId: 3,
         carId: 6,
         offer: 95000000,
         price: 9500000,
-        status: 'accepted',
-        createdOn: '02-04-2019'
+        status: 'accepted'
     }
 ];
 

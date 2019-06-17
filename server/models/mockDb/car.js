@@ -1,6 +1,5 @@
 const cars = [
     {
-        id: 1,
         owner: 2,
         state: 'new',
         status: 'available',
@@ -8,11 +7,9 @@ const cars = [
         manufacturer: 'Toyota',
         model: '2015 4Runner',
         bodyType: 's.u.v',
-        imageUrl: 'someurl',
-        createdOn: '13-02-2019'
+        imageUrl: 'someurl'
     },
     {
-        id: 2,
         owner: 3,
         state: 'used',
         status: 'available',
@@ -20,11 +17,9 @@ const cars = [
         manufacturer: 'Lexus',
         model: '2012 Rx330',
         bodyType: 's.u.v',
-        imageUrl: 'someurl',
-        createdOn: '14-02-2019'
+        imageUrl: 'someurl'
     },
     {
-        id: 3,
         owner: 4,
         state: 'used',
         status: 'sold',
@@ -32,11 +27,9 @@ const cars = [
         manufacturer: 'Honda',
         model: '2012 Accord',
         bodyType: 'sedan',
-        imageUrl: 'someurl',
-        createdOn: '14-03-2019'
+        imageUrl: 'someurl'
     },
     {
-        id: 4,
         owner: 5,
         state: 'used',
         status: 'available',
@@ -44,11 +37,9 @@ const cars = [
         manufacturer: 'Toyota',
         model: '2013 Camry',
         bodyType: 'sedan',
-        imageUrl: 'someurl',
-        createdOn: '15-03-2019'
+        imageUrl: 'someurl'
     },
     {
-        id: 5,
         owner: 3,
         state: 'new',
         status: 'available',
@@ -56,11 +47,9 @@ const cars = [
         manufacturer: 'Ford',
         model: '2018 Ranger',
         bodyType: 'truck',
-        imageUrl: 'someurl',
-        createdOn: '18-03-2019'
+        imageUrl: 'someurl'
     },
     {
-        id: 6,
         owner: 5,
         state: 'new',
         status: 'sold',
@@ -68,11 +57,9 @@ const cars = [
         manufacturer: 'Ford',
         model: '2019 Ranger',
         bodyType: 'truck',
-        imageUrl: 'someurl',
-        createdOn: '19-03-2019'
+        imageUrl: 'someurl'
     },
     {
-        id: 7,
         owner: 2,
         state: 'used',
         status: 'available',
@@ -80,11 +67,9 @@ const cars = [
         manufacturer: 'Nissan',
         model: '2011 Altima',
         bodyType: 'sedan',
-        imageUrl: 'someurl',
-        createdOn: '21-03-2019'
+        imageUrl: 'someurl'
     },
     {
-        id: 8,
         owner: 4,
         state: 'used',
         status: 'available',
@@ -92,8 +77,7 @@ const cars = [
         manufacturer: 'kia',
         model: '2008 Sorento',
         bodyType: 's.u.v',
-        imageUrl: 'someurl',
-        createdOn: '28-04-2019'
+        imageUrl: 'someurl'
     }
 ];
 
