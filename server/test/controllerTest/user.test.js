@@ -273,3 +273,106 @@ describe('POST /api/v2/auth/signup', () => {
             });
     });
 });
+
+describe('POST /api/v2/auth/signin', () => {
+    it('Should return a 422 status if email was not provided', (done) => {
+        chai.request(app)
+            .post('/api/v2/auth/signin')
+            .send({
+                pasword: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equals('error');
+                expect(res.body.message).to.deep.equal('email was not provided');
+                done();
+            });
+    });
+    it('Should return a 422 status if password was not provided', (done) => {
+        chai.request(app)
+            .post('/api/v2/auth/signin')
+            .send({
+                email: 'johndoe@gmail.com'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equals('error');
+                expect(res.body.message).to.deep.equal('password was not provided');
+                done();
+            });
+    });
+
+    it('Should return a 422 status if email has invalid characters', (done) => {
+        chai.request(app)
+            .post('/api/v2/auth/signin')
+            .send({
+                email: 'johndoe@gmail)(*).com**',
+                password: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equals('error');
+                expect(res.body.message).to.deep.equal('invalid email');
+                done();
+            });
+    });
+
+    it('Should return a 404 status if account does not exist', (done) => {
+        chai.request(app)
+            .post('/api/v2/auth/signin')
+            .send({
+                email: 'notauser@gmail.com',
+                password: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body.status).to.deep.equals('error');
+                expect(res.body.message).to.deep.equal('incorrect email or password');
+                done();
+            });
+    });
+
+    it('Should return a 404 status if passwords do match', (done) => {
+        chai.request(app)
+            .post('/api/v2/auth/signin')
+            .send({
+                email: 'johndoe@gmail.com',
+                password: 'notpass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body.status).to.deep.equals('error');
+                expect(res.body.message).to.deep.equal('incorrect email or password');
+                done();
+            });
+    });
+
+    it('Should return a 200 status on successful login', (done) => {
+        chai.request(app)
+            .post('/api/v2/auth/signin')
+            .send({
+                email: 'osahonoboite@gmail.com',
+                password: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'message', 'data');
+                expect(res.body.status).to.deep.equals('success');
+                expect(res.body.message).to.deep.equal('welcome back, Osahon!');
+                expect(res.body.data).to.have.keys('token', 'id', 'firstName', 'lastName', 'email');
+                done();
+            });
+    });
+});
