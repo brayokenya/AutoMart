@@ -69,6 +69,15 @@ export const carQueries = {
         };
         const { rows } = await pool.query(queryString);
         return rows[0];
+    },
+
+    async findAvailableCars() {
+        const queryString = {
+            text: 'SELECT * FROM cars WHERE status=$1;',
+            values: ['available']
+        };
+        const { rows } = await pool.query(queryString);
+        return rows;
     }
 };
 
