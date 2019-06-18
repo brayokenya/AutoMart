@@ -48,14 +48,25 @@ export const carQueries = {
         return rows[0];
     },
 
-    async markAsSold(carId) {
+    async markAsSold(carId, owner) {
         const queryString = {
-            text: ` UPDATE cars SET status = $2
-                    WHERE car_id  = $1
+            text: ` UPDATE cars SET status = $3
+                    WHERE car_id = $1 AND owner = $2
                     RETURNING * ;`,
-            values: [carId, 'sold']
+            values: [carId, owner, 'sold']
         };
 
+        const { rows } = await pool.query(queryString);
+        return rows[0];
+    },
+
+    async updatePrice(carId, owner, price) {
+        const queryString = {
+            text: `UPDATE cars SET price = $3
+                WHERE car_id = $1 AND owner=$2
+                RETURNING *;`,
+            values: [carId, owner, price]
+        };
         const { rows } = await pool.query(queryString);
         return rows[0];
     }
