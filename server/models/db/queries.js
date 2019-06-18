@@ -36,5 +36,31 @@ export const carQueries = {
 
         const { rows } = await pool.query(queryString);
         return rows[0];
+    },
+
+    async findCarById(carId) {
+        const queryString = {
+            text: 'SELECT * FROM cars WHERE car_id=$1;',
+            values: [carId]
+        };
+
+        const { rows } = await pool.query(queryString);
+        return rows[0];
+    }
+};
+
+
+export const orderQueries = {
+    async createOrder(buyerId, carId, offer, price) {
+        const queryString = {
+            text: `INSERT INTO orders 
+            (buyer_id, car_id, offer, price)
+            VALUES ($1, $2, $3, $4)
+            RETURNING *;`,
+            values: [buyerId, carId, offer, price]
+        };
+
+        const { rows } = await pool.query(queryString);
+        return rows[0];
     }
 };
