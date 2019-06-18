@@ -14,7 +14,8 @@ import {
     updateStatus,
     updatePrice,
     getSpecificCar,
-    getAvailableCars
+    getAvailableCars,
+    deleteAd
 } from '../controllers/car';
 
 
@@ -34,5 +35,6 @@ router.get('/car', validateQueries, getAvailableCars);
 router.patch('/car/:carId/status', verifyToken, validatePatchStatus, updateStatus);
 router.patch('/car/:carId/price', verifyToken, validatePatchPrice, updatePrice);
 router.get('/car/:carId', validateIdParam, getSpecificCar);
+router.delete('/car/:carId', verifyToken, validateIdParam, deleteAd);
 
 export default router;

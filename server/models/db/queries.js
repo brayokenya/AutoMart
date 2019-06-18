@@ -78,6 +78,14 @@ export const carQueries = {
         };
         const { rows } = await pool.query(queryString);
         return rows;
+    },
+
+    async deleteCar(carId) {
+        const queryString = {
+            text: 'DELETE FROM cars WHERE car_id=$1;',
+            values: [carId]
+        };
+        await pool.query(queryString);
     }
 };
 
