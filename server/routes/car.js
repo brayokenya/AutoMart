@@ -6,13 +6,15 @@ import {
     validatePostCar,
     validatePatchStatus,
     validatePatchPrice,
-    validateIdParam
+    validateIdParam,
+    validateQueries
 } from '../middleware/vaidators/car';
 import {
     postCarAd,
     updateStatus,
     updatePrice,
-    getSpecificCar
+    getSpecificCar,
+    getAvailableCars
 } from '../controllers/car';
 
 
@@ -28,6 +30,7 @@ router.post(
     postCarAd
 );
 
+router.get('/car', validateQueries, getAvailableCars);
 router.patch('/car/:carId/status', verifyToken, validatePatchStatus, updateStatus);
 router.patch('/car/:carId/price', verifyToken, validatePatchPrice, updatePrice);
 router.get('/car/:carId', validateIdParam, getSpecificCar);

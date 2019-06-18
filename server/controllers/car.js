@@ -83,3 +83,18 @@ export const getSpecificCar = async (req, res) => {
         return errorMessage(res, 500, 'oops! something went wrong went wrong');
     }
 };
+
+export const getAvailableCars = async (req, res) => {
+    const isInvalidStatus = (req.query.status !== 'available');
+    if (isInvalidStatus) return errorMessage(res, 403, 'you do not have access to this resource');
+    const cars = await carQueries.findAvailableCars();
+    return cars.length
+        ? res.status(200).json({
+            status: 'success',
+            data: cars
+        })
+        : res.status(404).json({
+            status: 'error',
+            message: 'we could not find any car that matches your search'
+        });
+};
