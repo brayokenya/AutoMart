@@ -3,6 +3,7 @@ import express from 'express';
 import appVariables from './server/config/app.config';
 import stringFormater from './server/middleware/stringFormater';
 import userRouter from './server/routes/user';
+import carRouter from './server/routes/car';
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.get('/docs', (req, res) => {
         .sendFile(path.resolve('documentation.html'));
 });
 
-app.use('/api/v2/', userRouter);
+app.use('/api/v2/', userRouter, carRouter);
 
 app.all('/*', (req, res) => {
     res.status(404).json({
@@ -30,6 +31,7 @@ app.all('/*', (req, res) => {
 
 /* eslint-disable-next-line */
 app.use((err, req, res, next) => {
+    console.log(err);
     res.status(500).json({
         status: 'error',
         message: 'oops! something went wrong'

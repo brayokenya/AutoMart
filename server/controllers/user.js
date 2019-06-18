@@ -1,7 +1,7 @@
 /* eslint-disable-next-line */
 import regenratorRuntime from 'regenerator-runtime';
 import bcrypt from 'bcrypt';
-import userQueries from '../models/db/queries';
+import { userQueries } from '../models/db/queries';
 import { generateToken } from '../middleware/jwtAuth';
 import errorMessage from '../helpers/responseMessages';
 
