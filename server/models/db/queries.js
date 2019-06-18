@@ -46,6 +46,18 @@ export const carQueries = {
 
         const { rows } = await pool.query(queryString);
         return rows[0];
+    },
+
+    async markAsSold(carId) {
+        const queryString = {
+            text: ` UPDATE cars SET status = $2
+                    WHERE car_id  = $1
+                    RETURNING * ;`,
+            values: [carId, 'sold']
+        };
+
+        const { rows } = await pool.query(queryString);
+        return rows[0];
     }
 };
 
