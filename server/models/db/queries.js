@@ -1,6 +1,6 @@
 import pool from '../../config/db.config';
 
-const userQueries = {
+export const userQueries = {
     async findUserByEmail(userEmail) {
         const queryString = {
             text: 'SELECT * FROm users WHERE email=$1;',
@@ -24,4 +24,17 @@ const userQueries = {
     }
 };
 
-export default userQueries;
+export const carQueries = {
+    async createCar(owner, state, price, manufacturer, model, bodyType, imageUrl) {
+        const queryString = {
+            text: `INSERT INTO cars
+            (owner, state, price, manufacturer, model, body_type, image_url)
+            VALUES($1, $2, $3, $4, $5, $6, $7)
+            RETURNING *;`,
+            values: [owner, state, price, manufacturer, model, bodyType, imageUrl]
+        };
+
+        const { rows } = await pool.query(queryString);
+        return rows[0];
+    }
+};
