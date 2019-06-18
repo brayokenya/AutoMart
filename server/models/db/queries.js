@@ -62,5 +62,27 @@ export const orderQueries = {
 
         const { rows } = await pool.query(queryString);
         return rows[0];
+    },
+
+    async findOrderById(orderId) {
+        const queryString = {
+            text: 'SELECT * FROM orders WHERE order_id=$1;',
+            values: [orderId]
+        };
+
+        const { rows } = await pool.query(queryString);
+        return rows[0];
+    },
+
+    async updateOffer(orderId, newOffer) {
+        const queryString = {
+            text: ` UPDATE orders SET offer = $2
+                    WHERE order_id  = $1
+                    RETURNING * ;`,
+            values: [orderId, newOffer]
+        };
+
+        const { rows } = await pool.query(queryString);
+        return rows[0];
     }
 };
