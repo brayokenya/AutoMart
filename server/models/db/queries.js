@@ -80,6 +80,12 @@ export const carQueries = {
         return rows;
     },
 
+    async findAllCars() {
+        const queryString = 'SELECT * FROM cars;';
+        const { rows } = await pool.query(queryString);
+        return rows;
+    },
+
     async deleteCar(carId) {
         const queryString = {
             text: 'DELETE FROM cars WHERE car_id=$1;',

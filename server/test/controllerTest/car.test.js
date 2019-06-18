@@ -782,7 +782,7 @@ describe('GET /api/v2/car?status=available', () => {
     });
 });
 
-describe('DELETE /api/v2/car/:carId', () => {
+describe('(Admin) GET /api/v2/car', () => {
 
     before((done) => {
         chai.request(app)
@@ -798,6 +798,26 @@ describe('DELETE /api/v2/car/:carId', () => {
             });
     });
 
+
+    it('should return a list of all cars, whether sold or not', (done) => {
+        chai.request(app)
+            .get('/api/v2/car')
+            .set('Authorization', adminToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data.find(datum => datum.status === 'sold'))
+                    .to.be.an('object');
+                expect(res.body.data.find(datum => datum.status === 'available'))
+                    .to.be.an('object');
+                done();
+            });
+    });
+});
+
+describe('DELETE /api/v2/car/:carId', () => {
 
     it('should return a 403 status if user is not an admin', (done) => {
         chai.request(app)

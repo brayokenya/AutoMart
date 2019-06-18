@@ -85,7 +85,7 @@ export const getSpecificCar = async (req, res) => {
     }
 };
 
-export const getAvailableCars = async (req, res) => {
+const getAvailableCars = async (req, res) => {
     const isInvalidStatus = (req.query.status !== 'available');
     if (isInvalidStatus) return errorMessage(res, 403, 'you do not have access to this resource');
     try {
@@ -102,6 +102,21 @@ export const getAvailableCars = async (req, res) => {
     } catch (error) {
         return errorMessage(res, 500, 'oops! something went wrong went wrong');
     }
+};
+
+const getAllCars = async (res) => {
+    const cars = await carQueries.findAllCars();
+    return res.status(200).json({
+        status: 'success',
+        data: cars
+    });
+};
+
+export const getCars = async (req, res) => {
+    const { is_admin: isAdmin } = await getUserFromToken(req.headers.authorization);
+    return isAdmin
+        ? getAllCars(res)
+        : getAvailableCars(req, res);
 };
 
 
