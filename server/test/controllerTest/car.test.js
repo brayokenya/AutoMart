@@ -728,3 +728,55 @@ describe('GET /api/v2/car/:carId', () => {
             });
     });
 });
+
+
+describe('GET /api/v2/car?status=available', () => {
+    it('should return a 403 error if status query is not available', (done) => {
+        chai.request(app)
+            .get('/api/v2/car')
+            .query({ status: 'notavailable' })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(403);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('you do not have access to this resource');
+                done();
+            });
+    });
+
+    it('should return available cars when authorization token is not provided', (done) => {
+        chai.request(app)
+            .get('/api/v2/car')
+            .query({ status: 'available' })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data).to.be.an('array');
+                expect(res.body.data[0]).to.be.an('object');
+                done();
+            });
+    });
+
+    it('should return available cars when authorization token is provided', (done) => {
+        chai.request(app)
+            .get('/api/v2/car')
+            .query({ status: 'available' })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data).to.be.an('array');
+                expect(res.body.data[0]).to.be.an('object');
+                done();
+            });
+    });
+});
