@@ -17,10 +17,10 @@ const carsTable = `
 DROP TABLE IF EXISTS cars CASCADE;
 CREATE TABLE cars (
     car_id SERIAL PRIMARY KEY,
-    owner INTEGER REFERENCES users(user_id) NOT NULL,
+    owner INTEGER REFERENCES users(user_id) ON DELETE CASCADE NOT NULL,
     state VARCHAR(7) NOT NULL,
     status VARCHAR(12) DEFAULT 'available',
-    price FLOAT NOT NULL,
+    price INTEGER NOT NULL,
     manufacturer VARCHAR(30) NOT NULL,
     model VARCHAR(30) NOT NULL,
     body_type VARCHAR(25) NOT NULL,
@@ -33,8 +33,8 @@ const ordersTable = `
 DROP TABLE IF EXISTS orders;
 CREATE TABLE orders (
     order_id SERIAL,
-    buyer_id INTEGER REFERENCES users(user_id) NOT NULL,
-    car_id INTEGER REFERENCES cars(car_id) NOT NULL,
+    buyer_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE NOT NULL,
+    car_id INTEGER REFERENCES cars(car_id) ON DELETE CASCADE NOT NULL,
     offer INTEGER NOT NULL,
     price INTEGER NOT NULL,
     status VARCHAR(10) DEFAULT 'pending',
@@ -46,10 +46,10 @@ const flagsTable = `
 DROP TABLE IF EXISTS flags;
 CREATE TABLE flags (
     flag_id SERIAL PRIMARY KEY,
-    car_id INTEGER REFERENCES cars(car_id),
+    car_id INTEGER REFERENCES cars(car_id) ON DELETE CASCADE NOT NULL,
     reason VARCHAR(110) NOT NULL,
     description TEXT,
-    reported_by INTEGER REFERENCES users(user_id) NOT NULL,
+    reported_by INTEGER REFERENCES users(user_id) ON DELETE CASCADE NOT NULL,
     created_on DATE DEFAULT NOW()
 );
 `;
