@@ -1,22 +1,9 @@
 import express from 'express';
-import {
-    signupUser,
-    loginUser,
-    sendResetPasswordLink,
-    resetPassword
-} from '../controllers/user';
-import {
-    validateSignup,
-    validateSignin,
-    validateEmail,
-    confirmPassword
-} from '../middleware/vaidators/user';
+import { validateSignup } from '../middleware/vaidators/user';
+import signupUser from '../controllers/user';
 
 const router = express.Router();
 
 router.post('/auth/signup', validateSignup, signupUser);
-router.post('/auth/signin', validateSignin, loginUser);
-router.post('/auth/reset-password', validateEmail, sendResetPasswordLink);
-router.patch('/auth/reset-password/:token', confirmPassword, resetPassword);
 
 export default router;

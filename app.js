@@ -1,13 +1,8 @@
 import path from 'path';
 import express from 'express';
-import dotenv from 'dotenv';
+import appVariables from './server/config/app.config';
 import stringFormater from './server/middleware/stringFormater';
 import userRouter from './server/routes/user';
-import carRouter from './server/routes/car';
-import orderRouter from './server/routes/order';
-import flagRouter from './server/routes/flag';
-
-dotenv.config();
 
 const app = express();
 
@@ -24,7 +19,7 @@ app.get('/docs', (req, res) => {
         .sendFile(path.resolve('documentation.html'));
 });
 
-app.use('/api/v1/', userRouter, carRouter, orderRouter, flagRouter);
+app.use('/api/v2/', userRouter);
 
 app.all('/*', (req, res) => {
     res.status(404).json({
@@ -41,8 +36,9 @@ app.use((err, req, res, next) => {
     });
 });
 
-const { PORT } = process.env;
+
+const { port } = appVariables;
 /* eslint-disable-next-line */
-app.listen(PORT, () => console.log(`App is running on port: ${PORT}`));
+app.listen(port, () => console.log(`App is running on port: ${port}`));
 
 export default app;
