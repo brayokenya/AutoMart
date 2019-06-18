@@ -1,4 +1,5 @@
 import { carQueries } from '../models/db/queries';
+import { getUserFromToken } from '../middleware/jwtAuth';
 import errorMessage from '../helpers/responseMessages';
 
 export const postCarAd = async (req, res) => {
@@ -87,14 +88,36 @@ export const getSpecificCar = async (req, res) => {
 export const getAvailableCars = async (req, res) => {
     const isInvalidStatus = (req.query.status !== 'available');
     if (isInvalidStatus) return errorMessage(res, 403, 'you do not have access to this resource');
-    const cars = await carQueries.findAvailableCars();
-    return cars.length
-        ? res.status(200).json({
+    try {
+        const cars = await carQueries.findAvailableCars();
+        return cars.length
+            ? res.status(200).json({
+                status: 'success',
+                data: cars
+            })
+            : res.status(404).json({
+                status: 'error',
+                message: 'we could not find any car that matches your search'
+            });
+    } catch (error) {
+        return errorMessage(res, 500, 'oops! something went wrong went wrong');
+    }
+};
+
+
+export const deleteAd = async (req, res) => {
+    const { carId } = req.params;
+    const { is_admin: isAdmin } = await getUserFromToken(req.headers.authorization);
+    if (!isAdmin) return errorMessage(res, 403, 'you do not have access to this resource');
+    try {
+        const car = await carQueries.findCarById(carId);
+        if (!car) return errorMessage(res, 404, 'car not found');
+        await carQueries.deleteCar(carId);
+        return res.status(200).json({
             status: 'success',
-            data: cars
-        })
-        : res.status(404).json({
-            status: 'error',
-            message: 'we could not find any car that matches your search'
+            message: 'car ad was successfully deleted'
         });
+    } catch (error) {
+        return errorMessage(res, 500, 'oops! something went wrong went wrong');
+    }
 };

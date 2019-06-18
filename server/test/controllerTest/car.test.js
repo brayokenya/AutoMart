@@ -8,6 +8,7 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 let myToken;
+let adminToken;
 
 before((done) => {
     chai.request(app)
@@ -776,6 +777,80 @@ describe('GET /api/v2/car?status=available', () => {
                 expect(res.body.status).to.deep.equal('success');
                 expect(res.body.data).to.be.an('array');
                 expect(res.body.data[0]).to.be.an('object');
+                done();
+            });
+    });
+});
+
+describe('DELETE /api/v2/car/:carId', () => {
+
+    before((done) => {
+        chai.request(app)
+            .post('/api/v2/auth/signin')
+            .send({
+                email: 'johndoe@gmail.com',
+                password: 'pass'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                adminToken = res.body.data.token;
+                done();
+            });
+    });
+
+
+    it('should return a 403 status if user is not an admin', (done) => {
+        chai.request(app)
+            .delete('/api/v2/car/3')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(403);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('you do not have access to this resource');
+                done();
+            });
+    });
+
+    it('should return a 404 status if car does not exist', (done) => {
+        chai.request(app)
+            .delete('/api/v2/car/39999')
+            .set('Authorization', adminToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('car not found');
+                done();
+            });
+    });
+
+    it('should return a 422 status if carId is not an integer', (done) => {
+        chai.request(app)
+            .delete('/api/v2/car/string')
+            .set('Authorization', adminToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('invalid car id');
+                done();
+            });
+    });
+
+    it('should return a 200 status if car was successfully deleted', (done) => {
+        chai.request(app)
+            .delete('/api/v2/car/6')
+            .set('Authorization', adminToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.message).to.deep.equal('car ad was successfully deleted');
                 done();
             });
     });
