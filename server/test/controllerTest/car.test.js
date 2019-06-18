@@ -541,3 +541,129 @@ describe('PATCH /api/v2/car/:carId/status', () => {
             });
     });
 });
+
+
+describe('PATCH/api/v2/car/:carId/price', () => {
+    it('should return a 404 status if car is not found', (done) => {
+        chai.request(app)
+            .patch('/api/v2/car/400/price')
+            .set('Authorization', myToken)
+            .send({
+                newPrice: 4000000
+            })
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('car not found');
+                done();
+            });
+    });
+
+    it('should return a 422 status if carId is not a valid integer', (done) => {
+        chai.request(app)
+            .patch('/api/v2/car/urusnsjd/price')
+            .set('Authorization', myToken)
+            .send({
+                newPrice: 4000000
+            })
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('invalid car id');
+                done();
+            });
+    });
+
+    it('should return a 404 error if car does not belong to user', (done) => {
+        chai.request(app)
+            .patch('/api/v2/car/6/price')
+            .set('Authorization', myToken)
+            .send({
+                newPrice: 4000000
+            })
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('car not found');
+                done();
+            });
+    });
+
+    it('should return a 422 error if new price was not provided', (done) => {
+        chai.request(app)
+            .patch('/api/v2/car/5/price')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('new price was not specified');
+                done();
+            });
+    });
+
+    it('should return a 422 error if price is not an integer', (done) => {
+        chai.request(app)
+            .patch('/api/v2/car/5/price')
+            .set('Authorization', myToken)
+            .send({
+                newPrice: 'hdhdhd'
+            })
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('invalid new price');
+                done();
+            });
+    });
+
+    it('should return a 422 error if price has length greater than 12', (done) => {
+        chai.request(app)
+            .patch('/api/v2/car/5/price')
+            .set('Authorization', myToken)
+            .send({
+                newPrice: 9000000000000000
+            })
+            .end((error, res) => {
+                if (error) return done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('whoa! that new price is quite high');
+                done();
+            });
+    });
+
+    it('should return a 200 status if price was successfully updated', (done) => {
+        chai.request(app)
+            .patch('/api/v2/car/5/price')
+            .set('Authorization', myToken)
+            .send({
+                newPrice: 4000000
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data.price).to.deep.equal(4000000);
+                done();
+            });
+    });
+});
