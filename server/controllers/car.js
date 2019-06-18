@@ -67,3 +67,19 @@ export const updatePrice = async (req, res) => {
         return errorMessage(res, 500, 'oops! something went wrong went wrong');
     }
 };
+
+
+export const getSpecificCar = async (req, res) => {
+    const { carId } = req.params;
+    try {
+        const car = await carQueries.findCarById(carId);
+        return !car
+            ? errorMessage(res, 404, 'car not found')
+            : res.status(200).json({
+                status: 'success',
+                data: car
+            });
+    } catch (error) {
+        return errorMessage(res, 500, 'oops! something went wrong went wrong');
+    }
+};
