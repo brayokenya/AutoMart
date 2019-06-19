@@ -21,6 +21,16 @@ export const userQueries = {
 
         const { rows } = await pool.query(queryString);
         return rows[0];
+    },
+
+    async updatePassword(userId, passwordHash) {
+        const queryString = {
+            text: `UPDATE users SET password_hash = $2
+                WHERE user_id = $1; `,
+            values: [userId, passwordHash]
+        };
+        const { rows } = await pool.query(queryString);
+        return rows;
     }
 };
 
