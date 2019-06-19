@@ -132,3 +132,16 @@ export const orderQueries = {
         return rows[0];
     }
 };
+
+
+export const createFlag = async (carId, reason, description, reportedBy) => {
+    const queryString = {
+        text: `INSERT INTO flags
+            (car_id, reason, description, reported_by)
+            VALUES ($1, $2, $3, $4)
+            RETURNING *;`,
+        values: [carId, reason, description, reportedBy]
+    };
+    const { rows } = await pool.query(queryString);
+    return rows[0];
+};

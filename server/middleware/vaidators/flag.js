@@ -23,9 +23,10 @@ const validateDescription = (req, res, next) => {
 const validateCarId = (req, res, next) => {
     const { carId } = req.body;
     if (!carId) return errorMessage(res, 422, 'Car id was not specified');
-
     req.body.carId = +carId;
-    return next();
+    return req.body.carId
+        ? next()
+        : errorMessage(res, 422, 'invalid car id');
 };
 
 const validateFlag = [validateCarId, validateReason, validateDescription];

@@ -5,6 +5,7 @@ import stringFormater from './server/middleware/stringFormater';
 import userRouter from './server/routes/user';
 import carRouter from './server/routes/car';
 import orderRouter from './server/routes/order';
+import flagRouter from './server/routes/flag';
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.get('/docs', (req, res) => {
         .sendFile(path.resolve('documentation.html'));
 });
 
-app.use('/api/v2/', userRouter, carRouter, orderRouter);
+app.use('/api/v2/', userRouter, carRouter, orderRouter, flagRouter);
 
 app.all('/*', (req, res) => {
     res.status(404).json({
