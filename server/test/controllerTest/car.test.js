@@ -875,3 +875,214 @@ describe('DELETE /api/v2/car/:carId', () => {
             });
     });
 });
+
+describe('GET /api/v2/car?status=available&min_price=XXXvalue&max_price=XXXvalue', () => {
+    it('should return a 403 status if query is invalid', (done) => {
+        chai.request(app)
+            .get('/api/v2/car')
+            .query({
+                status: 'available',
+                min_price: 'string',
+                max_price: 3000000,
+                notValid: 'somestring'
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('invalid query: notValid');
+                done();
+            });
+    });
+    it('should return a 422 status if min price is not a number', (done) => {
+        chai.request(app)
+            .get('/api/v2/car')
+            .query({
+                status: 'available',
+                min_price: 'string',
+                max_price: 3000000
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('invalid minimum price');
+                done();
+            });
+    });
+
+    it('should return a 422 status if max price is not a number', (done) => {
+        chai.request(app)
+            .get('/api/v2/car')
+            .query({
+                status: 'available',
+                min_price: 3000000,
+                max_price: 'another string'
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('invalid maximum price');
+                done();
+            });
+    });
+
+    it('should return a 422 state if status is neither new nor used', (done) => {
+        chai.request(app)
+            .get('/api/v2/car')
+            .query({
+                status: 'available',
+                min_price: 3000000,
+                max_price: 9000000,
+                state: 'any'
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(422);
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('car state can either be new or used');
+                done();
+            });
+    });
+
+    it('should set minimum pice to zero if not defined', (done) => {
+        chai.request(app)
+            .get('/api/v2/car')
+            .query({
+                status: 'available',
+                max_price: 30000000
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data[0]).to.be.an('object');
+                done();
+            });
+    });
+
+    it('should set maximum price to Infinity if it not defined', (done) => {
+        chai.request(app)
+            .get('/api/v2/car')
+            .query({
+                status: 'available',
+                min_price: 1000000
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data[0]).to.be.an('object');
+                done();
+            });
+    });
+
+    it('should return a 403 status if status is not defined and user is not an admin', (done) => {
+        chai.request(app)
+            .get('/api/v2/car')
+            .query({
+                min_price: 1000000,
+                max_price: 30000000
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(403);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('you do not have access to this resource');
+                done();
+            });
+    });
+
+    it('should return a 403 status if status is not equal to available', (done) => {
+        chai.request(app)
+            .get('/api/v2/car')
+            .query({
+                status: 'notavailable',
+                min_price: 1000000,
+                max_price: 30000000
+            })
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(403);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('you do not have access to this resource');
+                done();
+            });
+    });
+
+    it('should return a 403 status no query parameter is supplied and user is not an admin', (done) => {
+        chai.request(app)
+            .get('/api/v2/car')
+            .set('Authorization', myToken)
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(403);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('you do not have access to this resource');
+                done();
+            });
+    });
+
+    it('should return a 200 status even if user is not authenticated', (done) => {
+        chai.request(app)
+            .get('/api/v2/car')
+            .query({
+                status: 'available',
+                min_price: 200000,
+                max_price: 8000000,
+                state: 'new'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.keys('status', 'data');
+                expect(res.body.status).to.deep.equal('success');
+                expect(res.body.data[0]).to.be.an('object');
+                done();
+            });
+    });
+
+    it('should return a 404 status even if no car matches search condition', (done) => {
+        chai.request(app)
+            .get('/api/v2/car')
+            .query({
+                status: 'available',
+                min_price: 10000000,
+                max_price: 12000000,
+                state: 'new'
+            })
+            .end((error, res) => {
+                if (error) done(error);
+                expect(res).to.be.an('object');
+                expect(res).to.have.status(404);
+                expect(res.body).to.have.keys('status', 'message');
+                expect(res.body.status).to.deep.equal('error');
+                expect(res.body.message).to.deep.equal('we could not find any car that matches your search');
+                done();
+            });
+    });
+});

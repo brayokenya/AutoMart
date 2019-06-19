@@ -71,10 +71,13 @@ export const carQueries = {
         return rows[0];
     },
 
-    async findAvailableCars() {
+    async findAvailableCars(min, max, state, bodyType, make) {
         const queryString = {
-            text: 'SELECT * FROM cars WHERE status=$1;',
-            values: ['available']
+            text: `SELECT * FROM cars
+                WHERE status=$1 AND (price BETWEEN $2 AND $3) 
+                AND state ILIKE $4 AND
+                body_type ILIKE $5 AND manufacturer ILIKE $6;`,
+            values: ['available', min, max, state, bodyType, make]
         };
         const { rows } = await pool.query(queryString);
         return rows;
