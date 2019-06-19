@@ -85,11 +85,20 @@ export const getSpecificCar = async (req, res) => {
     }
 };
 
-const getAvailableCars = async (req, res) => {
-    const isInvalidStatus = (req.query.status !== 'available');
+export const getAvailableCars = async (req, res) => {
+    const {
+        status,
+        min_price: min = 0,
+        max_price: max = 2147483647,
+        state = '%',
+        body_type: bodyType = '%',
+        make = '%'
+    } = req.query;
+    const isInvalidStatus = (status !== 'available');
     if (isInvalidStatus) return errorMessage(res, 403, 'you do not have access to this resource');
     try {
-        const cars = await carQueries.findAvailableCars();
+        const cars = await carQueries
+            .findAvailableCars(min, max, state, bodyType, make);
         return cars.length
             ? res.status(200).json({
                 status: 'success',
